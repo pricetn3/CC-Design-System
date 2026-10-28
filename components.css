@@ -1,0 +1,143 @@
+/* =====================================================================
+   Credential Connections — Component recipes
+   ---------------------------------------------------------------------
+   The canonical look of each shared component, built only from tokens
+   in tokens.css. These recipes were distilled from the live prototypes
+   (auth flow, student store, credential pages). The style guide renders
+   them, and the drift check measures pages against the same values.
+
+   Standards
+     Buttons   heights 32 / 36 / 40 / 44 (xs / sm / md / lg), radius-md, text-sm medium
+     Access    WCAG 2.2 AA: every control's target is at least 24 x 24px (2.5.8)
+     Inputs    height 40, 1px gray-300 border, radius-md, focus = 2px blue-600 edge inside the field
+     Icons     button icons beside a label sit one step lighter than the label
+     Badges    pill (radius-full), text-xs, tinted bg + 200 border + 700 text
+     Cards     bg-primary, 1px gray-200 border, radius-xl, shadow-xs
+   ===================================================================== */
+
+/* ---------- Buttons ---------- */
+.cc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 40px;
+  padding: 0 var(--space-4);
+  border: none;
+  border-radius: var(--radius-md);
+  font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+.cc-btn:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+
+/* xs: compact rows, tables and inline actions. 32px stays above the 24px WCAG target minimum. */
+.cc-btn--xs { height: 32px; padding: 0 var(--space-3); gap: var(--space-1_5); }
+.cc-btn--sm { height: 36px; padding: 0 var(--space-3_5); }
+.cc-btn--lg { height: 44px; padding: 0 var(--space-5); font-size: var(--text-md-size); line-height: var(--text-md-lh); }
+.cc-btn--block { width: 100%; }
+
+.cc-btn--primary { background: var(--blue-600); color: var(--fg-on-brand); box-shadow: var(--shadow-button-primary); }
+.cc-btn--primary:hover { background: var(--blue-700); }
+
+.cc-btn--secondary { background: var(--bg-primary); color: var(--gray-700); box-shadow: var(--shadow-button-secondary), inset 0 0 0 1px var(--gray-300); }
+.cc-btn--secondary:hover { background: var(--gray-50); color: var(--gray-800); }
+
+.cc-btn--tertiary { background: transparent; color: var(--gray-600); }
+.cc-btn--tertiary:hover { background: var(--gray-100); color: var(--gray-800); }
+
+/* Icons beside a label are one step lighter than the label, matching the CC Platform.
+   They're decorative (the label carries the meaning), so 1.4.11 contrast doesn't apply.
+   Icon-only buttons use .cc-icon-btn, which keeps gray-500 (4.56:1). */
+.cc-btn > svg, .cc-btn > .lucide { flex-shrink: 0; transition: color 150ms cubic-bezier(0.2,0.6,0.2,1); }
+.cc-btn--primary > svg, .cc-btn--primary > .lucide { color: var(--blue-200); }
+.cc-btn--primary:hover > svg, .cc-btn--primary:hover > .lucide { color: var(--blue-300); }
+.cc-btn--secondary > svg, .cc-btn--secondary > .lucide,
+.cc-btn--tertiary > svg, .cc-btn--tertiary > .lucide { color: var(--gray-400); }
+.cc-btn--secondary:hover > svg, .cc-btn--secondary:hover > .lucide,
+.cc-btn--tertiary:hover > svg, .cc-btn--tertiary:hover > .lucide { color: var(--gray-500); }
+
+.cc-btn:disabled,
+.cc-btn[aria-disabled="true"] { background: var(--gray-100); color: var(--gray-400); box-shadow: none; cursor: not-allowed; pointer-events: none; }
+.cc-btn:disabled > svg, .cc-btn:disabled > .lucide,
+.cc-btn[aria-disabled="true"] > svg, .cc-btn[aria-disabled="true"] > .lucide { color: currentColor; }
+
+.cc-icon-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px;
+  border: none; border-radius: var(--radius-md);
+  background: transparent; color: var(--gray-500); cursor: pointer;
+}
+.cc-icon-btn:hover { background: var(--gray-100); color: var(--gray-900); }
+.cc-icon-btn--xs { width: 32px; height: 32px; }
+.cc-icon-btn:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+
+/* ---------- Inputs ---------- */
+.cc-field { display: flex; flex-direction: column; gap: var(--space-1_5); }
+.cc-label { font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+.cc-hint  { font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-600); }
+
+.cc-input {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 var(--space-3);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--gray-300);
+  font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body);
+  color: var(--gray-900);
+  outline: none;
+}
+.cc-input::placeholder { color: var(--gray-500); }
+/* Matches the CC Platform: a 2px blue-600 edge inside the field (5.46:1), no outer ring. */
+.cc-input:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
+/* Empty date/time fields read like placeholders; native picker icons sit at the gray-500 weight of other field icons. */
+.cc-input[data-empty="true"] { color: var(--gray-500); }
+.cc-input::-webkit-calendar-picker-indicator { opacity: 0.55; cursor: pointer; }
+.cc-input[aria-invalid="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500); }
+.cc-input:disabled { background: var(--gray-50); color: var(--gray-500); cursor: not-allowed; }
+.cc-field .cc-hint--error { color: var(--error-700); }
+
+/* ---------- Badges ---------- */
+.cc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-2_5);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--gray-200);
+  background: var(--gray-50);
+  color: var(--gray-700);
+  font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.cc-badge--brand   { background: var(--blue-50);    border-color: var(--blue-200);    color: var(--blue-800); }
+.cc-badge--success { background: var(--success-50); border-color: var(--success-200); color: var(--success-700); }
+.cc-badge--warning { background: var(--warning-50); border-color: var(--warning-200); color: var(--warning-700); }
+.cc-badge--error   { background: var(--error-50);   border-color: var(--error-200);   color: var(--error-700); }
+.cc-badge__dot { width: 6px; height: 6px; border-radius: var(--radius-full); background: currentColor; }
+
+/* ---------- Cards ---------- */
+.cc-card {
+  background: var(--bg-primary);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xs);
+  padding: var(--space-5);
+}
+.cc-card--compact { padding: var(--space-4); }
+.cc-card--interactive { cursor: pointer; transition: box-shadow 0.15s cubic-bezier(0.2,0.6,0.2,1), border-color 0.15s cubic-bezier(0.2,0.6,0.2,1); }
+.cc-card--interactive:hover { border-color: var(--gray-300); box-shadow: var(--shadow-md); }
+.cc-card--interactive:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+
+/* ---------- Links ---------- */
+.cc-link { color: var(--blue-800); font-weight: var(--fw-semibold); text-decoration: none; }
+.cc-link:hover { color: var(--blue-900); text-decoration: underline; }
+.cc-link--muted { color: var(--gray-600); font-weight: var(--fw-medium); }
+.cc-link--muted:hover { color: var(--gray-800); }
+.cc-link:focus-visible { outline: none; box-shadow: var(--ring-focus); border-radius: var(--radius-xxs); }

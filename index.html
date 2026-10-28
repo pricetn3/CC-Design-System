@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style Guide | Credential Connections</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--gray-50); color: var(--fg-primary); font: var(--fw-regular) var(--text-md-size)/var(--text-md-lh) var(--font-body); -webkit-font-smoothing: antialiased; }
+
+  .sg-shell { display: grid; grid-template-columns: 232px 1fr; min-height: 100vh; }
+  .sg-nav { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: var(--space-6) var(--space-4); background: var(--bg-primary); border-right: 1px solid var(--border-primary); }
+  .sg-brand { display: flex; align-items: center; gap: var(--space-2_5); margin: 0 var(--space-2) var(--space-8); color: var(--cc-navy); font: var(--fw-semibold) var(--text-md-size)/var(--text-md-lh) var(--font-body); }
+  .sg-brand__mark { width: 28px; height: 28px; border-radius: var(--radius-md); background: var(--cc-navy); display: grid; place-items: center; color: #fff; font-size: 13px; font-weight: var(--fw-bold); }
+  .sg-nav__group { margin: var(--space-6) var(--space-2) var(--space-1_5); font: var(--fw-semibold) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--fg-tertiary); text-transform: uppercase; letter-spacing: 0.04em; }
+  .sg-nav a { display: block; padding: var(--space-1_5) var(--space-2); border-radius: var(--radius-sm); color: var(--gray-700); text-decoration: none; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); }
+  .sg-nav a:hover { background: var(--gray-100); color: var(--gray-900); }
+
+  main { padding: var(--space-12) var(--space-12) var(--space-24); max-width: 1120px; }
+  .sg-hero h1 { margin: 0 0 var(--space-2); font: var(--fw-semibold) var(--text-display-sm-size)/var(--text-display-sm-lh) var(--font-display); letter-spacing: -0.02em; }
+  .sg-hero p { margin: 0; max-width: 640px; color: var(--fg-secondary); }
+  .sg-meta { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+
+  section { padding-top: var(--space-16); scroll-margin-top: var(--space-4); }
+  section > h2 { margin: 0 0 var(--space-1); font: var(--fw-semibold) var(--text-display-xs-size)/var(--text-display-xs-lh) var(--font-display); }
+  section > p { margin: 0 0 var(--space-6); color: var(--fg-secondary); font-size: var(--text-sm-size); line-height: var(--text-sm-lh); max-width: 680px; }
+  h3 { margin: var(--space-8) 0 var(--space-3); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+
+  .sg-panel { background: var(--bg-primary); border: 1px solid var(--border-primary); border-radius: var(--radius-xl); padding: var(--space-6); }
+  .sg-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+  code, .sg-mono { font-family: var(--font-mono); font-size: 12px; }
+
+  /* Swatches */
+  .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: var(--space-3); }
+  .sg-swatch { background: var(--bg-primary); border: 1px solid var(--border-primary); border-radius: var(--radius-lg); overflow: hidden; }
+  .sg-swatch__chip { height: 64px; display: flex; align-items: flex-end; justify-content: flex-end; padding: var(--space-1_5); }
+  .sg-swatch__aa { font: var(--fw-semibold) 10px/14px var(--font-body); padding: 1px 6px; border-radius: var(--radius-full); background: rgba(255,255,255,0.9); color: var(--gray-800); }
+  .sg-swatch__body { padding: var(--space-2) var(--space-2_5) var(--space-2_5); }
+  .sg-swatch__name { font: var(--fw-medium) 12px/16px var(--font-mono); color: var(--gray-900); }
+  .sg-swatch__val { font: 11px/16px var(--font-mono); color: var(--fg-tertiary); }
+  .sg-swatch__note { margin-top: 2px; font-size: 11px; line-height: 15px; color: var(--fg-secondary); }
+
+  /* Type */
+  .sg-type { display: grid; grid-template-columns: 180px 1fr; gap: var(--space-4); align-items: baseline; padding: var(--space-3) 0; border-top: 1px solid var(--border-secondary); }
+  .sg-type:first-child { border-top: none; }
+  .sg-type__spec { font: 12px/16px var(--font-mono); color: var(--fg-tertiary); }
+  .sg-type__spec b { display: block; color: var(--gray-900); font-weight: var(--fw-medium); }
+  .sg-type__sample { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--gray-900); }
+
+  /* Scales */
+  .sg-scale { display: grid; grid-template-columns: 120px 64px 1fr; gap: var(--space-3); align-items: center; padding: var(--space-1_5) 0; font-size: 12px; }
+  .sg-scale__bar { height: 12px; background: var(--blue-200); border-radius: var(--radius-xxs); }
+  .sg-tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--space-4); }
+  .sg-tile { height: 88px; background: var(--bg-primary); border: 1px solid var(--gray-300); display: grid; place-items: center; text-align: center; font-size: 11px; line-height: 15px; color: var(--fg-secondary); }
+  .sg-tile--shadow { border-color: var(--border-secondary); border-radius: var(--radius-xl); }
+
+  /* Component spec table */
+  .sg-spec { width: 100%; border-collapse: collapse; margin-top: var(--space-4); font-size: 12px; line-height: 18px; }
+  .sg-spec th, .sg-spec td { text-align: left; padding: var(--space-2) var(--space-3); border-top: 1px solid var(--border-secondary); vertical-align: top; }
+  .sg-spec th { color: var(--fg-tertiary); font-weight: var(--fw-medium); }
+  .sg-spec td:first-child code { white-space: nowrap; }
+
+  .sg-footer { margin-top: var(--space-16); padding-top: var(--space-6); border-top: 1px solid var(--border-primary); color: var(--fg-tertiary); font-size: var(--text-sm-size); }
+
+  @media (max-width: 860px) {
+    .sg-shell { grid-template-columns: 1fr; }
+    .sg-nav { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--border-primary); display: flex; flex-wrap: wrap; gap: var(--space-1); padding: var(--space-4); }
+    .sg-brand { width: 100%; margin-bottom: var(--space-2); }
+    .sg-nav__group { display: none; }
+    main { padding: var(--space-8) var(--space-4) var(--space-16); }
+    .sg-type { grid-template-columns: 1fr; gap: var(--space-1); }
+  }
+</style>
+</head>
+<body>
+<div class="sg-shell">
+  <nav class="sg-nav" aria-label="Style guide sections">
+    <div class="sg-brand"><span class="sg-brand__mark">CC</span>Credential Connections</div>
+    <div class="sg-nav__group">Foundations</div>
+    <a href="#color">Color</a>
+    <a href="#type">Typography</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#radius">Radius</a>
+    <a href="#elevation">Elevation</a>
+    <div class="sg-nav__group">Components</div>
+    <a href="#buttons">Buttons</a>
+    <a href="#inputs">Inputs</a>
+    <a href="#badges">Badges</a>
+    <a href="#cards">Cards</a>
+    <a href="#links">Links</a>
+  </nav>
+
+  <main>
+    <header class="sg-hero">
+      <h1>Credential Connections style guide</h1>
+      <p>The source of truth for every Credential Connections prototype. Everything on this page renders live from <code>tokens.css</code> and <code>components.css</code>, the same files the prototypes load, so it always shows the current system.</p>
+      <div class="sg-meta">
+        <span class="cc-badge cc-badge--brand" id="sg-token-count">Tokens</span>
+        <span class="cc-badge">Foundation: Untitled UI</span>
+        <span class="cc-badge">Typeface: Inter</span>
+        <span class="cc-badge cc-badge--success">Standard: WCAG 2.2 AA</span>
+      </div>
+    </header>
+
+    <section id="color">
+      <h2>Color</h2>
+      <p>The badge on each swatch shows its contrast with white text. <b>AA</b> (4.5:1 or more) is safe for body text; <b>AA large</b> (3:1 or more) only for text 18px+ or bold 14px+, and for icons.</p>
+      <div id="sg-colors"></div>
+    </section>
+
+    <section id="type">
+      <h2>Typography</h2>
+      <p>Inter on the Untitled UI scale. Display sizes are for headlines; body sizes cover everything else.</p>
+      <div class="sg-panel" id="sg-type"></div>
+      <h3>Weights</h3>
+      <div class="sg-panel sg-row" style="gap: var(--space-8)">
+        <span style="font-weight: var(--fw-regular)">Regular 400</span>
+        <span style="font-weight: var(--fw-medium)">Medium 500</span>
+        <span style="font-weight: var(--fw-semibold)">Semibold 600</span>
+        <span style="font-weight: var(--fw-bold)">Bold 700</span>
+      </div>
+    </section>
+
+    <section id="spacing">
+      <h2>Spacing</h2>
+      <p>A 4-point scale. Padding, gaps and margins should land on one of these steps.</p>
+      <div class="sg-panel" id="sg-spacing"></div>
+    </section>
+
+    <section id="radius">
+      <h2>Radius</h2>
+      <p><code>--radius-md</code> (8px) is the default for buttons and inputs; <code>--radius-xl</code> (12px) for cards.</p>
+      <div class="sg-tiles" id="sg-radius"></div>
+    </section>
+
+    <section id="elevation">
+      <h2>Elevation</h2>
+      <p>Cards sit at <code>--shadow-xs</code>. Menus and popovers use <code>--shadow-lg</code>; modals use <code>--shadow-xl</code> or higher.</p>
+      <div class="sg-tiles" id="sg-shadow"></div>
+    </section>
+
+    <section id="buttons">
+      <h2>Buttons</h2>
+      <p>One primary action per view. Use secondary for the alternatives, and tertiary for low-emphasis actions such as "Cancel". Use extra small only in dense spots such as table rows and inline actions.</p>
+      <div class="sg-panel">
+        <h3 style="margin-top:0">Hierarchy</h3>
+        <div class="sg-row">
+          <button class="cc-btn cc-btn--primary">Primary</button>
+          <button class="cc-btn cc-btn--secondary">Secondary</button>
+          <button class="cc-btn cc-btn--tertiary">Tertiary</button>
+          <button class="cc-btn cc-btn--primary" disabled>Disabled</button>
+          <button class="cc-icon-btn" aria-label="Help"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M7.6 7.5a2.5 2.5 0 0 1 4.85.83c0 1.67-2.5 2.5-2.5 2.5M10 14.17h.01"/></svg></button>
+        </div>
+        <h3>Sizes</h3>
+        <div class="sg-row">
+          <button class="cc-btn cc-btn--primary cc-btn--xs">Extra small · 32</button>
+          <button class="cc-btn cc-btn--primary cc-btn--sm">Small · 36</button>
+          <button class="cc-btn cc-btn--primary">Medium · 40</button>
+          <button class="cc-btn cc-btn--primary cc-btn--lg">Large · 44</button>
+        </div>
+        <table class="sg-spec">
+          <tr><th>Class</th><th>Height</th><th>Background</th><th>Label</th><th>Shadow</th></tr>
+          <tr><td><code>cc-btn--primary</code></td><td>32 / 36 / 40 / 44</td><td><code>--blue-600</code> → hover <code>--blue-700</code></td><td><code>--fg-on-brand</code>, text-sm medium</td><td><code>--shadow-button-primary</code></td></tr>
+          <tr><td><code>cc-btn--secondary</code></td><td>32 / 36 / 40 / 44</td><td><code>--bg-primary</code>, 1px <code>--gray-300</code></td><td><code>--gray-700</code></td><td><code>--shadow-button-secondary</code></td></tr>
+          <tr><td><code>cc-btn--tertiary</code></td><td>32 / 36 / 40 / 44</td><td>transparent → hover <code>--gray-100</code></td><td><code>--gray-600</code></td><td>none</td></tr>
+          <tr><td>Icons</td><td colspan="4">Beside a label, one step lighter: <code>--blue-200</code> on primary (hover <code>--blue-300</code>), <code>--gray-400</code> on secondary and tertiary (hover <code>--gray-500</code>), label colour when disabled. Icon-only buttons use <code>cc-icon-btn</code> at <code>--gray-500</code> (3:1 or more).</td></tr>
+          <tr><td>Focus (all)</td><td colspan="4"><code>--ring-focus</code>: 2px <code>--blue-400</code> (3:1 or more against white, WCAG 2.4.7 / 1.4.11)</td></tr>
+          <tr><td>Target size</td><td colspan="4">Extra small (32px) is the smallest button. Nothing interactive goes below 24 × 24px (WCAG 2.2, 2.5.8).</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section id="inputs">
+      <h2>Inputs</h2>
+      <p>40px tall with an inset 1px border, so the field doesn't shift when the error border appears.</p>
+      <div class="sg-panel" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
+        <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" placeholder="you@school.edu"><span class="cc-hint">We'll send a verification code.</span></label>
+        <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" value="taylor@" aria-invalid="true"><span class="cc-hint cc-hint--error">Enter a valid email address.</span></label>
+        <label class="cc-field"><span class="cc-label">Student ID</span><input class="cc-input" value="0049231" disabled><span class="cc-hint">Managed by your institution.</span></label>
+      </div>
+    </section>
+
+    <section id="badges">
+      <h2>Badges</h2>
+      <p>Pill shaped, 12px text. Each status uses its 50 tint for the fill, 200 for the border and 700 for the text.</p>
+      <div class="sg-panel sg-row">
+        <span class="cc-badge">Neutral</span>
+        <span class="cc-badge cc-badge--brand">Coming soon</span>
+        <span class="cc-badge cc-badge--success"><span class="cc-badge__dot"></span>Free</span>
+        <span class="cc-badge cc-badge--warning"><span class="cc-badge__dot"></span>Expiring</span>
+        <span class="cc-badge cc-badge--error"><span class="cc-badge__dot"></span>Revoked</span>
+        <span class="cc-badge">$25.00</span>
+      </div>
+    </section>
+
+    <section id="cards">
+      <h2>Cards</h2>
+      <p>Hairline <code>--gray-200</code> border, <code>--radius-xl</code>, <code>--shadow-xs</code>. Clickable cards lift to <code>--shadow-md</code> on hover.</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4)">
+        <div class="cc-card">
+          <div style="font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--fg-secondary)">Credentials earned</div>
+          <div style="margin-top: var(--space-2); font: var(--fw-semibold) var(--text-display-sm-size)/var(--text-display-sm-lh) var(--font-display)">12</div>
+        </div>
+        <div class="cc-card cc-card--interactive" tabindex="0">
+          <div class="sg-row" style="justify-content: space-between"><b style="font-size: var(--text-md-size)">Official transcript</b><span class="cc-badge cc-badge--success">Free</span></div>
+          <p style="margin: var(--space-1) 0 0; font-size: var(--text-sm-size); line-height: var(--text-sm-lh); color: var(--fg-secondary)">Clickable card: hover or tab to it.</p>
+        </div>
+        <div class="cc-card cc-card--compact">
+          <b style="font-size: var(--text-sm-size)">Compact card</b>
+          <p style="margin: var(--space-1) 0 0; font-size: var(--text-sm-size); line-height: var(--text-sm-lh); color: var(--fg-secondary)">16px padding for sidebars and dense lists.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="links">
+      <h2>Links</h2>
+      <p>Brand links use <code>--blue-800</code> (it passes AA on white). Muted links are for secondary navigation.</p>
+      <div class="sg-panel sg-row" style="gap: var(--space-8)">
+        <a class="cc-link" href="#links">View credential</a>
+        <a class="cc-link cc-link--muted" href="#links">Need help?</a>
+      </div>
+    </section>
+
+    <footer class="sg-footer">
+      Prototype pages are checked against this system with <code>python3 tools/drift_check.py</code>.
+    </footer>
+  </main>
+</div>
+
+<script>
+(async function () {
+  // Read the token file itself so the guide always reflects it, comments included.
+  let css = '';
+  try { css = await (await fetch('tokens.css')).text(); } catch (e) { return; }
+
+  const lines = css.split('\n');
+  const tokens = [];           // { name, value, note, group }
+  let group = '';
+  for (const line of lines) {
+    const g = line.match(/\/\*\s*=+\s*(.+?)\s*=+\s*\*\//);
+    if (g) { group = g[1]; continue; }
+    const re = /(--[\w-]+)\s*:\s*([^;]+);\s*(?:\/\*\s*(.*?)\s*\*\/)?/g;
+    let m;
+    while ((m = re.exec(line))) tokens.push({ name: m[1], value: m[2].trim(), note: m[3] || '', group });
+  }
+  document.getElementById('sg-token-count').textContent = tokens.length + ' tokens';
+
+  const resolve = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const el = (tag, attrs = {}, html = '') => Object.assign(document.createElement(tag), attrs, html ? { innerHTML: html } : {});
+
+  // ---- Color ----
+  function toRgb(str) {
+    const probe = el('div'); probe.style.color = str; document.body.appendChild(probe);
+    const c = getComputedStyle(probe).color; probe.remove();
+    const n = c.match(/[\d.]+/g); return n ? n.slice(0, 3).map(Number) : null;
+  }
+  function lum([r, g, b]) {
+    const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+    return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+  }
+  const contrastWithWhite = rgb => 1.05 / (lum(rgb) + 0.05);
+
+  const colorGroups = {};
+  for (const t of tokens) {
+    if (!/^(Brand|Neutral|Semantic|Aliases)/.test(t.group)) continue;
+    if (!/^(rgb|#|var\()/.test(t.value)) continue;
+    const key = t.group.replace(/\s*\(.*\)/, '').replace('Aliases used by Untitled-UI components in the Figma file', 'Semantic aliases');
+    (colorGroups[key] = colorGroups[key] || []).push(t);
+  }
+  const colorsRoot = document.getElementById('sg-colors');
+  for (const [name, list] of Object.entries(colorGroups)) {
+    colorsRoot.appendChild(el('h3', {}, name));
+    const grid = el('div', { className: 'sg-swatches' });
+    for (const t of list) {
+      const rgb = toRgb(`var(${t.name})`) || toRgb(resolve(t.name));
+      const ratio = rgb ? contrastWithWhite(rgb) : 0;
+      const grade = ratio >= 4.5 ? 'AA ' : ratio >= 3 ? 'AA large ' : '';
+      grid.appendChild(el('div', { className: 'sg-swatch' }, `
+        <div class="sg-swatch__chip" style="background: var(${t.name})"><span class="sg-swatch__aa" title="Contrast with white">${grade}${ratio.toFixed(1)}:1</span></div>
+        <div class="sg-swatch__body">
+          <div class="sg-swatch__name">${t.name}</div>
+          <div class="sg-swatch__val">${t.value}</div>
+          ${t.note ? `<div class="sg-swatch__note">${t.note}</div>` : ''}
+        </div>`));
+    }
+    colorsRoot.appendChild(grid);
+  }
+
+  // ---- Type ----
+  const typeRoot = document.getElementById('sg-type');
+  const sizes = tokens.filter(t => /^--text-.+-size$/.test(t.name));
+  for (const t of sizes) {
+    const base = t.name.replace(/-size$/, '');
+    const isDisplay = base.includes('display');
+    const lh = resolve(base + '-lh'), track = resolve(base + '-tracking');
+    const label = base.replace('--text-', '').replace('display-', 'Display ');
+    typeRoot.appendChild(el('div', { className: 'sg-type' }, `
+      <div class="sg-type__spec"><b>${label}</b>${t.value} / ${lh}</div>
+      <div class="sg-type__sample" style="font: ${isDisplay ? 'var(--fw-semibold)' : 'var(--fw-regular)'} var(${t.name})/var(${base}-lh) var(--font-${isDisplay ? 'display' : 'body'}); ${track ? `letter-spacing: ${track};` : ''}">Your credentials, verified</div>`));
+  }
+
+  // ---- Spacing ----
+  const spRoot = document.getElementById('sg-spacing');
+  for (const t of tokens.filter(t => t.name.startsWith('--space-'))) {
+    spRoot.appendChild(el('div', { className: 'sg-scale' }, `
+      <code>${t.name}</code><span class="sg-mono" style="color: var(--fg-tertiary)">${t.value}</span>
+      <div class="sg-scale__bar" style="width: var(${t.name})"></div>`));
+  }
+
+  // ---- Radius ----
+  const rRoot = document.getElementById('sg-radius');
+  for (const t of tokens.filter(t => t.name.startsWith('--radius-'))) {
+    rRoot.appendChild(el('div', { className: 'sg-tile', style: `border-radius: var(${t.name})` },
+      `<div><code>${t.name}</code><br>${t.value}${t.note ? `<br>${t.note}` : ''}</div>`));
+  }
+
+  // ---- Elevation ----
+  const shRoot = document.getElementById('sg-shadow');
+  for (const t of tokens.filter(t => /^--shadow-(xs|sm|md|lg|xl|2xl|3xl)$/.test(t.name))) {
+    shRoot.appendChild(el('div', { className: 'sg-tile sg-tile--shadow', style: `box-shadow: var(${t.name})` }, `<code>${t.name}</code>`));
+  }
+})();
+</script>
+</body>
+</html>

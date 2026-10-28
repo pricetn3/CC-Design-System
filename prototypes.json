@@ -1,0 +1,23 @@
+{
+  "_about": "Prototype pages that use this design system. tools/link_tokens.py links them to the shared tokens and tools/drift_check.py checks them. Paths are inside ~/Documents/GitHub; patterns like *.dc.html pick up new exports automatically.",
+  "sharedTokensUrl": "https://pricetn3.github.io/CC-Design-System/tokens.css",
+  "sharedComponentsUrl": "https://pricetn3.github.io/CC-Design-System/components.css",
+  "base": "~/Documents/GitHub",
+  "repos": {
+    "The Store/The-Store": [
+      "*.dc.html",
+      "index.html",
+      "emails/*.html"
+    ],
+    "CC-Prototype": [
+      "external.html",
+      "internal.html"
+    ]
+  },
+  "notUsingThisSystem": {
+    "Implementation Tool/Implementation Tool": "Built in the existing Client Implementation tool's style (Blazor, Telerik, Bootstrap 5.1) to match the live product. Intentionally not on these tokens."
+  },
+  "oldAddresses": [
+    "https://pricetn3.github.io/The-Store/design-system/"
+  ]
+}

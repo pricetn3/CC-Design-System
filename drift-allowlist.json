@@ -1,0 +1,17 @@
+{
+  "_about": "Colors that are allowed on prototype pages even though they are not design tokens, such as partner institution brands and third-party buttons. Hex values, lowercase. Add a note so others know why each one is here.",
+  "colors": {
+    "#ffffff": "White (same as --bg-primary / --fg-on-brand)",
+    "#fff": "White (same as --bg-primary / --fg-on-brand)",
+    "#000000": "Black",
+    "#000": "Black",
+    "#901414": "Virginia Hanock University: brand red (partner page)",
+    "#6e0f0f": "Virginia Hanock University: dark red (partner page)",
+    "#253b80": "PayPal button: navy (third-party brand)",
+    "#179bd7": "PayPal button: blue (third-party brand)",
+    "#ffc439": "PayPal button: yellow (third-party brand)",
+    "#ed6a5e": "macOS window controls: red (browser-frame mockup)",
+    "#f4bf4f": "macOS window controls: yellow (browser-frame mockup)",
+    "#61c454": "macOS window controls: green (browser-frame mockup)"
+  }
+}
