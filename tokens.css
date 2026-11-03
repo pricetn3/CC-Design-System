@@ -78,6 +78,11 @@
   --border-strong:      var(--gray-300);
   --border-brand:       var(--blue-600);
 
+  /* Overlays: gray-950 at fixed opacity */
+  --overlay-backdrop:   rgba(10, 13, 18, 0.40);  /* scrim behind dialogs and drawers */
+  --overlay-icon:       rgba(10, 13, 18, 0.60);  /* icon circles on images; white icon 5.1:1 over white */
+  --overlay-icon-hover: rgba(10, 13, 18, 0.75);  /* hover and focus of those circles; 8.9:1 */
+
   /* ====== Type system (Inter, Untitled UI scale) ====== */
   --font-display: 'Inter', system-ui, -apple-system, sans-serif;
   --font-body:    'Inter', system-ui, -apple-system, sans-serif;

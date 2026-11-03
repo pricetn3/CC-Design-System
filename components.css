@@ -141,3 +141,31 @@
 .cc-link--muted { color: var(--gray-600); font-weight: var(--fw-medium); }
 .cc-link--muted:hover { color: var(--gray-800); }
 .cc-link:focus-visible { outline: none; box-shadow: var(--ring-focus); border-radius: var(--radius-xxs); }
+
+/* ---------- Dialog ----------
+   The overlay scrolls; the panel centers with margin-block: auto.
+   Fits the screen: centered. Taller than the screen (small phones, 400% zoom): starts at the top and scrolls (WCAG 1.4.10).
+   The panel needs role="dialog", aria-modal="true" and an accessible name (aria-labelledby). */
+.cc-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: var(--overlay-backdrop);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+  padding: var(--space-4);
+  box-sizing: border-box;
+}
+@media (min-width: 640px) { .cc-dialog-overlay { padding: var(--space-6); } }
+.cc-dialog {
+  margin-block: auto;
+  width: 100%;
+  max-width: 480px;
+  box-sizing: border-box;
+  background: var(--bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-6);
+}
