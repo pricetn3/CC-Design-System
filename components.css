@@ -9,7 +9,7 @@
    Standards
      Buttons   heights 32 / 36 / 40 / 44 (xs / sm / md / lg), radius-md, text-sm medium
      Access    WCAG 2.2 AA: every control's target is at least 24 x 24px (2.5.8)
-     Inputs    height 40, 1px gray-300 border, radius-md, focus = 2px blue-600 edge inside the field
+     Inputs    height 40, 1px border-input border (#8C9199, 3:1+; disabled keeps gray-300), radius-md, focus = 2px blue-600 edge inside the field
      Icons     button icons beside a label sit one step lighter than the label
      Badges    pill (radius-full), text-xs, tinted bg + 200 border + 700 text
      Cards     bg-primary, 1px gray-200 border, radius-xl, shadow-xs
@@ -87,7 +87,7 @@
   border: none;
   border-radius: var(--radius-md);
   background: var(--bg-primary);
-  box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--gray-300);
+  box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--border-input);
   font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body);
   color: var(--gray-900);
   outline: none;
@@ -99,7 +99,8 @@
 .cc-input[data-empty="true"] { color: var(--gray-500); }
 .cc-input::-webkit-calendar-picker-indicator { opacity: 0.55; cursor: pointer; }
 .cc-input[aria-invalid="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500); }
-.cc-input:disabled { background: var(--gray-50); color: var(--gray-500); cursor: not-allowed; }
+/* Disabled is exempt from 3:1 (WCAG 1.4.11); the lighter border helps it read as unavailable. */
+.cc-input:disabled { background: var(--gray-50); color: var(--gray-500); box-shadow: inset 0 0 0 1px var(--border-strong); cursor: not-allowed; }
 .cc-field .cc-hint--error { color: var(--error-700); }
 
 /* ---------- Badges ---------- */
@@ -141,6 +142,9 @@
 .cc-link--muted { color: var(--gray-600); font-weight: var(--fw-medium); }
 .cc-link--muted:hover { color: var(--gray-800); }
 .cc-link:focus-visible { outline: none; box-shadow: var(--ring-focus); border-radius: var(--radius-xxs); }
+/* Inline: links inside a sentence stay underlined at rest, on hover and on focus (WCAG 1.4.1). Focus also gets --ring-focus from .cc-link. */
+.cc-link--inline { text-decoration: underline; text-underline-offset: 2px; }
+.cc-link--inline:hover, .cc-link--inline:focus-visible { text-decoration: underline; }
 
 /* ---------- Dialog ----------
    The overlay scrolls; the panel centers with margin-block: auto.
@@ -149,7 +153,7 @@
 .cc-dialog-overlay {
   position: fixed;
   inset: 0;
-  z-index: var(--z-overlay);
+  z-index: var(--z-modal);
   background: var(--overlay-backdrop);
   display: flex;
   justify-content: center;

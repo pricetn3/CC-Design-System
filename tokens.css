@@ -77,6 +77,7 @@
   --border-secondary:   var(--gray-100);
   --border-strong:      var(--gray-300);
   --border-brand:       var(--blue-600);
+  --border-input:       rgb(140, 145, 153);   /* active input borders: 3.17:1 on white, 3.04:1 on gray-50 */
 
   /* Overlays: gray-950 at fixed opacity */
   --overlay-backdrop:   rgba(10, 13, 18, 0.40);  /* scrim behind dialogs and drawers */
@@ -100,8 +101,8 @@
   --text-xl-size: 20px;  --text-xl-lh: 30px;
   --text-lg-size: 18px;  --text-lg-lh: 28px;
   --text-md-size: 16px;  --text-md-lh: 24px;
+  --text-smed-size: 15px;  --text-smed-lh: 22px;
   --text-sm-size: 14px;  --text-sm-lh: 20px;
-  --text-15-size: 15px;  --text-15-lh: 22px;
   --text-xs-size: 12px;  --text-xs-lh: 18px;
 
   /* Weights (Inter) */
