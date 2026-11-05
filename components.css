@@ -72,6 +72,8 @@
 }
 .cc-icon-btn:hover { background: var(--gray-100); color: var(--gray-900); }
 .cc-icon-btn--xs { width: 32px; height: 32px; }
+/* lg: 44px target for header and touch-first icon buttons (FX-20). Same icon size; only the button grows. */
+.cc-icon-btn--lg { width: 44px; height: 44px; }
 .cc-icon-btn:focus-visible { outline: none; box-shadow: var(--ring-focus); }
 
 /* ---------- Inputs ---------- */
@@ -126,14 +128,15 @@
 /* ---------- Cards ---------- */
 .cc-card {
   background: var(--bg-primary);
-  border: 1px solid var(--gray-200);
+  /* FX-09: gray-300 at rest. Best practice, not a 3:1 requirement: the card's content identifies it. */
+  border: 1px solid var(--border-strong);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-xs);
   padding: var(--space-5);
 }
 .cc-card--compact { padding: var(--space-4); }
 .cc-card--interactive { cursor: pointer; transition: box-shadow 0.15s cubic-bezier(0.2,0.6,0.2,1), border-color 0.15s cubic-bezier(0.2,0.6,0.2,1); }
-.cc-card--interactive:hover { border-color: var(--gray-300); box-shadow: var(--shadow-md); }
+.cc-card--interactive:hover { border-color: var(--gray-400); box-shadow: var(--shadow-md); }
 .cc-card--interactive:focus-visible { outline: none; box-shadow: var(--ring-focus); }
 
 /* ---------- Links ---------- */
@@ -173,3 +176,125 @@
   box-shadow: var(--shadow-xl);
   padding: var(--space-6);
 }
+
+/* =====================================================================
+   Student Store WCAG 2.2 AA additions (FX-09, FX-10, FX-12, FX-14, FX-17, FX-20)
+   ===================================================================== */
+
+/* Checkbox (FX-17): a native checkbox inside its label, so the label text ticks it. Row is at least 24px tall. */
+.cc-checkbox { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 24px; cursor: pointer; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+.cc-checkbox__input {
+  appearance: none; -webkit-appearance: none;
+  flex-shrink: 0; width: 16px; height: 16px; margin: 0;
+  box-sizing: border-box;
+  border: 1.5px solid var(--border-input);   /* 3.17:1 on white: an empty box is identified by its border */
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary) no-repeat center / 12px 12px;
+  cursor: pointer;
+}
+.cc-checkbox__input:checked {
+  background-color: var(--blue-600); border-color: var(--blue-600);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 6.2l2.3 2.3L9.5 3.8'/%3E%3C/svg%3E");
+}
+.cc-checkbox__input:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+.cc-checkbox__input[aria-invalid="true"] { border-color: var(--error-500); }
+.cc-checkbox__input:disabled { border-color: var(--border-strong); background-color: var(--gray-50); cursor: not-allowed; }
+.cc-checkbox__input:disabled:checked { background-color: var(--gray-300); border-color: var(--gray-300); }
+.cc-checkbox:has(.cc-checkbox__input:disabled) { color: var(--gray-500); cursor: not-allowed; }
+
+/* Code entry (FX-09, FX-12): one box per digit, same edge as cc-input. (Not .cc-code, which is inline code.) */
+.cc-code-entry { display: flex; gap: var(--space-2); max-width: 360px; }
+.cc-code-entry__box {
+  flex: 1 1 0; min-width: 0; max-width: 52px; height: 48px;
+  box-sizing: border-box; padding: 0;
+  border: none; border-radius: var(--radius-md); outline: none;
+  background: var(--bg-primary);
+  box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--border-input);
+  font: var(--fw-medium) 20px/28px var(--font-body); color: var(--gray-900);
+  text-align: center; font-variant-numeric: tabular-nums;
+}
+.cc-code-entry__box:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
+.cc-code-entry__box[aria-invalid="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500); }
+.cc-code-entry__box[aria-invalid="true"]:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--error-500); }
+.cc-code-entry__box:disabled { background: var(--gray-50); color: var(--gray-500); box-shadow: inset 0 0 0 1px var(--border-strong); cursor: not-allowed; }
+
+/* Alert (FX-10, FX-14): inline message at the top of a card or form. Never auto-dismisses. */
+.cc-alert {
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  padding: var(--space-3) var(--space-2) var(--space-3) var(--space-4);
+  border: 1px solid; border-radius: var(--radius-lg);
+  font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700);
+}
+.cc-alert:focus { outline: none; }
+.cc-alert:focus-visible { box-shadow: var(--ring-focus); }
+.cc-alert__icon { flex-shrink: 0; width: 20px; height: 20px; margin-top: 0; }
+.cc-alert__body { flex: 1; min-width: 0; padding-top: 0; }
+.cc-alert__title { margin: 0; font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-alert__message { margin: 2px 0 0; }
+.cc-alert__close { margin: -6px 0 -6px auto; }
+.cc-alert--warning { background: var(--warning-50); border-color: var(--warning-200); }
+.cc-alert--warning .cc-alert__icon { color: var(--warning-700); }
+.cc-alert--info { background: var(--blue-50); border-color: var(--blue-200); }
+.cc-alert--info .cc-alert__icon { color: var(--blue-800); }
+
+/* Toast (FX-14): one region per page, rendered with the page shell. */
+.cc-toast-region {
+  position: fixed; z-index: var(--z-toast);
+  top: var(--cc-toast-top, 24px); right: var(--space-6);
+  width: 400px; max-width: calc(100vw - 2 * var(--space-4));
+  display: flex; flex-direction: column; gap: var(--space-3);
+  pointer-events: none;
+}
+.cc-toast-region > [aria-live] { display: flex; flex-direction: column; gap: var(--space-3); }
+.cc-toast-region > [aria-live]:empty { display: none; }
+@media (max-width: 480px) { .cc-toast-region { left: var(--space-4); right: var(--space-4); width: auto; top: var(--cc-toast-top, 16px); } }
+.cc-toast {
+  pointer-events: auto;
+  display: flex; align-items: flex-start; gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--bg-primary); border: 1px solid var(--gray-200);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+  animation: cc-toast-in 0.18s cubic-bezier(0.2,0.6,0.2,1);
+}
+@keyframes cc-toast-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .cc-toast { animation: none; } }
+.cc-toast__icon { flex-shrink: 0; width: 32px; height: 32px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; background: var(--success-50); color: var(--success-700); }
+.cc-toast--error .cc-toast__icon { background: var(--error-50); color: var(--error-700); }
+.cc-toast__body { flex: 1; min-width: 0; padding-top: 6px; }
+.cc-toast__title { margin: 0; font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-toast__desc { margin: 2px 0 0; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-600); }
+.cc-toast__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-2); }
+.cc-toast__action { min-height: 24px; padding: 2px 0; border: none; background: none; cursor: pointer; font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--blue-800); border-radius: var(--radius-xxs); }
+.cc-toast__action:hover { color: var(--blue-900); text-decoration: underline; }
+.cc-toast__action:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+.cc-toast__close { flex-shrink: 0; margin: -4px -4px 0 0; }
+
+/* Tooltip (FX-20): short label for an icon button. Hover (about 300ms) and keyboard focus; Esc closes. */
+.cc-tooltip-wrap { position: relative; display: inline-flex; }
+.cc-tooltip {
+  position: absolute; z-index: var(--z-overlay);
+  top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  padding: 6px 10px; border-radius: var(--radius-md);
+  background: var(--gray-900); color: #fff; box-shadow: var(--shadow-lg);
+  font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body);
+  white-space: nowrap; max-width: 240px;
+}
+.cc-tooltip[hidden] { display: none; }
+/* Toggletip (FX-20): extra details that open on press, not hover. */
+.cc-toggletip {
+  position: absolute; z-index: var(--z-overlay);
+  top: calc(100% + 8px); left: 0;
+  width: min(320px, calc(100vw - 2 * var(--space-4))); box-sizing: border-box;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-primary); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg);
+  font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700);
+}
+.cc-toggletip[hidden] { display: none; }
+
+/* Session timeout dialog (FX-10): pattern on .cc-dialog. */
+.cc-dialog__icon { width: 48px; height: 48px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--gray-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-xs); color: var(--gray-700); margin-bottom: var(--space-4); }
+.cc-dialog__title { margin: 0 0 var(--space-2); font: var(--fw-semibold) var(--text-lg-size)/var(--text-lg-lh) var(--font-body); color: var(--gray-900); }
+.cc-dialog__message { margin: 0; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-600); }
+.cc-countdown { color: var(--blue-800); font-weight: var(--fw-semibold); font-variant-numeric: tabular-nums; }
+.cc-dialog__actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+@media (max-width: 480px) { .cc-dialog__actions { flex-direction: column-reverse; } .cc-dialog__actions .cc-btn { width: 100%; } }
