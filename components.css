@@ -9,7 +9,7 @@
    Standards
      Buttons   heights 32 / 36 / 40 / 44 (xs / sm / md / lg), radius-md, text-sm medium
      Access    WCAG 2.2 AA: every control's target is at least 24 x 24px (2.5.8)
-     Inputs    height 40, 1px border-input border (#8C9199, 3:1+; disabled keeps gray-300), radius-md, focus = 2px blue-600 edge inside the field
+     Inputs    height 40, 1px border-input border (#8C9199, 3:1+; disabled keeps gray-300), radius-md, focus = 1px edge plus a tight 2px blue-600 ring outside it (selects, dropdowns, code boxes too)
      Icons     button icons beside a label sit one step lighter than the label
      Badges    pill (radius-full), text-xs, tinted bg + 200 border + 700 text
      Cards     bg-primary, 1px gray-200 border, radius-xl, shadow-xs
@@ -96,13 +96,14 @@
 }
 .cc-input::placeholder { color: var(--gray-500); }
 /* Matches the CC Platform: a 2px blue-600 edge inside the field (5.46:1), no outer ring. */
-.cc-input:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
+/* Fields keep their 1px edge and get a tight 2px blue-600 ring outside it, matching the developed store. Not --ring-focus (buttons, links, cards). */
+.cc-input:focus { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--border-input), 0 0 0 2px var(--blue-600); }
 /* Empty date/time fields read like placeholders; native picker icons sit at the gray-500 weight of other field icons. */
 .cc-input[data-empty="true"] { color: var(--gray-500); }
 .cc-input::-webkit-calendar-picker-indicator { opacity: 0.55; cursor: pointer; }
 .cc-input[aria-invalid="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500); }
-/* A focused field with an error keeps its red edge, thickened to 2px so focus stays visible (WCAG 2.4.7). Matches the developed store. */
-.cc-input[aria-invalid="true"]:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--error-500); }
+/* A focused field with an error gets the same tight 2px ring in error-500 (WCAG 2.4.7). Matches the developed store. */
+.cc-input[aria-invalid="true"]:focus { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500), 0 0 0 2px var(--error-500); }
 /* Disabled is exempt from 3:1 (WCAG 1.4.11); the lighter border helps it read as unavailable. */
 .cc-input:disabled { background: var(--gray-50); color: var(--gray-500); box-shadow: inset 0 0 0 1px var(--border-strong); cursor: not-allowed; }
 .cc-field .cc-hint--error { color: var(--error-700); }
@@ -215,9 +216,9 @@
   font: var(--fw-medium) 20px/28px var(--font-body); color: var(--gray-900);
   text-align: center; font-variant-numeric: tabular-nums;
 }
-.cc-code-entry__box:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
+.cc-code-entry__box:focus { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--border-input), 0 0 0 2px var(--blue-600); }
 .cc-code-entry__box[aria-invalid="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500); }
-.cc-code-entry__box[aria-invalid="true"]:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--error-500); }
+.cc-code-entry__box[aria-invalid="true"]:focus { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500), 0 0 0 2px var(--error-500); }
 .cc-code-entry__box:disabled { background: var(--gray-50); color: var(--gray-500); box-shadow: inset 0 0 0 1px var(--border-strong); cursor: not-allowed; }
 
 /* Alert (FX-10, FX-14): inline message at the top of a card or form. Never auto-dismisses. */
