@@ -35,7 +35,7 @@ Linked prototype repos (see `prototypes.json`):
 
 `Implementation Tool` is intentionally **not** on this system: it's built in the existing Client Implementation tool's style (Blazor, Telerik, Bootstrap 5.1) to match the live product.
 
-The focus ring standard is the 2px solid `--ring-focus` (the owner chose it over the older 4px soft halo for accessibility).
+The focus ring standard is the 2px solid `--ring-focus` (the owner chose it over the older 4px soft halo for accessibility). Fields (inputs, selects, dropdowns, code-entry boxes) use a tight 2px `--blue-600` ring outside their 1px edge instead (`--error-500` when the field has an error), matching the developed store.
 
 ## After every new export, before publishing
 1. Link it to the shared tokens (covers every page in `prototypes.json`, skips pages already linked):

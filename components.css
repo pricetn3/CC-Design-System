@@ -95,7 +95,6 @@
   outline: none;
 }
 .cc-input::placeholder { color: var(--gray-500); }
-/* Matches the CC Platform: a 2px blue-600 edge inside the field (5.46:1), no outer ring. */
 /* Fields keep their 1px edge and get a tight 2px blue-600 ring outside it, matching the developed store. Not --ring-focus (buttons, links, cards). */
 .cc-input:focus { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--border-input), 0 0 0 2px var(--blue-600); }
 /* Empty date/time fields read like placeholders; native picker icons sit at the gray-500 weight of other field icons. */
@@ -204,6 +203,41 @@
 .cc-checkbox__input:disabled { border-color: var(--border-strong); background-color: var(--gray-50); cursor: not-allowed; }
 .cc-checkbox__input:disabled:checked { background-color: var(--gray-300); border-color: var(--gray-300); }
 .cc-checkbox:has(.cc-checkbox__input:disabled) { color: var(--gray-500); cursor: not-allowed; }
+
+/* Option card (FX-09): a radio choice shown as a card, e.g. Processing Time, carrier, report options.
+   Identified by its text, so the resting border stays light; the selected state differs by 3:1 or more
+   (--blue-600 is 4.54:1 against --border-primary, 3.79:1 against the hover --border-strong) and adds a tint and a filled radio. */
+.cc-option-group { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.cc-option-group__legend { padding: 0; margin-bottom: var(--space-2); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-option-card {
+  display: flex; align-items: center; gap: 10px;
+  min-height: 44px; box-sizing: border-box; padding: 10px 12px;
+  border: 1px solid var(--border-primary); border-radius: var(--radius-xl);
+  background: var(--bg-primary); cursor: pointer;
+  transition: border-color 0.15s cubic-bezier(0.2,0.6,0.2,1), background-color 0.15s cubic-bezier(0.2,0.6,0.2,1), box-shadow 0.15s cubic-bezier(0.2,0.6,0.2,1);
+}
+.cc-option-card:hover { border-color: var(--border-strong); background: var(--gray-50); }
+.cc-option-card:has(.cc-option-card__input:checked) { border-color: var(--blue-600); background: var(--blue-50); }
+.cc-option-card:has(.cc-option-card__input:focus-visible) { box-shadow: var(--ring-focus); }
+.cc-option-card__input {
+  appearance: none; -webkit-appearance: none;
+  flex-shrink: 0; width: 16px; height: 16px; margin: 0; box-sizing: border-box;
+  border: 1px solid var(--gray-500); border-radius: var(--radius-full);   /* 4.56:1 on white: state is visible */
+  background: var(--bg-primary); cursor: pointer; outline: none;
+}
+.cc-option-card__input:checked { border-color: var(--blue-600); background: radial-gradient(circle, var(--blue-600) 0 4px, var(--bg-primary) 4.5px); }
+.cc-option-card__body { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; }
+.cc-option-card__title { display: inline-flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+/* --fg-secondary, not tertiary: the card can be white, gray-50 (hover) or blue-50 (selected). */
+.cc-option-card__meta { font: var(--fw-regular) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--fg-secondary); }
+.cc-option-card__end { margin-left: auto; flex-shrink: 0; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); font-variant-numeric: tabular-nums; }
+.cc-option-card__end--success { color: var(--success-700); }
+/* Disabled is exempt from 3:1 (WCAG 1.4.11). */
+.cc-option-card:has(.cc-option-card__input:disabled) { background: var(--gray-50); border-color: var(--border-primary); cursor: not-allowed; }
+.cc-option-card:has(.cc-option-card__input:disabled) .cc-option-card__title,
+.cc-option-card:has(.cc-option-card__input:disabled) .cc-option-card__end { color: var(--gray-500); }
+.cc-option-card__input:disabled { border-color: var(--border-strong); background-color: var(--gray-50); cursor: not-allowed; }
+.cc-option-card__input:disabled:checked { border-color: var(--gray-300); background: radial-gradient(circle, var(--gray-300) 0 4px, var(--gray-50) 4.5px); }
 
 /* Code entry (FX-09, FX-12): one box per digit, same edge as cc-input. (Not .cc-code, which is inline code.) */
 .cc-code-entry { display: flex; gap: var(--space-2); max-width: 360px; }
