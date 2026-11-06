@@ -80,7 +80,7 @@
   --border-input:       rgb(140, 145, 153);   /* active input borders: 3.17:1 on white, 3.04:1 on gray-50 */
 
   /* Overlays: gray-950 at fixed opacity */
-  --overlay-backdrop:   rgba(10, 13, 18, 0.40);  /* scrim behind dialogs and drawers */
+  --overlay-backdrop:   rgba(10, 13, 18, 0.70);  /* scrim behind every dialog and drawer, image viewers included */
   --overlay-icon:       rgba(10, 13, 18, 0.60);  /* icon circles on images; white icon 5.1:1 over white */
   --overlay-icon-hover: rgba(10, 13, 18, 0.75);  /* hover and focus of those circles; 8.9:1 */
 
