@@ -101,6 +101,8 @@
 .cc-input[data-empty="true"] { color: var(--gray-500); }
 .cc-input::-webkit-calendar-picker-indicator { opacity: 0.55; cursor: pointer; }
 .cc-input[aria-invalid="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500); }
+/* A focused field with an error keeps its red edge, thickened to 2px so focus stays visible (WCAG 2.4.7). Matches the developed store. */
+.cc-input[aria-invalid="true"]:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--error-500); }
 /* Disabled is exempt from 3:1 (WCAG 1.4.11); the lighter border helps it read as unavailable. */
 .cc-input:disabled { background: var(--gray-50); color: var(--gray-500); box-shadow: inset 0 0 0 1px var(--border-strong); cursor: not-allowed; }
 .cc-field .cc-hint--error { color: var(--error-700); }
