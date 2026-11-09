@@ -49,6 +49,7 @@
   --success-200:        rgb(171, 239, 198);
   --success-500:        rgb(23, 178, 106);
   --success-700:        rgb(6, 118, 71);
+  --success-800:        rgb(8, 93, 58);         /* hover for green buttons; white text 7.96:1 */
 
   --warning-50:         rgb(255, 250, 235);
   --warning-200:        rgb(254, 223, 137);
