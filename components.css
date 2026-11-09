@@ -273,6 +273,12 @@
 .cc-alert--warning .cc-alert__icon { color: var(--warning-700); }
 .cc-alert--info { background: var(--blue-50); border-color: var(--blue-200); }
 .cc-alert--info .cc-alert__icon { color: var(--blue-800); }
+/* Message-only alert (FX-10, FX-14): one line of text, no title and no close button. Store sign-in notices: session ended, link expired, logged out. */
+.cc-alert--message { padding: var(--space-4); border-radius: var(--radius-xl); box-shadow: var(--shadow-xs); }
+.cc-alert--message:focus-visible { box-shadow: var(--shadow-xs), var(--ring-focus); }
+.cc-alert--message .cc-alert__message { margin: 0; font-weight: var(--fw-medium); }
+.cc-alert--message.cc-alert--warning .cc-alert__message { color: var(--warning-700); }
+.cc-alert--message.cc-alert--info .cc-alert__message { color: var(--blue-800); }
 
 /* Toast (FX-14): one region per page, rendered with the page shell. */
 .cc-toast-region {
