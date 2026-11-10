@@ -178,6 +178,34 @@
   box-shadow: var(--shadow-xl);
   padding: var(--space-6);
 }
+/* Scroll area (FX-11): a list that scrolls on its own inside a dialog or panel, with a soft shadow on an edge
+   only while content is hidden past that edge, so a fixed footer reads as "more below" without a permanent divider.
+   Put the content in ONE child element (the area itself must not be flex or grid). A script sets
+   data-scroll-up="true" / data-scroll-down="true" on scroll and resize. The shadow is decorative (aria-hidden by nature);
+   scroll-padding keeps a focused row clear of the edge so focus is never hidden (WCAG 2.4.11). */
+.cc-scroll-area {
+  position: relative;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block: var(--space-4);
+  max-height: min(360px, 45dvh);
+}
+.cc-scroll-area::before,
+.cc-scroll-area::after {
+  content: "";
+  position: sticky;
+  z-index: 1;
+  display: block;
+  height: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s cubic-bezier(0.2,0.6,0.2,1);
+}
+.cc-scroll-area::before { top: 0; margin-bottom: -16px; background: linear-gradient(to bottom, rgba(10, 13, 18, 0.12), rgba(10, 13, 18, 0)); }
+.cc-scroll-area::after { bottom: 0; margin-top: -16px; background: linear-gradient(to top, rgba(10, 13, 18, 0.12), rgba(10, 13, 18, 0)); }
+.cc-scroll-area[data-scroll-up="true"]::before,
+.cc-scroll-area[data-scroll-down="true"]::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .cc-scroll-area::before, .cc-scroll-area::after { transition: none; } }
 
 /* =====================================================================
    Student Store WCAG 2.2 AA additions (FX-09, FX-10, FX-12, FX-14, FX-17, FX-20)
