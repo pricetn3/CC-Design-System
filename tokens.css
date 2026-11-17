@@ -48,9 +48,11 @@
   --success-50:         rgb(236, 253, 243);
   --success-200:        rgb(171, 239, 198);
   --success-500:        rgb(23, 178, 106);
+  --success-600:        rgb(7, 148, 85);        /* XLSX file badge, heavier success fills */
   --success-700:        rgb(6, 118, 71);
   --success-800:        rgb(8, 93, 58);         /* hover for green buttons; white text 7.96:1 */
 
+  --warning-25:         rgb(255, 252, 245);     /* lightest warning tint: pending rows, callouts */
   --warning-50:         rgb(255, 250, 235);
   --warning-200:        rgb(254, 223, 137);
   --warning-500:        rgb(247, 144, 9);
@@ -59,6 +61,7 @@
   --error-50:           rgb(254, 243, 242);
   --error-200:          rgb(254, 205, 202);
   --error-500:          rgb(240, 68, 56);
+  --error-600:          rgb(217, 45, 32);
   --error-700:          rgb(180, 35, 24);
 
   /* ====== Aliases used by Untitled-UI components in the Figma file ====== */
@@ -105,6 +108,7 @@
   --text-smed-size: 15px;  --text-smed-lh: 22px;
   --text-sm-size: 14px;  --text-sm-lh: 20px;
   --text-xs-size: 12px;  --text-xs-lh: 18px;
+  --text-2xs-size: 10px;  --text-2xs-lh: 14px;   /* tiny labels only: file-type badges, chart axes. Never body text. */
 
   /* Weights (Inter) */
   --fw-regular:  400;
@@ -124,12 +128,18 @@
   --space-4: 16px;
   --space-5: 20px;
   --space-6: 24px;
+  --space-7: 28px;
   --space-8: 32px;
+  --space-9: 36px;
   --space-10: 40px;
+  --space-11: 44px;
   --space-12: 48px;
+  --space-14: 56px;
   --space-16: 64px;
   --space-20: 80px;
+  --space-22: 88px;
   --space-24: 96px;
+  --space-28: 112px;
 
   /* ====== Radius ====== */
   --radius-none: 0;
