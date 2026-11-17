@@ -91,6 +91,7 @@
     <a href="#buttons">Buttons</a>
     <a href="#inputs">Inputs</a>
     <a href="#badges">Badges</a>
+    <a href="#tabs">Segmented tabs</a>
     <a href="#cards">Cards</a>
     <a href="#links">Links</a>
   </nav>
@@ -195,6 +196,29 @@
         <span class="cc-badge cc-badge--warning"><span class="cc-badge__dot"></span>Expiring</span>
         <span class="cc-badge cc-badge--error"><span class="cc-badge__dot"></span>Revoked</span>
         <span class="cc-badge">$25.00</span>
+      </div>
+    </section>
+
+    <section id="tabs">
+      <h2>Segmented tabs</h2>
+      <p>Switch between views of the same page or table. One 40px layout, so tabs line up with search fields and buttons in a toolbar. Table toolbars use the default look (white selected tab); page-level views use <code>cc-tabs--brand</code> (light blue selected tab). The selected tab is the one with <code>aria-pressed="true"</code>.</p>
+      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-4);">
+        <div class="sg-row">
+          <div class="cc-tabs" role="group" aria-label="Show countries">
+            <button type="button" class="cc-tabs__tab" aria-pressed="true">All <span class="cc-tabs__count">221</span></button>
+            <button type="button" class="cc-tabs__tab" aria-pressed="false">Enabled <span class="cc-tabs__count">207</span></button>
+            <button type="button" class="cc-tabs__tab" aria-pressed="false">Disabled <span class="cc-tabs__count">14</span></button>
+          </div>
+          <input class="cc-input" style="width:240px;" placeholder="Search by country or code" aria-label="Search countries">
+          <button type="button" class="cc-btn cc-btn--secondary">Filter</button>
+        </div>
+        <div class="sg-row">
+          <div class="cc-tabs cc-tabs--brand" role="group" aria-label="Report">
+            <button type="button" class="cc-tabs__tab" aria-pressed="true">Paper Credentials</button>
+            <button type="button" class="cc-tabs__tab" aria-pressed="false">Digital Credentials</button>
+            <button type="button" class="cc-tabs__tab" aria-pressed="false">Student Reorders <span class="cc-tabs__count cc-tabs__count--warning">12</span></button>
+          </div>
+        </div>
       </div>
     </section>
 
