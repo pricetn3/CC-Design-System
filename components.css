@@ -47,6 +47,12 @@
 
 .cc-btn--tertiary { background: transparent; color: var(--gray-600); }
 .cc-btn--tertiary:hover { background: var(--gray-100); color: var(--gray-800); }
+/* Destructive: for delete, deactivate and remove actions. Filled for the final confirm in a dialog, outline for the action that opens it. */
+.cc-btn--destructive { background: var(--error-700); color: var(--fg-on-brand); box-shadow: var(--shadow-button-primary); }
+.cc-btn--destructive:hover { box-shadow: var(--shadow-button-primary), var(--shadow-md); }
+.cc-btn--destructive-secondary { background: var(--bg-primary); color: var(--error-700); box-shadow: var(--shadow-button-secondary), inset 0 0 0 1px var(--error-200); }
+.cc-btn--destructive-secondary:hover { background: var(--error-50); }
+.cc-btn--destructive > svg, .cc-btn--destructive > .lucide { color: var(--error-200); }
 
 /* Icons beside a label are one step lighter than the label, matching the CC Platform.
    They're decorative (the label carries the meaning), so 1.4.11 contrast doesn't apply.
