@@ -409,3 +409,30 @@
 .cc-tabs__count { min-width: 22px; box-sizing: border-box; padding: 0 var(--space-1_5); border-radius: var(--radius-full); border: 1px solid var(--gray-200); background: var(--gray-100); color: var(--gray-700); font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); text-align: center; font-variant-numeric: tabular-nums; }
 .cc-tabs__tab[aria-pressed="true"] .cc-tabs__count, .cc-tabs__tab[aria-selected="true"] .cc-tabs__count { background: var(--blue-50); border-color: var(--blue-200); color: var(--blue-700); }
 .cc-tabs__count--warning, .cc-tabs__tab[aria-pressed="true"] .cc-tabs__count--warning { background: var(--warning-50); border-color: var(--warning-200); color: var(--warning-700); }
+
+/* =====================================================================
+   Text styles (mirrors the master design system's type classes).
+   Headings use --font-display; body text uses --font-body.
+   ===================================================================== */
+.cc-display-2xl { font: var(--fw-semibold) var(--text-display-2xl-size)/var(--text-display-2xl-lh) var(--font-display); letter-spacing: var(--text-display-2xl-tracking); color: var(--fg-primary); }
+.cc-display-xl  { font: var(--fw-semibold) var(--text-display-xl-size)/var(--text-display-xl-lh) var(--font-display); letter-spacing: var(--text-display-xl-tracking); color: var(--fg-primary); }
+.cc-display-lg  { font: var(--fw-semibold) var(--text-display-lg-size)/var(--text-display-lg-lh) var(--font-display); letter-spacing: var(--text-display-lg-tracking); color: var(--fg-primary); }
+.cc-display-md  { font: var(--fw-semibold) var(--text-display-md-size)/var(--text-display-md-lh) var(--font-display); letter-spacing: var(--text-display-md-tracking); color: var(--fg-primary); }
+.cc-display-sm  { font: var(--fw-semibold) var(--text-display-sm-size)/var(--text-display-sm-lh) var(--font-display); color: var(--fg-primary); }
+.cc-display-xs  { font: var(--fw-semibold) var(--text-display-xs-size)/var(--text-display-xs-lh) var(--font-display); color: var(--fg-primary); }
+
+.cc-h1 { font: var(--fw-semibold) 30px/38px var(--font-display); letter-spacing: -0.01em; color: var(--fg-primary); }
+.cc-h2 { font: var(--fw-semibold) 24px/32px var(--font-display); color: var(--fg-primary); }
+.cc-h3 { font: var(--fw-semibold) 20px/30px var(--font-display); color: var(--fg-primary); }
+.cc-h4 { font: var(--fw-semibold) 18px/28px var(--font-display); color: var(--fg-primary); }
+
+.cc-text-xl   { font: var(--fw-regular) var(--text-xl-size)/var(--text-xl-lh) var(--font-body); color: var(--fg-primary); }
+.cc-text-lg   { font: var(--fw-regular) var(--text-lg-size)/var(--text-lg-lh) var(--font-body); color: var(--fg-primary); }
+.cc-text-md   { font: var(--fw-regular) var(--text-md-size)/var(--text-md-lh) var(--font-body); color: var(--fg-primary); }
+.cc-text-smed { font: var(--fw-regular) var(--text-smed-size)/var(--text-smed-lh) var(--font-body); color: var(--fg-primary); }
+.cc-text-sm   { font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--fg-primary); }
+.cc-text-xs   { font: var(--fw-regular) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--fg-primary); }
+
+.cc-eyebrow { font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-500); text-transform: none; }
+.cc-mono    { font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-mono); color: var(--fg-primary); }
+.cc-code    { font: var(--fw-regular) 13px/20px var(--font-mono); background: var(--gray-100); padding: 2px 6px; border-radius: var(--radius-xs); color: var(--gray-800); }

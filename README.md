@@ -22,7 +22,7 @@ Then style with tokens (`var(--blue-600)`, `var(--space-4)`, `var(--radius-md)`)
 | File | What it is |
 |---|---|
 | `tokens.css` | Colors, type, spacing, radius, shadows |
-| `components.css` | Buttons (xs 32 / sm 36 / md 40 / lg 44), inputs, badges, cards, links |
+| `components.css` | Text styles, buttons (xs 32 / sm 36 / md 40 / lg 44), icon buttons, inputs, checkboxes and radios, option cards, code entry, badges, segmented tabs, cards, links, alerts, toasts, tooltips, dialogs and scroll areas |
 | `index.html` | The living style guide |
 | `prototypes.json` | Which prototype pages use this system |
 | `drift-allowlist.json` | Non-token colors that are allowed (partner brands, third-party buttons) |
