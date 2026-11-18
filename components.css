@@ -135,6 +135,53 @@
 .cc-badge--error   { background: var(--error-50);   border-color: var(--error-200);   color: var(--error-700); }
 .cc-badge__dot { width: 6px; height: 6px; border-radius: var(--radius-full); background: currentColor; }
 
+/* Badge, square: 6px corners for status and category labels in tables, detail rows and panels.
+   Same tones as the pill (combine with --brand, --success, --warning, --error). Pills stay for counts and standalone status. */
+.cc-badge--square { border-radius: var(--radius-sm); padding: 2px var(--space-2); }
+
+/* Underline tabs: switch between sections inside a page, panel or drawer (shipping types, document status, report type).
+   Use segmented tabs (cc-tabs) for table views and toolbars. The selected tab has aria-selected="true".
+   Selected text --blue-700 (6.4:1) and the 2px --blue-600 line; unselected --gray-600 (7.1:1). */
+.cc-utabs { display: flex; flex-wrap: wrap; column-gap: var(--space-6); border-bottom: 1px solid var(--gray-200); }
+.cc-utabs__tab {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  height: 40px; padding: 0 var(--space-0_5); margin-bottom: -1px; box-sizing: border-box;
+  border: none; border-bottom: 2px solid transparent; background: transparent; cursor: pointer;
+  font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-600); white-space: nowrap;
+}
+.cc-utabs__tab:hover { color: var(--gray-800); border-bottom-color: var(--gray-300); }
+.cc-utabs__tab[aria-selected="true"] { color: var(--blue-700); border-bottom-color: var(--blue-600); }
+.cc-utabs__tab:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--blue-400); border-radius: var(--radius-xs); }
+
+/* Calendar: the date picker panel opened from a date field or a date filter. Days are 40px round targets.
+   State comes from attributes: aria-pressed="true" selected, aria-disabled="true" not allowed,
+   data-range="true" inside a selected range, data-outside="true" from the next or previous month, data-today="true" today's dot. */
+.cc-calendar { width: 328px; max-width: 100%; box-sizing: border-box; background: var(--bg-primary); border: 1px solid var(--gray-200); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); padding: var(--space-4); }
+.cc-calendar__title { margin: 0 0 var(--space-2); padding: 0 var(--space-2); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+.cc-calendar__header { display: flex; align-items: center; gap: var(--space-0_5); margin-bottom: var(--space-2_5); }
+.cc-calendar__heading { display: inline-flex; align-items: center; gap: var(--space-1); height: 36px; padding: 0 var(--space-2); border: none; border-radius: var(--radius-md); background: transparent; cursor: pointer; font: var(--fw-semibold) var(--text-smed-size)/var(--text-smed-lh) var(--font-body); color: var(--gray-900); }
+.cc-calendar__heading:hover { background: var(--gray-100); }
+.cc-calendar__heading:focus-visible, .cc-calendar__day:focus-visible, .cc-calendar__option:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+.cc-calendar__label { font: var(--fw-semibold) var(--text-smed-size)/var(--text-smed-lh) var(--font-body); color: var(--gray-900); }
+.cc-calendar__grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+.cc-calendar__weekday { padding: var(--space-1_5) 0; text-align: center; font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--gray-600); }
+.cc-calendar__cell { display: flex; align-items: center; justify-content: center; padding: var(--space-0_5) 0; }
+.cc-calendar__day { position: relative; width: 40px; height: 40px; border: none; border-radius: var(--radius-full); background: transparent; cursor: pointer; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); font-variant-numeric: tabular-nums; }
+.cc-calendar__day:hover:not([aria-pressed="true"]):not([aria-disabled="true"]) { background: var(--gray-100); }
+/* Days from the next or previous month can be picked, so they keep 4.5:1 (--gray-500, 4.56:1). */
+.cc-calendar__day[data-outside="true"] { color: var(--gray-500); }
+.cc-calendar__day[data-range="true"] { background: var(--blue-50); }
+.cc-calendar__day[aria-pressed="true"] { background: var(--blue-600); color: var(--fg-on-brand); font-weight: var(--fw-semibold); }
+/* Disabled days are exempt from contrast (WCAG 1.4.3), so they use the lighter --gray-400. */
+.cc-calendar__day[aria-disabled="true"] { color: var(--gray-400); cursor: default; }
+.cc-calendar__day[data-today="true"]:not([aria-pressed="true"])::after { content: ""; position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: var(--radius-full); background: var(--blue-600); }
+.cc-calendar__options { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-1); }
+.cc-calendar__options--scroll { max-height: 280px; overflow-y: auto; }
+.cc-calendar__option { height: 36px; border: none; border-radius: var(--radius-md); background: transparent; cursor: pointer; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-calendar__option:hover:not([aria-pressed="true"]) { background: var(--gray-100); }
+.cc-calendar__option[aria-pressed="true"] { background: var(--blue-600); color: var(--fg-on-brand); font-weight: var(--fw-semibold); }
+
+
 /* ---------- Cards ---------- */
 .cc-card {
   background: var(--bg-primary);
@@ -438,3 +485,39 @@
 .cc-eyebrow { font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-500); text-transform: none; }
 .cc-mono    { font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-mono); color: var(--fg-primary); }
 .cc-code    { font: var(--fw-regular) 13px/20px var(--font-mono); background: var(--gray-100); padding: 2px 6px; border-radius: var(--radius-xs); color: var(--gray-800); }
+
+/* ---------- Read-only input, Switch, Settings group (mirrors master design system, 2026-11-17) ---------- */
+/* Read-only field: readable and focusable, not changeable (settings in view mode). Keeps the 3:1 edge. */
+.cc-input[readonly] { background: var(--gray-50); color: var(--gray-700); cursor: default; }
+
+/* Switch: <button role="switch" aria-checked> with a visible label and an On/Off word. 40x24 (WCAG 2.5.8). */
+.cc-switch { position: relative; display: inline-flex; flex-shrink: 0; width: 40px; height: 24px; box-sizing: border-box; padding: 0; border: none; border-radius: var(--radius-full); background: var(--bg-primary); box-shadow: inset 0 0 0 1px var(--border-input); cursor: pointer; transition: background-color 150ms cubic-bezier(0.2,0.6,0.2,1); }
+.cc-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: var(--radius-full); background: var(--gray-500); box-shadow: var(--shadow-xs); transition: transform 150ms cubic-bezier(0.2,0.6,0.2,1), background-color 150ms cubic-bezier(0.2,0.6,0.2,1); }
+.cc-switch:hover { background: var(--gray-50); }
+.cc-switch[aria-checked="true"] { background: var(--blue-600); box-shadow: none; }
+.cc-switch[aria-checked="true"]:hover { background: var(--blue-700); }
+.cc-switch[aria-checked="true"]::after { transform: translateX(16px); background: var(--bg-primary); }
+.cc-switch:focus-visible { outline: none; box-shadow: inset 0 0 0 1px var(--border-input), 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--blue-400); }
+.cc-switch[aria-checked="true"]:focus-visible { box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--blue-400); }
+.cc-switch[aria-readonly="true"] { cursor: default; }
+.cc-switch[aria-readonly="true"]:hover { background: var(--bg-primary); }
+.cc-switch[aria-readonly="true"][aria-checked="true"]:hover { background: var(--blue-600); }
+.cc-switch:disabled { cursor: not-allowed; background: var(--gray-100); box-shadow: inset 0 0 0 1px var(--border-strong); }
+.cc-switch:disabled::after { background: var(--gray-300); box-shadow: none; }
+.cc-switch:disabled[aria-checked="true"] { background: var(--blue-200); box-shadow: none; }
+.cc-switch:disabled[aria-checked="true"]::after { background: var(--bg-primary); }
+.cc-switch-label { display: inline-flex; align-items: center; gap: var(--space-2_5); font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+@media (prefers-reduced-motion: reduce) { .cc-switch, .cc-switch::after { transition: none; } }
+
+/* Settings group: titled, bordered list of setting rows; label left, control right; stacks below 640px (WCAG 1.4.10). */
+.cc-setting-group__title { margin: 0 0 var(--space-2); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-setting-group { border: 1px solid var(--gray-200); border-radius: var(--radius-xl); background: var(--bg-primary); }
+.cc-setting-group--muted { opacity: 0.6; }
+.cc-setting-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding: var(--space-4) var(--space-5); }
+.cc-setting-row + .cc-setting-row { border-top: 1px solid var(--gray-200); }
+.cc-setting-row__text { min-width: 0; flex: 1; }
+.cc-setting-row__label { display: block; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-setting-row__help { margin: var(--space-0_5) 0 0; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--fg-secondary); }
+.cc-setting-row__control { flex-shrink: 0; width: 320px; display: flex; flex-direction: column; gap: var(--space-1_5); }
+.cc-setting-row__control--end { width: auto; align-items: flex-end; }
+@media (max-width: 640px) { .cc-setting-row { flex-direction: column; align-items: stretch; gap: var(--space-3); } .cc-setting-row__control { width: 100%; } .cc-setting-row__control--end { align-items: flex-start; } }

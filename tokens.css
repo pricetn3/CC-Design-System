@@ -87,6 +87,9 @@
   --overlay-backdrop:   rgba(10, 13, 18, 0.70);  /* scrim behind every dialog and drawer, image viewers included */
   --overlay-icon:       rgba(10, 13, 18, 0.60);  /* icon circles on images; white icon 5.1:1 over white */
   --overlay-icon-hover: rgba(10, 13, 18, 0.75);  /* hover and focus of those circles; 8.9:1 */
+  --overlay-hover: rgba(10, 13, 18, 0.05);      /* nav and quiet-button hover on a tinted surface */
+  --overlay-subtle: rgba(10, 13, 18, 0.12);     /* round prev / next buttons over an image */
+  --overlay-on-brand: rgba(255, 255, 255, 0.45); /* faint white on blue-600, e.g. spinner track */
 
   /* ====== Type system (Inter, Untitled UI scale) ====== */
   --font-display: 'Inter', system-ui, -apple-system, sans-serif;
@@ -162,6 +165,7 @@
   --shadow-xl: 0 20px 24px -4px rgba(10, 13, 18, 0.08), 0 8px 8px -4px rgba(10, 13, 18, 0.03);
   --shadow-2xl: 0 24px 48px -12px rgba(10, 13, 18, 0.18);
   --shadow-3xl: 0 32px 64px -12px rgba(10, 13, 18, 0.14);
+  --shadow-drawer: -8px 0 24px -6px rgba(10, 13, 18, 0.12), -2px 0 8px -2px rgba(10, 13, 18, 0.06);  /* right-edge drawers */
 
   /* Inset accents used on inputs + primary buttons */
   --shadow-button-primary: 0 1px 2px 0 rgba(10,13,18,0.05), inset 0 0 0 1px rgba(0,0,0,0.20);

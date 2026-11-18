@@ -101,6 +101,8 @@
     <a href="#option-cards">Option cards</a>
     <a href="#scroll-area">Scroll area</a>
     <a href="#tabs">Segmented tabs</a>
+    <a href="#settings-group">Settings group</a>
+    <a href="#switch">Switch</a>
     <a href="#text-styles">Text styles</a>
     <a href="#toasts">Toasts</a>
     <a href="#tooltips">Tooltips</a>
@@ -168,7 +170,7 @@
 
     <section id="badges">
       <h2>Badges</h2>
-      <p>Pill shaped, 12px text. Each status uses its 50 tint for the fill, 200 for the border and 700 for the text.</p>
+      <p>Pill shaped by default, 12px text. Each status uses its 50 tint for the fill, 200 for the border and 700 for the text.</p>
       <div class="sg-panel sg-row">
         <span class="cc-badge">Neutral</span>
         <span class="cc-badge cc-badge--brand">Coming soon</span>
@@ -176,6 +178,14 @@
         <span class="cc-badge cc-badge--warning"><span class="cc-badge__dot"></span>Expiring</span>
         <span class="cc-badge cc-badge--error"><span class="cc-badge__dot"></span>Revoked</span>
         <span class="cc-badge">$25.00</span>
+      </div>
+      <p>Square (<code>cc-badge--square</code>, 6px corners) for status and category labels in tables, detail rows and panels. Keep one shape per table or panel.</p>
+      <div class="sg-panel sg-row">
+        <span class="cc-badge cc-badge--square">Draft</span>
+        <span class="cc-badge cc-badge--square cc-badge--brand">Processing</span>
+        <span class="cc-badge cc-badge--square cc-badge--success">Paid</span>
+        <span class="cc-badge cc-badge--square cc-badge--warning">On hold</span>
+        <span class="cc-badge cc-badge--square cc-badge--error">Denied</span>
       </div>
     </section>
 
@@ -300,6 +310,32 @@
       </div>
     </section>
 
+    <section id="underline-tabs">
+      <h2>Underline tabs</h2>
+      <p>Sections inside a page, panel or drawer. Use segmented tabs for table views and toolbars. The selected tab has <code>aria-selected="true"</code>.</p>
+      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-6);">
+        <div class="cc-utabs" role="tablist" aria-label="Shipping addresses"><button type="button" class="cc-utabs__tab" role="tab" aria-selected="true">Credentials</button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Covers</button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Returns</button></div>
+        <div class="cc-utabs" role="tablist" aria-label="Document status"><button type="button" class="cc-utabs__tab" role="tab" aria-selected="true">Active <span class="cc-badge cc-badge--brand">12</span></button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Archived <span class="cc-badge cc-badge--brand">3</span></button></div>
+      </div>
+    </section>
+
+    <section id="calendar">
+      <h2>Calendar</h2>
+      <p>The date picker panel. 40px round days; state comes from <code>aria-pressed</code> (selected), <code>aria-disabled</code>, <code>data-range</code>, <code>data-outside</code> and <code>data-today</code>.</p>
+      <div class="sg-panel">
+        <div class="cc-calendar" id="sg-cal">
+          <div class="cc-calendar__header"><button type="button" class="cc-calendar__heading">November</button><button type="button" class="cc-calendar__heading">2026</button><span style="flex:1"></span><button type="button" class="cc-icon-btn cc-icon-btn--xs" aria-label="Previous month">&lsaquo;</button><button type="button" class="cc-icon-btn cc-icon-btn--xs" aria-label="Next month">&rsaquo;</button></div>
+          <div class="cc-calendar__grid" id="sg-cal-wk"></div>
+          <div class="cc-calendar__grid" id="sg-cal-days"></div>
+        </div>
+      </div>
+      <script>
+        (function(){var w=document.getElementById('sg-cal-wk'),g=document.getElementById('sg-cal-days');['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(function(d){var e=document.createElement('div');e.className='cc-calendar__weekday';e.textContent=d;w.appendChild(e);});
+        for(var i=0;i<35;i++){var n=i+1,out=n>30,d=out?n-30:n,c=document.createElement('div'),b=document.createElement('button');c.className='cc-calendar__cell';b.type='button';b.className='cc-calendar__day';b.textContent=d;
+        if(out)b.setAttribute('data-outside','true');if(!out&&d<3)b.setAttribute('aria-disabled','true');if(!out&&d===17)b.setAttribute('data-today','true');if(!out&&(d===10||d===14))b.setAttribute('aria-pressed','true');if(!out&&d>10&&d<14)b.setAttribute('data-range','true');c.appendChild(b);g.appendChild(c);}})();
+      </script>
+    </section>
+
     <section id="inputs">
       <h2>Inputs</h2>
       <p>40px tall by default, with an inset 1px border so the field doesn't shift when the error border appears. <code>cc-input--sm</code> (36px) is only for dense spots: filter bars, a search inside a menu, popover or dialog list, and compact toolbars beside <code>cc-btn--sm</code>. Keep fields in one row the same height.</p>
@@ -370,6 +406,30 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section id="settings-group">
+      <h2>Settings group</h2>
+      <p>A titled, bordered list of setting rows: label and help on the left, the control on the right. Used on the organization Settings tab (layout Version 3). In view mode, fields are read-only (not disabled) so they can still be reached.</p>
+      <div class="sg-panel" style="max-width:760px;">
+        <h3 class="cc-setting-group__title">Student site</h3>
+        <div class="cc-setting-group">
+          <div class="cc-setting-row"><div class="cc-setting-row__text"><label class="cc-setting-row__label" for="sg-sg-dom">Domain</label><p class="cc-setting-row__help">Read-only until you select Edit.</p></div><div class="cc-setting-row__control"><input id="sg-sg-dom" class="cc-input" value="school.edu" readonly></div></div>
+          <div class="cc-setting-row"><div class="cc-setting-row__text"><label class="cc-setting-row__label" for="sg-sg-sub">Subdomain</label></div><div class="cc-setting-row__control"><input id="sg-sg-sub" class="cc-input" placeholder="reorder"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="switch">
+      <h2>Switch</h2>
+      <p>Turns one setting on or off. A <code>&lt;button role="switch" aria-checked&gt;</code> with a visible label and an On/Off word beside it. 40×24. Use <code>aria-readonly="true"</code> in view mode instead of <code>disabled</code>.</p>
+      <div class="sg-panel" style="display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
+        <span class="cc-switch-label">Off<button type="button" class="cc-switch" role="switch" aria-checked="false" aria-label="Example off"></button></span>
+        <span class="cc-switch-label">On<button type="button" class="cc-switch" role="switch" aria-checked="true" aria-label="Example on"></button></span>
+        <span class="cc-switch-label">Read-only<button type="button" class="cc-switch" role="switch" aria-checked="true" aria-readonly="true" aria-label="Example read-only"></button></span>
+        <span class="cc-switch-label">Disabled<button type="button" class="cc-switch" role="switch" aria-checked="false" disabled aria-label="Example disabled"></button></span>
+      </div>
+      <script>document.querySelectorAll('#switch .cc-switch:not([aria-readonly="true"]):not([disabled])').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-checked',b.getAttribute('aria-checked')!=='true');});});</script>
     </section>
 
     <section id="text-styles">
