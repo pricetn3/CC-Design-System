@@ -302,11 +302,12 @@
 
     <section id="inputs">
       <h2>Inputs</h2>
-      <p>40px tall with an inset 1px border, so the field doesn't shift when the error border appears.</p>
+      <p>40px tall by default, with an inset 1px border so the field doesn't shift when the error border appears. <code>cc-input--sm</code> (36px) is only for dense spots: filter bars, a search inside a menu, popover or dialog list, and compact toolbars beside <code>cc-btn--sm</code>. Keep fields in one row the same height.</p>
       <div class="sg-panel" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
         <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" placeholder="you@school.edu"><span class="cc-hint">We'll send a verification code.</span></label>
         <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" value="taylor@" aria-invalid="true"><span class="cc-hint cc-hint--error">Enter a valid email address.</span></label>
         <label class="cc-field"><span class="cc-label">Student ID</span><input class="cc-input" value="0049231" disabled><span class="cc-hint">Managed by your institution.</span></label>
+        <label class="cc-field"><span class="cc-label">Search certificate types</span><input class="cc-input cc-input--sm" placeholder="Search"><span class="cc-hint">Small · 36px, dense spots only.</span></label>
       </div>
     </section>
 

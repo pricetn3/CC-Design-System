@@ -37,7 +37,7 @@ Linked prototype repos (see `prototypes.json`):
 
 The focus ring standard is the 2px solid `--ring-focus` (the owner chose it over the older 4px soft halo for accessibility). Fields (inputs, selects, dropdowns, code-entry boxes) instead swap their gray edge for a 2px `--blue-600` edge drawn inside the field (`--error-500` when the field has an error), with no outside ring, so containers can't clip it. Chosen 2026-11-17; the developed store still uses the older outside ring until developers update it.
 
-Inputs, selects, dropdown triggers and search fields are always 40px tall across every CC product.
+Inputs, selects, dropdown triggers and search fields are 40px tall by default across every CC product. The small size `cc-input--sm` (36px, added 2026-11-18) is allowed only in dense spots: filter bars, a search inside a menu, popover or dialog list, and compact toolbars beside `cc-btn--sm`.
 
 The style guide lists Foundations first, then Components in alphabetical order; keep new components in that order.
 
