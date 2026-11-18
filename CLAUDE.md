@@ -6,7 +6,7 @@ The master is the **Credential Connections Design System in Claude Design**. Cha
 
 ## What's here
 - `tokens.css`: the canonical token values (colors, type, spacing, radius, shadows). Every linked prototype loads it from https://pricetn3.github.io/CC-Design-System/tokens.css.
-- `components.css`: the standard recipes for text styles, buttons (xs 32 / sm 36 / md 40 / lg 44), icon buttons, inputs, checkboxes and radios, option cards, code entry, badges, segmented tabs, cards, links, alerts, toasts, tooltips, dialogs and scroll areas. Exports don't load it (their components are built in); the style guide and the React handoff components do.
+- `components.css`: the standard recipes for text styles, buttons (xs 32 / sm 36 / md 40 / lg 44), icon buttons, inputs, checkboxes and radios, option cards, code entry, badges, segmented tabs, cards, links, alerts, toasts, tooltips, dialogs, scroll areas, switches and settings groups (plus a read-only input state). Exports don't load it (their components are built in); the style guide and the React handoff components do.
 - `index.html`: the living style guide (the site's home page), rendered live from the two files above.
 - `prototypes.json`: which prototype pages use this system (repos in `~/Documents/GitHub`, with file patterns). Both tools read it. Add new prototype repos here.
 - `drift-allowlist.json`: non-token colors that are allowed (partner brands, third-party buttons). Each entry has a note.
