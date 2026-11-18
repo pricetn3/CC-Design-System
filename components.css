@@ -513,11 +513,13 @@
 .cc-setting-group__title { margin: 0 0 var(--space-2); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
 .cc-setting-group { border: 1px solid var(--gray-200); border-radius: var(--radius-xl); background: var(--bg-primary); }
 .cc-setting-group--muted { opacity: 0.6; }
-.cc-setting-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); padding: var(--space-4) var(--space-5); }
+/* Labels stay at the top of the row, lined up with the first line of the control (fields and control slots are 40px, so the text gets 10px on top). */
+.cc-setting-row { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-6); padding: var(--space-4) var(--space-5); }
 .cc-setting-row + .cc-setting-row { border-top: 1px solid var(--gray-200); }
-.cc-setting-row__text { min-width: 0; flex: 1; }
-.cc-setting-row__label { display: block; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-setting-row__text { min-width: 0; flex: 1; padding-top: var(--space-2_5); }
+.cc-setting-row__label { display: block; font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+.cc-setting-row__value { margin: 0; font: var(--fw-regular) var(--text-smed-size)/var(--text-smed-lh) var(--font-body); color: var(--gray-900); overflow-wrap: anywhere; }
 .cc-setting-row__help { margin: var(--space-0_5) 0 0; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--fg-secondary); }
 .cc-setting-row__control { flex-shrink: 0; width: 320px; display: flex; flex-direction: column; gap: var(--space-1_5); }
 .cc-setting-row__control--end { width: auto; align-items: flex-end; }
-@media (max-width: 640px) { .cc-setting-row { flex-direction: column; align-items: stretch; gap: var(--space-3); } .cc-setting-row__control { width: 100%; } .cc-setting-row__control--end { align-items: flex-start; } }
+@media (max-width: 640px) { .cc-setting-row { flex-direction: column; align-items: stretch; gap: var(--space-3); } .cc-setting-row__control { width: 100%; } .cc-setting-row__control--end { align-items: flex-start; } .cc-setting-row__text { padding-top: 0; } }
