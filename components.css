@@ -491,19 +491,19 @@
 .cc-input[readonly] { background: var(--gray-50); color: var(--gray-700); cursor: default; }
 
 /* Switch: <button role="switch" aria-checked> with a visible label and an On/Off word. 40x24 (WCAG 2.5.8). */
-.cc-switch { position: relative; display: inline-flex; flex-shrink: 0; width: 40px; height: 24px; box-sizing: border-box; padding: 0; border: none; border-radius: var(--radius-full); background: var(--bg-primary); box-shadow: inset 0 0 0 1px var(--border-input); cursor: pointer; transition: background-color 150ms cubic-bezier(0.2,0.6,0.2,1); }
-.cc-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: var(--radius-full); background: var(--gray-500); box-shadow: var(--shadow-xs); transition: transform 150ms cubic-bezier(0.2,0.6,0.2,1), background-color 150ms cubic-bezier(0.2,0.6,0.2,1); }
-.cc-switch:hover { background: var(--gray-50); }
+.cc-switch { position: relative; display: inline-flex; flex-shrink: 0; width: 40px; height: 24px; box-sizing: border-box; padding: 0; border: none; border-radius: var(--radius-full); background: var(--border-input); box-shadow: none; cursor: pointer; transition: background-color 150ms cubic-bezier(0.2,0.6,0.2,1); }
+.cc-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: var(--radius-full); background: var(--bg-primary); box-shadow: var(--shadow-xs); transition: transform 150ms cubic-bezier(0.2,0.6,0.2,1), background-color 150ms cubic-bezier(0.2,0.6,0.2,1); }
+.cc-switch:hover { background: var(--gray-500); }
 .cc-switch[aria-checked="true"] { background: var(--blue-600); box-shadow: none; }
 .cc-switch[aria-checked="true"]:hover { background: var(--blue-700); }
 .cc-switch[aria-checked="true"]::after { transform: translateX(16px); background: var(--bg-primary); }
-.cc-switch:focus-visible { outline: none; box-shadow: inset 0 0 0 1px var(--border-input), 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--blue-400); }
+.cc-switch:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--blue-400); }
 .cc-switch[aria-checked="true"]:focus-visible { box-shadow: 0 0 0 2px var(--bg-primary), 0 0 0 4px var(--blue-400); }
 .cc-switch[aria-readonly="true"] { cursor: default; }
-.cc-switch[aria-readonly="true"]:hover { background: var(--bg-primary); }
+.cc-switch[aria-readonly="true"]:hover { background: var(--border-input); }
 .cc-switch[aria-readonly="true"][aria-checked="true"]:hover { background: var(--blue-600); }
-.cc-switch:disabled { cursor: not-allowed; background: var(--gray-100); box-shadow: inset 0 0 0 1px var(--border-strong); }
-.cc-switch:disabled::after { background: var(--gray-300); box-shadow: none; }
+.cc-switch:disabled { cursor: not-allowed; background: var(--gray-200); box-shadow: none; }
+.cc-switch:disabled::after { background: var(--bg-primary); box-shadow: none; }
 .cc-switch:disabled[aria-checked="true"] { background: var(--blue-200); box-shadow: none; }
 .cc-switch:disabled[aria-checked="true"]::after { background: var(--bg-primary); }
 .cc-switch-label { display: inline-flex; align-items: center; gap: var(--space-2_5); font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
