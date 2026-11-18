@@ -35,7 +35,11 @@ Linked prototype repos (see `prototypes.json`):
 
 `Implementation Tool` is intentionally **not** on this system: it's built in the existing Client Implementation tool's style (Blazor, Telerik, Bootstrap 5.1) to match the live product.
 
-The focus ring standard is the 2px solid `--ring-focus` (the owner chose it over the older 4px soft halo for accessibility). Fields (inputs, selects, dropdowns, code-entry boxes) use a tight 2px `--blue-600` ring outside their 1px edge instead (`--error-500` when the field has an error), matching the developed store.
+The focus ring standard is the 2px solid `--ring-focus` (the owner chose it over the older 4px soft halo for accessibility). Fields (inputs, selects, dropdowns, code-entry boxes) instead swap their gray edge for a 2px `--blue-600` edge drawn inside the field (`--error-500` when the field has an error), with no outside ring, so containers can't clip it. Chosen 2026-11-17; the developed store still uses the older outside ring until developers update it.
+
+Inputs, selects, dropdown triggers and search fields are always 40px tall across every CC product.
+
+The style guide lists Foundations first, then Components in alphabetical order; keep new components in that order.
 
 ## After every new export, before publishing
 1. Link it to the shared tokens (covers every page in `prototypes.json`, skips pages already linked):
