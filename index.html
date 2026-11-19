@@ -80,7 +80,7 @@
 
   /* Preview / Code switch (pilot: Buttons). Sections with data-sg-code get the switch; code is generated from the live examples. */
   .sg-view { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin: 0 0 var(--space-3); }
-  .sg-states { display: grid; grid-template-columns: 120px repeat(4, max-content); align-items: center; gap: var(--space-3) var(--space-6); }
+  .sg-states { display: grid; grid-template-columns: 120px repeat(var(--sg-cols, 4), max-content); align-items: center; gap: var(--space-3) var(--space-6); }
   .sg-states__head { font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--fg-tertiary); }
   .sg-code { display: flex; flex-direction: column; gap: var(--space-5); }
   .sg-code__block h3 { margin: 0 0 var(--space-2); }
@@ -99,6 +99,7 @@
   .sg-details > summary:focus-visible { outline: none; box-shadow: var(--ring-focus); }
   .sg-tokens { margin: 0 0 var(--space-4); table-layout: fixed; }
   .sg-tokens th:first-child { width: 180px; }
+  .sg-tokens code { white-space: nowrap; }
   .sg-tokens caption { text-align: left; padding: 0 0 var(--space-1_5); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
   .sg-tokens th[scope="row"] { color: var(--gray-700); font-weight: var(--fw-medium); white-space: nowrap; }
   .sg-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -322,14 +323,23 @@
       </div>
     </section>
 
-    <section id="inputs">
+    <section id="inputs" data-sg-code>
       <h2>Inputs</h2>
       <p>40px tall by default, with an inset 1px border so the field doesn't shift when the error border appears. <code>cc-input--sm</code> (36px) is only for dense spots: filter bars, a search inside a menu, popover or dialog list, and compact toolbars beside <code>cc-btn--sm</code>. Keep fields in one row the same height.</p>
-      <div class="sg-panel" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
-        <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" placeholder="you@school.edu"><span class="cc-hint">We'll send a verification code.</span></label>
-        <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" value="taylor@" aria-invalid="true"><span class="cc-hint cc-hint--error">Enter a valid email address.</span></label>
-        <label class="cc-field"><span class="cc-label">Student ID</span><input class="cc-input" value="0049231" disabled><span class="cc-hint">Managed by your institution.</span></label>
-        <label class="cc-field"><span class="cc-label">Search certificate types</span><input class="cc-input cc-input--sm" placeholder="Search"><span class="cc-hint">Small · 36px, dense spots only.</span></label>
+      <div class="sg-panel">
+        <h3 style="margin-top:0">Fields</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
+          <label class="cc-field" data-sg-example="Field with hint" data-sg-self><span class="cc-label">Email</span><input class="cc-input" type="email" placeholder="you@school.edu"><span class="cc-hint">We'll send a verification code.</span></label>
+          <label class="cc-field" data-sg-example="Error" data-sg-self><span class="cc-label">Email</span><input class="cc-input" type="email" value="taylor@" aria-invalid="true" aria-describedby="sg-in-err"><span class="cc-hint cc-hint--error" id="sg-in-err">Enter a valid email address.</span></label>
+          <label class="cc-field" data-sg-example="Disabled" data-sg-self><span class="cc-label">Student ID</span><input class="cc-input" value="0049231" disabled><span class="cc-hint">Managed by your institution.</span></label>
+          <label class="cc-field" data-sg-example="Small (dense spots only)" data-sg-self><span class="cc-label">Search certificate types</span><input class="cc-input cc-input--sm" placeholder="Search"><span class="cc-hint">Small · 36px, dense spots only.</span></label>
+        </div>
+        <h3>States</h3>
+        <div class="sg-states" data-sg-cols="5" style="--sg-cols:5" aria-hidden="true">
+          <span></span><span class="sg-states__head">Default</span><span class="sg-states__head">Focus</span><span class="sg-states__head">Error</span><span class="sg-states__head">Disabled</span><span class="sg-states__head">Read-only</span>
+          <span class="sg-states__head">Field</span><input class="cc-input" style="width:150px" tabindex="-1" placeholder="Placeholder"><input class="cc-input" style="width:150px" tabindex="-1" data-sg-state="focus" value="Typing"><input class="cc-input" style="width:150px" tabindex="-1" aria-invalid="true" value="taylor@"><input class="cc-input" style="width:150px" tabindex="-1" disabled value="0049231"><input class="cc-input" style="width:150px" tabindex="-1" readonly value="school.edu">
+        </div>
+        <p class="sg-sr">The states grid shows a field at rest, with focus, with an error, disabled and read-only.</p>
       </div>
     </section>
 
@@ -346,16 +356,29 @@
       </div>
     </section>
 
-    <section id="switch">
+    <section id="switch" data-sg-code>
       <h2>Switch</h2>
       <p>Turns one setting on or off. A <code>&lt;button role="switch" aria-checked&gt;</code> with a visible label and an On/Off word beside it. 40×24. Use <code>aria-readonly="true"</code> in view mode instead of <code>disabled</code>.</p>
-      <div class="sg-panel" style="display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
-        <span class="cc-switch-label">Off<button type="button" class="cc-switch" role="switch" aria-checked="false" aria-label="Example off"></button></span>
-        <span class="cc-switch-label">On<button type="button" class="cc-switch" role="switch" aria-checked="true" aria-label="Example on"></button></span>
-        <span class="cc-switch-label">Read-only<button type="button" class="cc-switch" role="switch" aria-checked="true" aria-readonly="true" aria-label="Example read-only"></button></span>
-        <span class="cc-switch-label">Disabled<button type="button" class="cc-switch" role="switch" aria-checked="false" disabled aria-label="Example disabled"></button></span>
+      <div class="sg-panel">
+        <h3 style="margin-top:0">Off and on</h3>
+        <div class="sg-row" style="gap:var(--space-6)" data-sg-example="Off and on">
+          <span class="cc-switch-label"><span aria-hidden="true">Off</span><button type="button" class="cc-switch" role="switch" aria-checked="false" aria-label="Email reminders"></button></span>
+          <span class="cc-switch-label"><span aria-hidden="true">On</span><button type="button" class="cc-switch" role="switch" aria-checked="true" aria-label="Hold Management"></button></span>
+        </div>
+        <h3>Read-only and disabled</h3>
+        <div class="sg-row" style="gap:var(--space-6)" data-sg-example="Read-only and disabled">
+          <span class="cc-switch-label"><span aria-hidden="true">On</span><button type="button" class="cc-switch" role="switch" aria-checked="true" aria-readonly="true" aria-label="Lost and damaged reporting"></button></span>
+          <span class="cc-switch-label"><span aria-hidden="true">Off</span><button type="button" class="cc-switch" role="switch" aria-checked="false" disabled aria-label="CeCerts"></button></span>
+        </div>
+        <h3>States</h3>
+        <div class="sg-states" data-sg-cols="5" style="--sg-cols:5" aria-hidden="true">
+          <span></span><span class="sg-states__head">Default</span><span class="sg-states__head">Hover</span><span class="sg-states__head">Focus</span><span class="sg-states__head">Disabled</span><span class="sg-states__head">Read-only</span>
+          <span class="sg-states__head">Off</span><button type="button" class="cc-switch" role="switch" aria-checked="false" tabindex="-1"></button><button type="button" class="cc-switch" role="switch" aria-checked="false" tabindex="-1" data-sg-state="hover"></button><button type="button" class="cc-switch" role="switch" aria-checked="false" tabindex="-1" data-sg-state="focus"></button><button type="button" class="cc-switch" role="switch" aria-checked="false" tabindex="-1" disabled></button><button type="button" class="cc-switch" role="switch" aria-checked="false" tabindex="-1" aria-readonly="true"></button>
+          <span class="sg-states__head">On</span><button type="button" class="cc-switch" role="switch" aria-checked="true" tabindex="-1"></button><button type="button" class="cc-switch" role="switch" aria-checked="true" tabindex="-1" data-sg-state="hover"></button><button type="button" class="cc-switch" role="switch" aria-checked="true" tabindex="-1" data-sg-state="focus"></button><button type="button" class="cc-switch" role="switch" aria-checked="true" tabindex="-1" disabled></button><button type="button" class="cc-switch" role="switch" aria-checked="true" tabindex="-1" aria-readonly="true"></button>
+        </div>
+        <p class="sg-sr">The states grid shows the switch off and on, at rest, on hover, with keyboard focus, disabled and read-only.</p>
       </div>
-      <script>document.querySelectorAll('#switch .cc-switch:not([aria-readonly="true"]):not([disabled])').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-checked',b.getAttribute('aria-checked')!=='true');});});</script>
+      <script>document.querySelectorAll('#switch [data-sg-example] .cc-switch:not([aria-readonly="true"]):not([disabled])').forEach(function(b){b.addEventListener('click',function(){var on=b.getAttribute('aria-checked')!=='true';b.setAttribute('aria-checked',on);var w=b.previousElementSibling;if(w)w.textContent=on?'On':'Off';});});</script>
     </section>
 
     <section id="tabs">
@@ -661,10 +684,10 @@
     const out = [];
     const walk = (rules) => { for (const r of rules) {
       if (r.cssRules && !r.selectorText) { walk(r.cssRules); continue; }
-      const s = r.selectorText; if (!s || !/:hover|:focus-visible/.test(s)) continue;
-      const parts = s.split(',').map(x => x.trim()).filter(x => /:hover|:focus-visible/.test(x));
+      const s = r.selectorText; if (!s || !/:hover|:focus/.test(s)) continue;
+      const parts = s.split(',').map(x => x.trim()).filter(x => /:hover|:focus/.test(x));
       if (!parts.length) continue;
-      const sel = parts.map(x => x.replace(/:hover/g, '[data-sg-state~="hover"]').replace(/:focus-visible/g, '[data-sg-state~="focus"]')).join(', ');
+      const sel = parts.map(x => x.replace(/:hover/g, '[data-sg-state~="hover"]').replace(/:focus-visible/g, '[data-sg-state~="focus"]').replace(/:focus(?![\w-])/g, '[data-sg-state~="focus"]')).join(', ');
       out.push(sel + ' { ' + r.style.cssText + ' }');
     } };
     for (const sh of document.styleSheets) { let rules; try { rules = sh.cssRules; } catch (e) { continue; } if (sh.href && !/components\.css/.test(sh.href)) continue; walk(rules); }
@@ -676,7 +699,7 @@
   function clean(el) {
     const c = el.cloneNode(true);
     c.querySelectorAll('[data-sg-state]').forEach(n => n.removeAttribute('data-sg-state'));
-    [c, ...c.querySelectorAll('*')].forEach(n => { n.removeAttribute('data-sg-example'); if (n.getAttribute('tabindex') === '-1') n.removeAttribute('tabindex'); });
+    [c, ...c.querySelectorAll('*')].forEach(n => { n.removeAttribute('data-sg-example'); n.removeAttribute('data-sg-self'); if (n.getAttribute('tabindex') === '-1') n.removeAttribute('tabindex'); });
     return c;
   }
   function fmt(node, depth) {
@@ -715,7 +738,7 @@
       if (!r.selectorText) continue;
       r.selectorText.split(',').map(s => s.trim()).forEach(s => {
         if (/::|>|\s/.test(s.replace(/\[[^\]]*\]/g, ''))) return; // only rules on the element itself
-        RULES.push({ sel: s.replace(/:hover/g, '[data-sg-state~="hover"]').replace(/:focus-visible/g, '[data-sg-state~="focus"]'), style: r.style });
+        RULES.push({ sel: s.replace(/:hover/g, '[data-sg-state~="hover"]').replace(/:focus-visible/g, '[data-sg-state~="focus"]').replace(/:focus(?![\w-])/g, '[data-sg-state~="focus"]'), style: r.style });
       });
     } };
     for (const sh of document.styleSheets) { if (sh.href && !/components\.css/.test(sh.href)) continue; let rs; try { rs = sh.cssRules; } catch (e) { continue; } walk(rs); }
@@ -731,11 +754,11 @@
   }
   function tokenTables(sec) {
     const grid = sec.querySelector('.sg-states'); if (!grid) return null;
-    const kids = [...grid.children]; const heads = kids.slice(1, 5).map(k => k.textContent.trim());
+    const kids = [...grid.children]; const n = +(grid.getAttribute('data-sg-cols') || 4); const heads = kids.slice(1, n + 1).map(k => k.textContent.trim());
     const wrap = document.createElement('details'); wrap.className = 'sg-code__block sg-details';
     wrap.innerHTML = '<summary>Token details</summary><p class="sg-code__uses" style="margin:var(--space-2) 0 var(--space-3)">Which token styles each part, in each state, read from components.css. A dash means it stays the same as Default.</p>';
-    for (let i = 5; i + 4 < kids.length; i += 5) {
-      const name = kids[i].textContent.trim(); const els = kids.slice(i + 1, i + 5);
+    for (let i = n + 1; i + n < kids.length; i += n + 1) {
+      const name = kids[i].textContent.trim(); const els = kids.slice(i + 1, i + n + 1);
       const cols = els.map(tokensFor);
       const labels = [...new Set(PROPS.map(p => p[1]))].filter(l => cols.some(c => c[l]));
       let h = '<table class="sg-spec sg-tokens"><caption>' + name + '</caption><tr><th scope="col">Part</th>' + heads.map(x => '<th scope="col">' + x + '</th>').join('') + '</tr>';
@@ -795,7 +818,7 @@
     const code = document.createElement('div'); code.className = 'sg-panel sg-code'; code.id = id + '-code'; code.hidden = true;
     code.setAttribute('role', 'tabpanel'); code.setAttribute('aria-labelledby', id + '-tab-code');
     const tidy = (s) => s.replace(/=""/g, ''); /* boolean attributes: disabled, not disabled="" */
-    const blocks = [...panel.querySelectorAll('[data-sg-example]')].map(ex => ({ label: ex.getAttribute('data-sg-example'), html: tidy([...clean(ex).children].map(k => fmt(k, 0)).join('\n')) }));
+    const blocks = [...panel.querySelectorAll('[data-sg-example]')].map(ex => ({ label: ex.getAttribute('data-sg-example'), html: tidy((ex.hasAttribute('data-sg-self') ? [clean(ex)] : [...clean(ex).children]).map(k => fmt(k, 0)).join('\n')) })); /* data-sg-self: the example is the element itself, not its children */
     const extra = sec.querySelectorAll('template[data-sg-snippet]');
     extra.forEach(tp => blocks.push({ label: tp.getAttribute('data-sg-snippet'), html: tidy([...tp.content.children].map(k => fmt(k, 0)).join('\n')) }));
     const html = document.createElement('div'); html.className = 'sg-code__group'; html.innerHTML = '<h3 class="sg-code__kind">HTML</h3><p class="sg-code__uses" style="margin:0">Copy the markup. On a page that loads components.css, every state (hover, focus, disabled) comes with it.</p>';
