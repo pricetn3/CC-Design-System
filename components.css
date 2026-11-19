@@ -497,16 +497,20 @@
 .cc-setting-group__title { margin: 0 0 var(--space-2); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
 .cc-setting-group { border: 1px solid var(--gray-200); border-radius: var(--radius-xl); background: var(--bg-primary); }
 .cc-setting-group--muted { opacity: 0.6; }
-/* Labels stay at the top of the row, lined up with the first line of the control (fields and control slots are 40px, so the text gets 10px on top). */
-.cc-setting-row { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-6); padding: var(--space-4) var(--space-5); }
+/* Rows: the control (or its view-mode value) is centered against the label and help text, like a switch row.
+   A control taller than the text (a radio or checkbox list, several values) starts at the top, beside the label.
+   An error or count sits right under its field, inside the control. */
+.cc-setting-row { display: grid; grid-template-columns: minmax(0, 1fr) 320px; column-gap: var(--space-6); align-items: start; padding: var(--space-4) var(--space-5); }
+.cc-setting-row:has(> .cc-setting-row__control--end) { grid-template-columns: minmax(0, 1fr) auto; }
 .cc-setting-row + .cc-setting-row { border-top: 1px solid var(--gray-200); }
-.cc-setting-row__text { min-width: 0; flex: 1; padding-top: var(--space-2_5); }
+.cc-setting-row__text { min-width: 0; }
 .cc-setting-row__label { display: block; font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
 .cc-setting-row__value { margin: 0; font: var(--fw-regular) var(--text-smed-size)/var(--text-smed-lh) var(--font-body); color: var(--gray-900); overflow-wrap: anywhere; }
 .cc-setting-row__help { margin: var(--space-0_5) 0 0; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--fg-secondary); }
-.cc-setting-row__control { flex-shrink: 0; width: 320px; display: flex; flex-direction: column; gap: var(--space-1_5); }
-.cc-setting-row__control--end { width: auto; align-items: flex-end; }
-@media (max-width: 640px) { .cc-setting-row { flex-direction: column; align-items: stretch; gap: var(--space-3); } .cc-setting-row__control { width: 100%; } .cc-setting-row__control--end { align-items: flex-start; } .cc-setting-row__text { padding-top: 0; } }
+.cc-setting-row__control { align-self: center; min-width: 0; display: flex; flex-direction: column; gap: var(--space-1_5); }
+.cc-setting-row__control--end { align-items: flex-end; }
+.cc-setting-row .cc-hint--error { color: var(--error-700); }
+@media (max-width: 640px) { .cc-setting-row, .cc-setting-row:has(> .cc-setting-row__control--end) { grid-template-columns: minmax(0, 1fr); row-gap: var(--space-3); } .cc-setting-row__control { align-self: stretch; } .cc-setting-row__control--end { align-items: flex-start; } }
 
 /* Featured icon (Modern, gray): a decorative icon tile beside headings, metric cards and empty states. Not a button.
    sm 32 / md 40 (default) / lg 48 / xl 56. Icon 16/20/24/28, gray-500 (4.8:1 on white). 1px gray-300 edge.

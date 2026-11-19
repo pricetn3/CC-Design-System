@@ -479,12 +479,17 @@
 
     <section id="settings-group">
       <h2>Settings group</h2>
-      <p>A titled, bordered list of setting rows: label and help on the left, the control on the right. Used on the organization Settings tab (layout Version 3). In view mode, fields are read-only (not disabled) so they can still be reached.</p>
+      <p>A titled, bordered list of setting rows: label and help on the left, the control on the right, centered against the text like a switch row. A control taller than the text, such as a radio list, starts at the top beside the label. An error sits right under its field. Keep help text to about two lines. Used on the organization Settings tab. In view mode, show values as plain text, or make fields read-only (not disabled) so they can still be reached.</p>
       <div class="sg-panel" style="max-width:760px;">
-        <h3 class="cc-setting-group__title">Student site</h3>
+        <h3 class="cc-setting-group__title">Status</h3>
         <div class="cc-setting-group">
+          <div class="cc-setting-row"><div class="cc-setting-row__text"><label class="cc-setting-row__label" for="sg-sg-on">Hold Management</label><p class="cc-setting-row__help" id="sg-sg-on-h">Turn on to batch held orders and email the school.</p></div><div class="cc-setting-row__control cc-setting-row__control--end"><span class="cc-switch-label"><span aria-hidden="true">On</span><button type="button" id="sg-sg-on" class="cc-switch" role="switch" aria-checked="true" aria-describedby="sg-sg-on-h"></button></span></div></div>
+        </div>
+        <h3 class="cc-setting-group__title" style="margin-top:var(--space-6);">Schedule</h3>
+        <div class="cc-setting-group">
+          <div class="cc-setting-row"><div class="cc-setting-row__text"><label class="cc-setting-row__label" for="sg-sg-freq">Batch frequency</label><p class="cc-setting-row__help" id="sg-sg-freq-h">Batched only when 6 or more documents are on hold. Otherwise they wait for the next batch date.</p></div><div class="cc-setting-row__control"><select id="sg-sg-freq" class="cc-input" aria-invalid="true" aria-describedby="sg-sg-freq-h sg-sg-freq-e"><option value="">Select</option><option>Weekly</option></select><span id="sg-sg-freq-e" class="cc-hint cc-hint--error">Select a batch frequency.</span></div></div>
           <div class="cc-setting-row"><div class="cc-setting-row__text"><label class="cc-setting-row__label" for="sg-sg-dom">Domain</label><p class="cc-setting-row__help">Read-only until you select Edit.</p></div><div class="cc-setting-row__control"><input id="sg-sg-dom" class="cc-input" value="school.edu" readonly></div></div>
-          <div class="cc-setting-row"><div class="cc-setting-row__text"><label class="cc-setting-row__label" for="sg-sg-sub">Subdomain</label></div><div class="cc-setting-row__control"><input id="sg-sg-sub" class="cc-input" placeholder="reorder"></div></div>
+          <div class="cc-setting-row"><div class="cc-setting-row__text"><span class="cc-setting-row__label" id="sg-sg-day">Batch day</span><p class="cc-setting-row__help">Select 1 day.</p></div><div class="cc-setting-row__control"><div role="radiogroup" aria-labelledby="sg-sg-day" style="display:flex;flex-direction:column;gap:var(--space-2);"><label class="cc-radio"><input type="radio" class="cc-radio__input" name="sg-sg-day"> Monday</label><label class="cc-radio"><input type="radio" class="cc-radio__input" name="sg-sg-day"> Tuesday</label><label class="cc-radio"><input type="radio" class="cc-radio__input" name="sg-sg-day" checked> Wednesday</label></div></div></div>
         </div>
       </div>
     </section>
