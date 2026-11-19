@@ -447,15 +447,15 @@
 /* Session timeout dialog layout. Default: clock icon box on the left, title and message beside it.
    Footer row: countdown on the left, Log out and Continue session on the right.
    The only variant leaves out the icon box (the text then starts at the dialog's edge). */
-.cc-dialog:has(.cc-timeout) { max-width: 544px; } /* a little wider than the 480px default so the message wraps to two lines */
+.cc-dialog:has(.cc-timeout) { max-width: 500px; } /* matches the Student Store's session dialog */
 .cc-timeout { display: flex; align-items: flex-start; gap: var(--space-4); }
 .cc-timeout .cc-dialog__icon { flex-shrink: 0; margin-bottom: 0; }
 .cc-timeout__body { flex: 1; min-width: 0; }
-.cc-timeout .cc-dialog__title { margin: 0 0 var(--space-1); }
-.cc-timeout__footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3) var(--space-4); margin-top: var(--space-12); }
-.cc-timeout__footer .cc-countdown { font: var(--fw-semibold) var(--text-md-size)/var(--text-md-lh) var(--font-body); }
+.cc-timeout .cc-dialog__title { margin: 0 0 var(--space-1); font-size: var(--text-md-size); line-height: var(--text-md-lh); }
+.cc-timeout__footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3) var(--space-4); margin-top: var(--space-5); }
+.cc-timeout__footer .cc-countdown { font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); white-space: nowrap; }
 .cc-timeout__footer .cc-dialog__actions { margin-top: 0; }
-@media (max-width: 480px) { .cc-timeout__footer { flex-direction: column; align-items: stretch; margin-top: var(--space-8); } }
+@media (max-width: 480px) { .cc-timeout__footer { flex-direction: column; align-items: stretch; } }
 
 /* Segmented tabs: switch between views of the same page or table (mirrors master design system).
    Two looks, one layout: default (white selected tab) for table toolbars, --brand (light blue selected tab) for page-level views.
