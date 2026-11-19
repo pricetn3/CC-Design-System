@@ -91,6 +91,12 @@
   .sg-code__uses { margin: var(--space-2) 0 0; font-size: 12px; line-height: 18px; color: var(--fg-secondary); }
   .sg-code__uses code { white-space: nowrap; background: var(--gray-100); padding: 1px 4px; border-radius: var(--radius-xs); color: var(--gray-800); }
   .sg-panel[hidden] { display: none; }
+  .sg-code__kind { margin: 0; font: var(--fw-semibold) var(--text-md-size)/var(--text-md-lh) var(--font-body); color: var(--gray-900); }
+  .sg-code__group { margin-top: var(--space-2); }
+  .sg-code__group:first-child { margin-top: 0; }
+  .sg-details { border-top: 1px solid var(--border-secondary); padding-top: var(--space-4); }
+  .sg-details > summary { cursor: pointer; width: fit-content; border-radius: var(--radius-xs); font: var(--fw-semibold) var(--text-md-size)/var(--text-md-lh) var(--font-body); color: var(--gray-900); }
+  .sg-details > summary:focus-visible { outline: none; box-shadow: var(--ring-focus); }
   .sg-tokens { margin: 0 0 var(--space-4); table-layout: fixed; }
   .sg-tokens th:first-child { width: 180px; }
   .sg-tokens caption { text-align: left; padding: 0 0 var(--space-1_5); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
@@ -726,8 +732,8 @@
   function tokenTables(sec) {
     const grid = sec.querySelector('.sg-states'); if (!grid) return null;
     const kids = [...grid.children]; const heads = kids.slice(1, 5).map(k => k.textContent.trim());
-    const wrap = document.createElement('div'); wrap.className = 'sg-code__block';
-    wrap.innerHTML = '<h3>Tokens by state</h3><p class="sg-code__uses" style="margin:0 0 var(--space-3)">Which token styles each part, read from components.css. A dash means it stays the same as Default.</p>';
+    const wrap = document.createElement('details'); wrap.className = 'sg-code__block sg-details';
+    wrap.innerHTML = '<summary>Token details</summary><p class="sg-code__uses" style="margin:var(--space-2) 0 var(--space-3)">Which token styles each part, in each state, read from components.css. A dash means it stays the same as Default.</p>';
     for (let i = 5; i + 4 < kids.length; i += 5) {
       const name = kids[i].textContent.trim(); const els = kids.slice(i + 1, i + 5);
       const cols = els.map(tokensFor);
@@ -736,6 +742,39 @@
       labels.forEach(l => { h += '<tr><th scope="row">' + l + '</th>' + cols.map((c, j) => { const v = c[l] || ''; const same = j > 0 && v === (cols[0][l] || ''); return '<td>' + (j === 0 && !v ? 'none' : same || !v ? '—' : v.split(' + ').map(x => /^--/.test(x) ? '<code>' + x + '</code>' : x).join(' + ')) + '</td>'; }).join('') + '</tr>'; });
       wrap.insertAdjacentHTML('beforeend', h + '</table>');
     }
+    return wrap;
+  }
+
+  // 4. The CSS that makes these classes work: the rules exactly as written in components.css (all states, comments kept), ready to copy.
+  let CSS_SRC = '';
+  function cssFor(classes) {
+    const set = new Set(classes);
+    /* a rule belongs here when one of its selectors uses these classes and no other component's class (so .cc-dialog__actions .cc-btn stays with Dialogs) */
+    const mine = (sel) => sel.split(',').some(s => { const cs = (s.match(/\.cc-[\w-]+/g) || []).map(c => c.slice(1)); return cs.length && cs.every(c => set.has(c)); });
+    const src = CSS_SRC; const out = []; let k = 0, comment = '';
+    const block = (from) => { let d = 0, p = src.indexOf('{', from); for (let q = p; q < src.length; q++) { if (src[q] === '{') d++; else if (src[q] === '}' && --d === 0) return q + 1; } return src.length; };
+    while (k < src.length) {
+      const ws = src.slice(k).match(/^\s+/); if (ws) { k += ws[0].length; if (/\n\s*\n/.test(ws[0])) comment = ''; continue; }
+      if (src.startsWith('/*', k)) { const e = src.indexOf('*/', k) + 2; comment = src.slice(k, e); k = e; continue; }
+      const end = block(k); const text = src.slice(k, end); const sel = text.slice(0, text.indexOf('{'));
+      if (/^@media/.test(sel.trim())) {
+        const inner = text.slice(text.indexOf('{') + 1, text.lastIndexOf('}'));
+        const parts = inner.split('}').map(s => s.trim()).filter(Boolean).filter(s => mine(s.slice(0, s.indexOf('{'))));
+        if (parts.length) out.push(sel.trim() + ' {\n' + parts.map(s => '  ' + s + ' }').join('\n') + '\n}');
+      } else if (mine(sel)) out.push((comment ? comment + '\n' : '') + text.trim());
+      comment = ''; k = end;
+    }
+    return out.join('\n');
+  }
+  function codeBlock(label, text, lang) {
+    const wrap = document.createElement('div'); wrap.className = 'sg-code__block';
+    wrap.innerHTML = '<h3>' + label + '</h3><div class="sg-code__wrap"><pre tabindex="0" aria-label="' + label + ' ' + lang + '"></pre>' +
+      '<button type="button" class="cc-btn cc-btn--secondary cc-btn--xs sg-code__copy">Copy<span class="sg-sr"> ' + label + ' ' + lang + '</span></button></div>';
+    wrap.querySelector('pre').textContent = text;
+    wrap.querySelector('button').addEventListener('click', (e) => {
+      const btn = e.currentTarget; const done = () => { btn.firstChild.textContent = 'Copied'; say(label + ' ' + lang + ' copied'); setTimeout(() => { btn.firstChild.textContent = 'Copy'; }, 1600); };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, done); else done();
+    });
     return wrap;
   }
 
@@ -759,19 +798,15 @@
     const blocks = [...panel.querySelectorAll('[data-sg-example]')].map(ex => ({ label: ex.getAttribute('data-sg-example'), html: tidy([...clean(ex).children].map(k => fmt(k, 0)).join('\n')) }));
     const extra = sec.querySelectorAll('template[data-sg-snippet]');
     extra.forEach(tp => blocks.push({ label: tp.getAttribute('data-sg-snippet'), html: tidy([...tp.content.children].map(k => fmt(k, 0)).join('\n')) }));
-    blocks.forEach((b, i) => {
-      const u = uses(b.html);
-      const wrap = document.createElement('div'); wrap.className = 'sg-code__block';
-      wrap.innerHTML = '<h3>' + b.label + '</h3><div class="sg-code__wrap"><pre tabindex="0" aria-label="' + b.label + ' code"></pre>' +
-        '<button type="button" class="cc-btn cc-btn--secondary cc-btn--xs sg-code__copy">Copy<span class="sg-sr"> ' + b.label + ' code</span></button></div>' +
-        (u.classes.length ? '<p class="sg-code__uses">Classes: ' + u.classes.map(c => '<code>' + c + '</code>').join(' ') + '</p>' : '');
-      wrap.querySelector('pre').textContent = b.html;
-      wrap.querySelector('button').addEventListener('click', (e) => {
-        const btn = e.currentTarget; const done = () => { btn.firstChild.textContent = 'Copied'; say(b.label + ' code copied'); setTimeout(() => { btn.firstChild.textContent = 'Copy'; }, 1600); };
-        if (navigator.clipboard) navigator.clipboard.writeText(b.html).then(done, done); else done();
-      });
-      code.appendChild(wrap);
-    });
+    const html = document.createElement('div'); html.className = 'sg-code__group'; html.innerHTML = '<h3 class="sg-code__kind">HTML</h3><p class="sg-code__uses" style="margin:0">Copy the markup. On a page that loads components.css, every state (hover, focus, disabled) comes with it.</p>';
+    code.appendChild(html);
+    const allClasses = new Set();
+    blocks.forEach(b => { uses(b.html).classes.forEach(c => allClasses.add(c)); code.appendChild(codeBlock(b.label, b.html, 'HTML')); });
+    const css = cssFor([...allClasses]);
+    if (css) {
+      const head = document.createElement('div'); head.className = 'sg-code__group'; head.innerHTML = '<h3 class="sg-code__kind">CSS</h3><p class="sg-code__uses" style="margin:0">The rules behind these classes, from components.css, with every state. Copy them only if the page can\'t load components.css; they still need tokens.css for the var(--…) values. Classes: ' + [...allClasses].map(c => '<code>' + c + '</code>').join(' ') + '</p>';
+      code.appendChild(head); code.appendChild(codeBlock(name, css, 'CSS'));
+    }
     const tt = tokenTables(sec); if (tt) code.appendChild(tt);
     panel.after(code);
     // Tab behaviour: click, and arrow keys move between tabs (WAI-ARIA tabs pattern).
@@ -780,7 +815,7 @@
     tabs.forEach((t, i) => { t.addEventListener('click', () => show(i)); t.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); show((i + 1) % 2, true); } if (e.key === 'Home') { e.preventDefault(); show(0, true); } if (e.key === 'End') { e.preventDefault(); show(1, true); } }); });
   }
 
-  function init() { forceStates(); document.querySelectorAll('section[data-sg-code]').forEach(build); }
+  async function init() { forceStates(); try { const l = document.querySelector('link[href*="components.css"]'); CSS_SRC = await (await fetch(l ? l.href : 'components.css')).text(); } catch (e) {} document.querySelectorAll('section[data-sg-code]').forEach(build); }
   if (document.readyState === 'complete') init(); else window.addEventListener('load', init);
 })();
 </script>
