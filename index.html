@@ -91,6 +91,10 @@
   .sg-code__uses { margin: var(--space-2) 0 0; font-size: 12px; line-height: 18px; color: var(--fg-secondary); }
   .sg-code__uses code { white-space: nowrap; background: var(--gray-100); padding: 1px 4px; border-radius: var(--radius-xs); color: var(--gray-800); }
   .sg-panel[hidden] { display: none; }
+  .sg-tokens { margin: 0 0 var(--space-4); table-layout: fixed; }
+  .sg-tokens th:first-child { width: 180px; }
+  .sg-tokens caption { text-align: left; padding: 0 0 var(--space-1_5); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+  .sg-tokens th[scope="row"] { color: var(--gray-700); font-weight: var(--fw-medium); white-space: nowrap; }
   .sg-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
 </head>
@@ -693,6 +697,48 @@
     return { classes, tokens: [...toks].sort() };
   }
 
+
+  // 3. Token tables: for each variant in the States grid, which token styles which property, in each state.
+  //    Read from components.css: a rule counts for a state when its selector matches that state's example.
+  const PROPS = [['background-color', 'Background'], ['background', 'Background'], ['color', 'Text'], ['box-shadow', 'Shadow, border or ring'], ['border-color', 'Border'], ['border-radius', 'Radius'], ['height', 'Height']];
+  let RULES = null;
+  function rules() {
+    if (RULES) return RULES; RULES = [];
+    const walk = (rs, media) => { for (const r of rs) {
+      if (r.cssRules && !r.selectorText) { if (!r.media || matchMedia(r.media.mediaText).matches) walk(r.cssRules); continue; }
+      if (!r.selectorText) continue;
+      r.selectorText.split(',').map(s => s.trim()).forEach(s => {
+        if (/::|>|\s/.test(s.replace(/\[[^\]]*\]/g, ''))) return; // only rules on the element itself
+        RULES.push({ sel: s.replace(/:hover/g, '[data-sg-state~="hover"]').replace(/:focus-visible/g, '[data-sg-state~="focus"]'), style: r.style });
+      });
+    } };
+    for (const sh of document.styleSheets) { if (sh.href && !/components\.css/.test(sh.href)) continue; let rs; try { rs = sh.cssRules; } catch (e) { continue; } walk(rs); }
+    return RULES;
+  }
+  function tokensFor(el) {
+    const got = {};
+    rules().forEach(r => { let ok = false; try { ok = el.matches(r.sel); } catch (e) {} if (!ok) return;
+      PROPS.forEach(([p, label]) => { const v = r.style.getPropertyValue(p); if (v) got[label] = v.trim(); }); });
+    const show = {};
+    Object.keys(got).forEach(k => { if (/^(currentcolor|initial|inherit)$/i.test(got[k])) return; /* e.g. border: none sets border-color to currentcolor: not a real style */ const vars = got[k].match(/--[\w-]+/g); show[k] = vars ? [...new Set(vars)].join(' + ') : got[k]; });
+    return show;
+  }
+  function tokenTables(sec) {
+    const grid = sec.querySelector('.sg-states'); if (!grid) return null;
+    const kids = [...grid.children]; const heads = kids.slice(1, 5).map(k => k.textContent.trim());
+    const wrap = document.createElement('div'); wrap.className = 'sg-code__block';
+    wrap.innerHTML = '<h3>Tokens by state</h3><p class="sg-code__uses" style="margin:0 0 var(--space-3)">Which token styles each part, read from components.css. A dash means it stays the same as Default.</p>';
+    for (let i = 5; i + 4 < kids.length; i += 5) {
+      const name = kids[i].textContent.trim(); const els = kids.slice(i + 1, i + 5);
+      const cols = els.map(tokensFor);
+      const labels = [...new Set(PROPS.map(p => p[1]))].filter(l => cols.some(c => c[l]));
+      let h = '<table class="sg-spec sg-tokens"><caption>' + name + '</caption><tr><th scope="col">Part</th>' + heads.map(x => '<th scope="col">' + x + '</th>').join('') + '</tr>';
+      labels.forEach(l => { h += '<tr><th scope="row">' + l + '</th>' + cols.map((c, j) => { const v = c[l] || ''; const same = j > 0 && v === (cols[0][l] || ''); return '<td>' + (j === 0 && !v ? 'none' : same || !v ? '—' : v.split(' + ').map(x => /^--/.test(x) ? '<code>' + x + '</code>' : x).join(' + ')) + '</td>'; }).join('') + '</tr>'; });
+      wrap.insertAdjacentHTML('beforeend', h + '</table>');
+    }
+    return wrap;
+  }
+
   let live;
   function say(msg) { if (!live) { live = document.createElement('div'); live.className = 'sg-sr'; live.setAttribute('role', 'status'); document.body.appendChild(live); } live.textContent = ''; setTimeout(() => { live.textContent = msg; }, 50); }
 
@@ -718,7 +764,7 @@
       const wrap = document.createElement('div'); wrap.className = 'sg-code__block';
       wrap.innerHTML = '<h3>' + b.label + '</h3><div class="sg-code__wrap"><pre tabindex="0" aria-label="' + b.label + ' code"></pre>' +
         '<button type="button" class="cc-btn cc-btn--secondary cc-btn--xs sg-code__copy">Copy<span class="sg-sr"> ' + b.label + ' code</span></button></div>' +
-        (u.classes.length ? '<p class="sg-code__uses">Classes: ' + u.classes.map(c => '<code>' + c + '</code>').join(' ') + (u.tokens.length ? '<br>Tokens: ' + u.tokens.map(t => '<code>' + t + '</code>').join(' ') : '') + '</p>' : '');
+        (u.classes.length ? '<p class="sg-code__uses">Classes: ' + u.classes.map(c => '<code>' + c + '</code>').join(' ') + '</p>' : '');
       wrap.querySelector('pre').textContent = b.html;
       wrap.querySelector('button').addEventListener('click', (e) => {
         const btn = e.currentTarget; const done = () => { btn.firstChild.textContent = 'Copied'; say(b.label + ' code copied'); setTimeout(() => { btn.firstChild.textContent = 'Copy'; }, 1600); };
@@ -726,6 +772,7 @@
       });
       code.appendChild(wrap);
     });
+    const tt = tokenTables(sec); if (tt) code.appendChild(tt);
     panel.after(code);
     // Tab behaviour: click, and arrow keys move between tabs (WAI-ARIA tabs pattern).
     const tabs = [...bar.querySelectorAll('[role="tab"]')];
