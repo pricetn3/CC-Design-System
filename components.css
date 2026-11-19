@@ -154,8 +154,9 @@
 .cc-utabs__tab:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--blue-400); border-radius: var(--radius-xs); }
 
 /* Calendar: the date picker panel opened from a date field or a date filter. Days are 40px round targets.
+   It picks one date at a time (a date range uses two fields, From and To, each with its own calendar).
    State comes from attributes: aria-pressed="true" selected, aria-disabled="true" not allowed,
-   data-range="true" inside a selected range, data-outside="true" from the next or previous month, data-today="true" today's dot. */
+   data-outside="true" from the next or previous month, data-today="true" today's dot. */
 .cc-calendar { width: 328px; max-width: 100%; box-sizing: border-box; background: var(--bg-primary); border: 1px solid var(--gray-200); border-radius: var(--radius-xl); box-shadow: var(--shadow-lg); padding: var(--space-4); }
 .cc-calendar__title { margin: 0 0 var(--space-2); padding: 0 var(--space-2); font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
 .cc-calendar__header { display: flex; align-items: center; gap: var(--space-0_5); margin-bottom: var(--space-2_5); }
@@ -170,7 +171,6 @@
 .cc-calendar__day:hover:not([aria-pressed="true"]):not([aria-disabled="true"]) { background: var(--gray-100); }
 /* Days from the next or previous month can be picked, so they keep 4.5:1 (--gray-500, 4.56:1). */
 .cc-calendar__day[data-outside="true"] { color: var(--gray-500); }
-.cc-calendar__day[data-range="true"] { background: var(--blue-50); }
 .cc-calendar__day[aria-pressed="true"] { background: var(--blue-600); color: var(--fg-on-brand); font-weight: var(--fw-semibold); }
 /* Disabled days are exempt from contrast (WCAG 1.4.3), so they use the lighter --gray-400. */
 .cc-calendar__day[aria-disabled="true"] { color: var(--gray-400); cursor: default; }
