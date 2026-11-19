@@ -385,9 +385,13 @@
 }
 @keyframes cc-toast-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .cc-toast { animation: none; } }
-.cc-toast__icon { flex-shrink: 0; width: 32px; height: 32px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; background: var(--success-50); color: var(--success-700); }
-.cc-toast--error .cc-toast__icon { background: var(--error-50); color: var(--error-700); }
-.cc-toast__body { flex: 1; min-width: 0; padding-top: 6px; }
+/* Icon: Untitled UI featured icon, outline style. 20px icon inside two faint rings (30% and 10%), 38px overall, no fill. Icon colors pass 3:1 (1.4.11): success-600 3.91:1, error-600 4.83:1. */
+.cc-toast__icon { position: relative; flex-shrink: 0; width: 38px; height: 38px; border-radius: var(--radius-full); display: inline-flex; align-items: center; justify-content: center; background: none; color: var(--success-600); }
+.cc-toast__icon::before, .cc-toast__icon::after { content: ""; position: absolute; border: 2px solid currentColor; border-radius: var(--radius-full); pointer-events: none; }
+.cc-toast__icon::before { inset: 5px; opacity: 0.3; }
+.cc-toast__icon::after { inset: 0; opacity: 0.1; }
+.cc-toast--error .cc-toast__icon { background: none; color: var(--error-600); }
+.cc-toast__body { flex: 1; min-width: 0; padding-top: 9px; }
 .cc-toast__title { margin: 0; font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
 .cc-toast__desc { margin: 2px 0 0; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-600); }
 .cc-toast__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-2); }
