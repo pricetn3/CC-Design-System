@@ -177,6 +177,12 @@
 .cc-calendar__day[data-today="true"]:not([aria-pressed="true"])::after { content: ""; position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: var(--radius-full); background: var(--blue-600); }
 .cc-calendar__options { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-1); }
 .cc-calendar__options--scroll { max-height: 280px; overflow-y: auto; }
+/* Date field: a text field typed as MM/DD/YYYY with a calendar button inside on the right. The button opens the calendar (cc-calendar) under the field, one date at a time. Down arrow or a click in the field opens it; Esc closes it and returns focus to the field. */
+.cc-date-field { position: relative; display: block; width: 100%; }
+.cc-date-field > .cc-input { width: 100%; padding-right: 44px; }
+.cc-date-field > .cc-date-field__btn { position: absolute; top: 20px; right: var(--space-1); transform: translateY(-50%); width: 32px; height: 32px; }
+.cc-date-field > .cc-date-field__popover { position: absolute; top: calc(40px + var(--space-1)); right: 0; z-index: 100; }
+@media (max-width: 480px) { .cc-date-field__popover { left: 0; right: auto; } }
 .cc-calendar__option { height: 36px; border: none; border-radius: var(--radius-md); background: transparent; cursor: pointer; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
 .cc-calendar__option:hover:not([aria-pressed="true"]) { background: var(--gray-100); }
 .cc-calendar__option[aria-pressed="true"] { background: var(--blue-600); color: var(--fg-on-brand); font-weight: var(--fw-semibold); }
