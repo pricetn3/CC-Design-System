@@ -80,7 +80,9 @@
 
   /* Preview / Code switch (pilot: Buttons). Sections with data-sg-code get the switch; code is generated from the live examples. */
   .sg-view { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin: 0 0 var(--space-3); }
-  .sg-states { display: grid; grid-template-columns: 120px repeat(var(--sg-cols, 4), max-content); align-items: center; gap: var(--space-3) var(--space-6); }
+  .sg-states { max-width: 100%; overflow-x: auto; padding: 4px; display: grid; grid-template-columns: 120px repeat(var(--sg-cols, 4), max-content); align-items: center; gap: var(--space-3) var(--space-6); }
+  .sg-states__na { color: var(--fg-tertiary); }
+  .sg-states-panel { margin-top: var(--space-4); }
   .sg-states__head { font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--fg-tertiary); }
   .sg-code { display: flex; flex-direction: column; gap: var(--space-5); }
   .sg-code__block h3 { margin: 0 0 var(--space-2); }
@@ -90,7 +92,9 @@
   .sg-code__copy { position: absolute; top: var(--space-2); right: var(--space-2); }
   .sg-code__uses { margin: var(--space-2) 0 0; font-size: 12px; line-height: 18px; color: var(--fg-secondary); }
   .sg-code__uses code { white-space: nowrap; background: var(--gray-100); padding: 1px 4px; border-radius: var(--radius-xs); color: var(--gray-800); }
-  .sg-panel[hidden] { display: none; }
+  .sg-panel[hidden], .sg-preview[hidden] { display: none; }
+  .sg-preview > p { margin: var(--space-6) 0; color: var(--fg-secondary); font-size: var(--text-sm-size); line-height: var(--text-sm-lh); max-width: 680px; }
+  .sg-preview > .sg-states, .sg-preview > h3 + .sg-states { margin-top: 0; }
   .sg-code__kind { margin: 0; font: var(--fw-semibold) var(--text-md-size)/var(--text-md-lh) var(--font-body); color: var(--gray-900); }
   .sg-code__group { margin-top: var(--space-2); }
   .sg-code__group:first-child { margin-top: 0; }
@@ -252,7 +256,7 @@
           <template data-sg-snippet="Disabled"><button class="cc-btn cc-btn--primary" disabled>Save</button></template>
     </section>
 
-    <section id="icon-buttons">
+    <section id="icon-buttons" data-sg-code data-sg-states=".cc-icon-btn">
       <h2>Icon buttons</h2>
       <p>For actions shown as an icon only. Always give them an <code>aria-label</code> and a tooltip. 36px by default; <code>cc-icon-btn--xs</code> (32px) for table rows; <code>cc-icon-btn--lg</code> (44px) for headers and touch.</p>
       <div class="sg-panel sg-row">
@@ -263,7 +267,7 @@
       </div>
     </section>
 
-    <section id="links">
+    <section id="links" data-sg-code data-sg-states=".cc-link" data-sg-state-list="Default,Hover,Focus">
       <h2>Links</h2>
       <p>Brand links use <code>--blue-800</code> (it passes AA on white). Muted links are for secondary navigation.</p>
       <div class="sg-panel sg-row" style="gap: var(--space-8)">
@@ -272,7 +276,7 @@
       </div>
     </section>
 
-    <section id="calendar">
+    <section id="calendar" data-sg-code data-sg-states=".cc-calendar__day" data-sg-state-list="Default,Hover,Focus">
       <h2>Calendar</h2>
       <p>The date picker panel. It picks one date at a time; a date range uses two fields (From and To), each with its own calendar. 40px round days; state comes from <code>aria-pressed</code> (selected), <code>aria-disabled</code>, <code>data-outside</code> and <code>data-today</code>.</p>
       <div class="sg-panel">
@@ -289,7 +293,7 @@
       </script>
     </section>
 
-    <section id="checkbox-radio">
+    <section id="checkbox-radio" data-sg-code data-sg-states=".cc-checkbox, .cc-radio" data-sg-state-list="Default,Hover,Focus">
       <h2>Checkbox &amp; radio</h2>
       <p>Native inputs inside their label, so clicking the text ticks them. Rows are at least 24px tall. Hover is a gray-50 fill; checked is blue-600; focus is a 2px white gap then a 2px blue-400 ring; disabled is flat gray.</p>
       <div class="sg-panel" style="display:flex; flex-wrap:wrap; gap:var(--space-8);">
@@ -310,7 +314,7 @@
       </div>
     </section>
 
-    <section id="code-entry">
+    <section id="code-entry" data-sg-code data-sg-states=".cc-code-entry__box" data-sg-state-list="Default,Focus,Disabled">
       <h2>Code entry</h2>
       <p>One box per digit for verification codes, with the same edge and focus ring as inputs. (Not <code>cc-code</code>, which is inline code.)</p>
       <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-4);">
@@ -343,7 +347,7 @@
       </div>
     </section>
 
-    <section id="option-cards">
+    <section id="option-cards" data-sg-code data-sg-states=".cc-option-card" data-sg-state-list="Default,Hover,Focus">
       <h2>Option cards</h2>
       <p>A radio choice shown as a card (processing time, carrier, report options). The selected card gets a blue-600 border, a blue-50 tint and a filled radio.</p>
       <div class="sg-panel">
@@ -381,7 +385,7 @@
       <script>document.querySelectorAll('#switch [data-sg-example] .cc-switch:not([aria-readonly="true"]):not([disabled])').forEach(function(b){b.addEventListener('click',function(){var on=b.getAttribute('aria-checked')!=='true';b.setAttribute('aria-checked',on);var w=b.previousElementSibling;if(w)w.textContent=on?'On':'Off';});});</script>
     </section>
 
-    <section id="tabs">
+    <section id="tabs" data-sg-code data-sg-states=".cc-tabs__tab" data-sg-state-list="Default,Hover,Focus">
       <h2>Segmented tabs</h2>
       <p>Switch between views of the same page or table. One 40px layout, so tabs line up with search fields and buttons in a toolbar. Table toolbars use the default look (white selected tab); page-level views use <code>cc-tabs--brand</code> (light blue selected tab). The selected tab is the one with <code>aria-pressed="true"</code>.</p>
       <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-4);">
@@ -404,7 +408,7 @@
       </div>
     </section>
 
-    <section id="underline-tabs">
+    <section id="underline-tabs" data-sg-code data-sg-states=".cc-utabs__tab" data-sg-state-list="Default,Hover,Focus">
       <h2>Underline tabs</h2>
       <p>Sections inside a page, panel or drawer. Use segmented tabs for table views and toolbars. The selected tab has <code>aria-selected="true"</code>.</p>
       <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-6);">
@@ -413,7 +417,7 @@
       </div>
     </section>
 
-    <section id="alerts">
+    <section id="alerts" data-sg-code>
       <h2>Alerts</h2>
       <p>Inline messages at the top of a card or form. They never dismiss on their own. Use the message-only style for one-line sign-in notices.</p>
       <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-3); max-width:640px;">
@@ -424,10 +428,10 @@
       </div>
     </section>
 
-    <section id="badges">
+    <section id="badges" data-sg-code>
       <h2>Badges</h2>
       <p>Pill shaped by default, 12px text. Each status uses its 50 tint for the fill, 200 for the border and 700 for the text.</p>
-      <div class="sg-panel sg-row">
+      <div class="sg-panel sg-row" data-sg-label="Pill (default)">
         <span class="cc-badge">Neutral</span>
         <span class="cc-badge cc-badge--brand">Coming soon</span>
         <span class="cc-badge cc-badge--success"><span class="cc-badge__dot"></span>Free</span>
@@ -436,7 +440,7 @@
         <span class="cc-badge">$25.00</span>
       </div>
       <p>Square (<code>cc-badge--square</code>, 6px corners) for status and category labels in tables, detail rows and panels. Keep one shape per table or panel.</p>
-      <div class="sg-panel sg-row">
+      <div class="sg-panel sg-row" data-sg-label="Square">
         <span class="cc-badge cc-badge--square">Draft</span>
         <span class="cc-badge cc-badge--square cc-badge--brand">Processing</span>
         <span class="cc-badge cc-badge--square cc-badge--success">Paid</span>
@@ -445,7 +449,7 @@
       </div>
     </section>
 
-    <section id="featured-icons">
+    <section id="featured-icons" data-sg-code>
       <h2>Featured icons</h2>
       <p>A decorative icon tile (Modern, gray) beside section headings, metric cards and empty states. It isn't clickable, so add <code>aria-hidden="true"</code> and let the heading name it. <code>cc-featured-icon</code> is md (40px); add <code>--sm</code> (32), <code>--lg</code> (48) or <code>--xl</code> (56).</p>
       <div style="display:flex; align-items:center; gap:var(--space-6); flex-wrap:wrap;">
@@ -456,7 +460,7 @@
       </div>
     </section>
 
-    <section id="toasts">
+    <section id="toasts" data-sg-code data-sg-states=".cc-toast__action" data-sg-state-list="Default,Hover,Focus">
       <h2>Toasts</h2>
       <p>Short confirmation after an action, in one region at the top right of the page (<code>cc-toast-region</code>). Shown inline here.</p>
       <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-3); max-width:440px;">
@@ -465,7 +469,7 @@
       </div>
     </section>
 
-    <section id="tooltips">
+    <section id="tooltips" data-sg-code>
       <h2>Tooltips</h2>
       <p>A tooltip labels an icon button on hover (about 300ms) and on keyboard focus; Esc closes it. A toggletip holds extra details and opens on press, not hover. Both shown open here.</p>
       <div class="sg-panel sg-row" style="align-items:flex-start; gap:var(--space-16); min-height:150px;">
@@ -474,7 +478,7 @@
       </div>
     </section>
 
-    <section id="cards">
+    <section id="cards" data-sg-code data-sg-states=".cc-card--interactive" data-sg-state-list="Default,Hover,Focus">
       <h2>Cards</h2>
       <p>Hairline <code>--gray-200</code> border, <code>--radius-xl</code>, <code>--shadow-xs</code>. Clickable cards lift to <code>--shadow-md</code> on hover.</p>
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4)">
@@ -493,7 +497,7 @@
       </div>
     </section>
 
-    <section id="dialogs">
+    <section id="dialogs" data-sg-code>
       <h2>Dialogs</h2>
       <p>A white panel over the <code>--overlay-backdrop</code> scrim (<code>cc-dialog-overlay</code>). It centers when it fits and scrolls from the top when it doesn't (WCAG 1.4.10). Shown on a sample backdrop here.</p>
       <h3>Confirmation (icon left): Unsaved changes, deletes</h3>
@@ -510,7 +514,7 @@
       <p style="margin-top:var(--space-3)">The master documents this layout as a pattern but has no class for it yet, so it's built from tokens: 40px round icon, title <code>--text-md</code>, message <code>--text-sm</code> in <code>--fg-secondary</code>.</p>
       <h3>Session timeout</h3>
       <p>The Student Store version is the reference (no icon, Stay signed in). CC Platform adds the icon and uses its own message and Continue session.</p>
-      <div style="background:var(--overlay-backdrop); border-radius:var(--radius-xl); padding:var(--space-8); display:flex; justify-content:center; margin-bottom:var(--space-4);">
+      <div data-sg-label="Session timeout: CC Platform (with icon)" style="background:var(--overlay-backdrop); border-radius:var(--radius-xl); padding:var(--space-8); display:flex; justify-content:center; margin-bottom:var(--space-4);">
         <div class="cc-dialog" role="alertdialog" aria-labelledby="sg-to1-t" aria-describedby="sg-to1-d">
           <div class="cc-timeout">
             <span class="cc-dialog__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span>
@@ -522,7 +526,7 @@
           <div class="cc-timeout__footer"><span class="cc-countdown">5:00 remaining</span><div class="cc-dialog__actions"><button type="button" class="cc-btn cc-btn--secondary">Log out</button><button type="button" class="cc-btn cc-btn--primary">Continue session</button></div></div>
         </div>
       </div>
-      <div style="background:var(--overlay-backdrop); border-radius:var(--radius-xl); padding:var(--space-8); display:flex; justify-content:center; margin-bottom:var(--space-4);">
+      <div data-sg-label="Session timeout: Student Store" style="background:var(--overlay-backdrop); border-radius:var(--radius-xl); padding:var(--space-8); display:flex; justify-content:center; margin-bottom:var(--space-4);">
         <div class="cc-dialog" role="alertdialog" aria-labelledby="sg-to2-t" aria-describedby="sg-to2-d">
           <div class="cc-timeout">
             <div class="cc-timeout__body">
@@ -535,7 +539,7 @@
       </div>
     </section>
 
-    <section id="settings-group">
+    <section id="settings-group" data-sg-code>
       <h2>Settings group</h2>
       <p>A titled, bordered list of setting rows: label and help on the left, the control on the right, centered against the text like a switch row. A control taller than the text, such as a radio list, starts at the top beside the label. An error sits right under its field. Keep help text to about two lines. For 2–3 choices use radio buttons side by side, with the chosen option's description as the help text under the label; for 4 or more use a dropdown. Used on the organization Settings tab. In view mode, show values as plain text, or make fields read-only (not disabled) so they can still be reached.</p>
       <div class="sg-panel" style="max-width:760px;">
@@ -744,10 +748,13 @@
     for (const sh of document.styleSheets) { if (sh.href && !/components\.css/.test(sh.href)) continue; let rs; try { rs = sh.cssRules; } catch (e) { continue; } walk(rs); }
     return RULES;
   }
-  function tokensFor(el) {
+  function tokensFor(root) {
     const got = {};
-    rules().forEach(r => { let ok = false; try { ok = el.matches(r.sel); } catch (e) {} if (!ok) return;
-      PROPS.forEach(([p, label]) => { const v = r.style.getPropertyValue(p); if (v) got[label] = v.trim(); }); });
+    /* the example itself, plus its own parts (e.g. the box inside a checkbox label), named after their class */
+    const parts = [root, ...[...root.querySelectorAll('[class*="cc-"]')].filter(p => p.closest('[class*="cc-"]') && (p.className.match(/cc-[\w-]+__([\w-]+)/) || [])[1])];
+    parts.forEach(el => { const pre = el === root ? '' : (el.className.match(/cc-[\w-]+__([\w-]+)/) || [])[1].replace(/-/g, ' ') + ': ';
+      rules().forEach(r => { let ok = false; try { ok = el.matches(r.sel); } catch (e) {} if (!ok) return;
+        PROPS.forEach(([p, label]) => { const v = r.style.getPropertyValue(p); if (v) got[pre + label] = v.trim(); }); }); });
     const show = {};
     Object.keys(got).forEach(k => { if (/^(currentcolor|initial|inherit)$/i.test(got[k])) return; /* e.g. border: none sets border-color to currentcolor: not a real style */ const vars = got[k].match(/--[\w-]+/g); show[k] = vars ? [...new Set(vars)].join(' + ') : got[k]; });
     return show;
@@ -760,7 +767,7 @@
     for (let i = n + 1; i + n < kids.length; i += n + 1) {
       const name = kids[i].textContent.trim(); const els = kids.slice(i + 1, i + n + 1);
       const cols = els.map(tokensFor);
-      const labels = [...new Set(PROPS.map(p => p[1]))].filter(l => cols.some(c => c[l]));
+      const labels = [...new Set(cols.flatMap(c => Object.keys(c)))];
       let h = '<table class="sg-spec sg-tokens"><caption>' + name + '</caption><tr><th scope="col">Part</th>' + heads.map(x => '<th scope="col">' + x + '</th>').join('') + '</tr>';
       labels.forEach(l => { h += '<tr><th scope="row">' + l + '</th>' + cols.map((c, j) => { const v = c[l] || ''; const same = j > 0 && v === (cols[0][l] || ''); return '<td>' + (j === 0 && !v ? 'none' : same || !v ? '—' : v.split(' + ').map(x => /^--/.test(x) ? '<code>' + x + '</code>' : x).join(' + ')) + '</td>'; }).join('') + '</tr>'; });
       wrap.insertAdjacentHTML('beforeend', h + '</table>');
@@ -770,10 +777,20 @@
 
   // 4. The CSS that makes these classes work: the rules exactly as written in components.css (all states, comments kept), ready to copy.
   let CSS_SRC = '';
-  function cssFor(classes) {
+  /* Which section documents each component family, so a section's CSS shows only its own rules and links to the rest. */
+  const OWNER = { 'cc-btn': 'buttons', 'cc-icon-btn': 'icon-buttons', 'cc-link': 'links', 'cc-calendar': 'calendar', 'cc-date-field': 'calendar',
+    'cc-checkbox': 'checkbox-radio', 'cc-radio': 'checkbox-radio', 'cc-code-entry': 'code-entry', 'cc-input': 'inputs', 'cc-hint': 'inputs', 'cc-field': 'inputs', 'cc-label': 'inputs',
+    'cc-option-card': 'option-cards', 'cc-option-group': 'option-cards', 'cc-switch': 'switch', 'cc-switch-label': 'switch', 'cc-tabs': 'tabs', 'cc-utabs': 'underline-tabs',
+    'cc-alert': 'alerts', 'cc-badge': 'badges', 'cc-featured-icon': 'featured-icons', 'cc-toast': 'toasts', 'cc-toast-region': 'toasts',
+    'cc-tooltip': 'tooltips', 'cc-tooltip-wrap': 'tooltips', 'cc-toggletip': 'tooltips', 'cc-card': 'cards',
+    'cc-dialog': 'dialogs', 'cc-dialog-overlay': 'dialogs', 'cc-timeout': 'dialogs', 'cc-countdown': 'dialogs', 'cc-setting-group': 'settings-group', 'cc-setting-row': 'settings-group' };
+  const family = (c) => c.replace(/(__|--).*$/, '');
+  const ownedHere = (c, id) => !OWNER[family(c)] || OWNER[family(c)] === id;
+  function cssFor(classes, id) {
     const set = new Set(classes);
-    /* a rule belongs here when one of its selectors uses these classes and no other component's class (so .cc-dialog__actions .cc-btn stays with Dialogs) */
-    const mine = (sel) => sel.split(',').some(s => { const cs = (s.match(/\.cc-[\w-]+/g) || []).map(c => c.slice(1)); return cs.length && cs.every(c => set.has(c)); });
+    /* a rule belongs here when one of its selectors uses only classes from this snippet, at least one of them this section's own
+       (so .cc-dialog__actions .cc-btn stays with Dialogs, and plain .cc-btn stays with Buttons) */
+    const mine = (sel) => sel.split(',').some(s => { const cs = (s.match(/\.cc-[\w-]+/g) || []).map(c => c.slice(1)); return cs.length && cs.every(c => set.has(c)) && cs.some(c => ownedHere(c, id)); });
     const src = CSS_SRC; const out = []; let k = 0, comment = '';
     const block = (from) => { let d = 0, p = src.indexOf('{', from); for (let q = p; q < src.length; q++) { if (src[q] === '{') d++; else if (src[q] === '}' && --d === 0) return q + 1; } return src.length; };
     while (k < src.length) {
@@ -801,11 +818,72 @@
     return wrap;
   }
 
+  // 5. Sections without hand-marked examples: each demo block after the intro becomes a copyable example,
+  //    named by the heading above it (or the section name).
+  function autoExamples(sec, panel) {
+    if (panel.querySelector('[data-sg-example]')) return;
+    const name = (sec.querySelector('h2') || {}).textContent || sec.id; let n = 0, label = '';
+    [...panel.children].forEach(el => {
+      const tag = el.tagName;
+      if (tag === 'H3') { label = el.textContent.trim(); return; }
+      if (/^(P|TABLE|SCRIPT|TEMPLATE)$/.test(tag) || el.classList.contains('sg-states') || el.classList.contains('sg-states-panel') || el.classList.contains('sg-sr')) return;
+      // A demo panel holds the components; a heading inside it names the next block.
+      const inner = [...el.children].filter(c => !/^(SCRIPT|TABLE)$/.test(c.tagName) && !c.classList.contains('sg-states') && !c.classList.contains('sg-sr') && !c.classList.contains('sg-spec'));
+      if (inner.some(c => c.tagName === 'H3' || c.classList.contains('cc-setting-group__title'))) { el.setAttribute('data-sg-example', label || name); return; }
+      if (!inner.length) return;
+      n++; el.setAttribute('data-sg-example', el.getAttribute('data-sg-label') || label || (n > 1 ? name + ' ' + n : name)); label = ''; /* data-sg-label names a block that has no heading */
+    });
+  }
+  // 6. States grid for sections with data-sg-states="selector": each distinct example in the preview,
+  //    shown at rest and in each forced state.
+  let stUid = 0; /* unique across sections, so cloned radios never share a group */
+  function autoStates(sec, panel) {
+    const sel = sec.getAttribute('data-sg-states'); if (!sel || panel.querySelector('.sg-states')) return;
+    const cols = (sec.getAttribute('data-sg-state-list') || 'Default,Hover,Focus,Disabled').split(',').map(s => s.trim());
+    const sig = (e) => [e.className, ...[e, ...e.querySelectorAll('input,button')].map(x => [x.checked, x.disabled, x.getAttribute && x.getAttribute('aria-pressed'), x.getAttribute && x.getAttribute('aria-selected'), x.getAttribute && x.getAttribute('aria-invalid'), x.getAttribute && x.getAttribute('data-outside')].join())].join('|');
+    const seen = new Set(); const rows = [];
+    panel.querySelectorAll(sel).forEach(e => { const s = sig(e); if (!seen.has(s) && rows.length < 10) { seen.add(s); rows.push(e); } });
+    if (!rows.length) return;
+    const grid = document.createElement('div'); grid.className = 'sg-states'; grid.setAttribute('aria-hidden', 'true');
+    grid.setAttribute('data-sg-cols', cols.length); grid.style.setProperty('--sg-cols', cols.length);
+    grid.innerHTML = '<span></span>' + cols.map(c => '<span class="sg-states__head">' + c + '</span>').join('');
+    rows.forEach(e => {
+      const inp = e.matches('input,button') ? e : e.querySelector('input,button') || e;
+      const hints = [];
+      if (inp.checked) hints.push('checked'); if (e.getAttribute('aria-pressed') === 'true' || e.getAttribute('aria-selected') === 'true') hints.push('selected');
+      if (inp.getAttribute('aria-invalid') === 'true') hints.push('error'); if (inp.disabled || e.getAttribute('aria-disabled') === 'true') hints.push('disabled');
+      if (e.hasAttribute('data-outside')) hints.push('other month'); if (e.hasAttribute('data-today')) hints.push('today');
+      let nm = ((e.getAttribute('aria-label') || e.innerText || '').split('\n')[0] || '').trim().slice(0, 22) || e.className.split(' ').pop();
+      const extra = hints.filter(h => nm.toLowerCase().indexOf(h) < 0); if (extra.length) nm += ' (' + extra.join(', ') + ')';
+      const isOff = inp.disabled || e.getAttribute('aria-disabled') === 'true';
+      grid.insertAdjacentHTML('beforeend', '<span class="sg-states__head">' + nm.replace(/</g, '&lt;') + '</span>');
+      cols.forEach(c => {
+        if (isOff && /^(hover|focus)$/i.test(c)) { grid.insertAdjacentHTML('beforeend', '<span class="sg-states__na">—</span>'); return; } /* disabled items can't be hovered or focused */
+        const k = e.cloneNode(true); const all = [k, ...k.querySelectorAll('*')];
+        all.forEach(x => { x.removeAttribute('id'); if (x.name) x.name = 'sg-st-' + (stUid++); if (x.matches('a,button,input,select,textarea,[tabindex]')) x.setAttribute('tabindex', '-1'); x.removeAttribute('data-sg-example'); });
+        if (e.querySelector('input:checked') || (e.matches('input') && e.checked)) [k, ...k.querySelectorAll('input')].forEach(x => { if (x.type === 'radio' || x.type === 'checkbox') x.checked = true; });
+        const st = c.toLowerCase();
+        if (st === 'hover' || st === 'focus') all.forEach(x => x.setAttribute('data-sg-state', st));
+        if (st === 'disabled') all.forEach(x => { if (x.matches('input,button,select,textarea')) x.disabled = true; });
+        grid.appendChild(k);
+      });
+    });
+    const h = document.createElement('h3'); h.textContent = 'States';
+    const note = document.createElement('p'); note.className = 'sg-sr'; note.textContent = 'The states grid shows each example in each state: ' + cols.join(', ') + '.';
+    const box = document.createElement('div'); box.className = 'sg-panel sg-states-panel'; h.style.marginTop = '0'; box.append(h, grid, note); panel.append(box);
+  }
+
   let live;
   function say(msg) { if (!live) { live = document.createElement('div'); live.className = 'sg-sr'; live.setAttribute('role', 'status'); document.body.appendChild(live); } live.textContent = ''; setTimeout(() => { live.textContent = msg; }, 50); }
 
   function build(sec) {
-    const id = sec.id; const panel = sec.querySelector('.sg-panel'); if (!panel) return;
+    const id = sec.id;
+    // Everything after the section's intro becomes the Preview panel.
+    const intro = sec.querySelector(':scope > p');
+    const panel = document.createElement('div'); panel.className = 'sg-preview';
+    const kids = [...sec.children]; kids.slice(kids.indexOf(intro) + 1).forEach(k => { if (k.tagName !== 'TEMPLATE') panel.appendChild(k); });
+    sec.appendChild(panel);
+    autoStates(sec, panel);
     const name = (sec.querySelector('h2') || {}).textContent || id;
     // Tabs
     const bar = document.createElement('div'); bar.className = 'sg-view';
@@ -818,6 +896,7 @@
     const code = document.createElement('div'); code.className = 'sg-panel sg-code'; code.id = id + '-code'; code.hidden = true;
     code.setAttribute('role', 'tabpanel'); code.setAttribute('aria-labelledby', id + '-tab-code');
     const tidy = (s) => s.replace(/=""/g, ''); /* boolean attributes: disabled, not disabled="" */
+    autoExamples(sec, panel);
     const blocks = [...panel.querySelectorAll('[data-sg-example]')].map(ex => ({ label: ex.getAttribute('data-sg-example'), html: tidy((ex.hasAttribute('data-sg-self') ? [clean(ex)] : [...clean(ex).children]).map(k => fmt(k, 0)).join('\n')) })); /* data-sg-self: the example is the element itself, not its children */
     const extra = sec.querySelectorAll('template[data-sg-snippet]');
     extra.forEach(tp => blocks.push({ label: tp.getAttribute('data-sg-snippet'), html: tidy([...tp.content.children].map(k => fmt(k, 0)).join('\n')) }));
@@ -825,9 +904,13 @@
     code.appendChild(html);
     const allClasses = new Set();
     blocks.forEach(b => { uses(b.html).classes.forEach(c => allClasses.add(c)); code.appendChild(codeBlock(b.label, b.html, 'HTML')); });
-    const css = cssFor([...allClasses]);
+    const css = cssFor([...allClasses], id);
     if (css) {
-      const head = document.createElement('div'); head.className = 'sg-code__group'; head.innerHTML = '<h3 class="sg-code__kind">CSS</h3><p class="sg-code__uses" style="margin:0">The rules behind these classes, from components.css, with every state. Copy them only if the page can\'t load components.css; they still need tokens.css for the var(--…) values. Classes: ' + [...allClasses].map(c => '<code>' + c + '</code>').join(' ') + '</p>';
+      const own = [...allClasses].filter(c => ownedHere(c, id));
+      const others = [...new Set([...allClasses].filter(c => !ownedHere(c, id)).map(c => OWNER[family(c)]))];
+      const link = (sid) => { const t = document.getElementById(sid); const h = t && t.querySelector('h2'); return '<a class="cc-link" href="#' + sid + '">' + (h ? h.textContent.trim() : sid) + '</a>'; };
+      const head = document.createElement('div'); head.className = 'sg-code__group'; head.innerHTML = '<h3 class="sg-code__kind">CSS</h3><p class="sg-code__uses" style="margin:0">The rules behind these classes, from components.css, with every state. Copy them only if the page can\'t load components.css; they still need tokens.css for the var(--…) values. Classes: ' + own.map(c => '<code>' + c + '</code>').join(' ') + '</p>' +
+        (others.length ? '<p class="sg-code__uses">Also uses ' + others.map(link).join(', ') + '. Their CSS is in those sections.</p>' : '');
       code.appendChild(head); code.appendChild(codeBlock(name, css, 'CSS'));
     }
     const tt = tokenTables(sec); if (tt) code.appendChild(tt);
