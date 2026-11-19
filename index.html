@@ -20,6 +20,8 @@
   .sg-nav__group { margin: var(--space-6) var(--space-2) var(--space-1_5); font: var(--fw-semibold) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--fg-tertiary); text-transform: uppercase; letter-spacing: 0.04em; }
   .sg-nav a { display: block; padding: var(--space-1_5) var(--space-2); border-radius: var(--radius-sm); color: var(--gray-700); text-decoration: none; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); }
   .sg-nav a:hover { background: var(--gray-100); color: var(--gray-900); }
+  .sg-nav a[aria-current="true"] { background: var(--blue-50); color: var(--blue-700); }
+  .sg-nav a:focus-visible { outline: none; box-shadow: var(--ring-focus); }
 
   main { padding: var(--space-12) var(--space-12) var(--space-24); max-width: 1120px; }
   .sg-hero h1 { margin: 0 0 var(--space-2); font: var(--fw-semibold) var(--text-display-sm-size)/var(--text-display-sm-lh) var(--font-display); letter-spacing: -0.02em; }
@@ -83,29 +85,35 @@
     <div class="sg-brand"><span class="sg-brand__mark">CC</span>Credential Connections</div>
     <div class="sg-nav__group">Foundations</div>
     <a href="#color">Color</a>
-    <a href="#type">Typography</a>
-    <a href="#spacing">Spacing</a>
-    <a href="#radius">Radius</a>
     <a href="#elevation">Elevation</a>
-    <div class="sg-nav__group">Components</div>
-    <a href="#alerts">Alerts</a>
-    <a href="#badges">Badges</a>
+    <a href="#radius">Radius</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#text-styles">Text styles</a>
+    <a href="#type">Typography</a>
+    <div class="sg-nav__group">Actions</div>
     <a href="#buttons">Buttons</a>
-    <a href="#cards">Cards</a>
+    <a href="#icon-buttons">Icon buttons</a>
+    <a href="#links">Links</a>
+    <div class="sg-nav__group">Forms</div>
+    <a href="#calendar">Calendar</a>
     <a href="#checkbox-radio">Checkbox &amp; radio</a>
     <a href="#code-entry">Code entry</a>
-    <a href="#dialogs">Dialogs</a>
-    <a href="#featured-icons">Featured icons</a>
-    <a href="#icon-buttons">Icon buttons</a>
     <a href="#inputs">Inputs</a>
-    <a href="#links">Links</a>
     <a href="#option-cards">Option cards</a>
-    <a href="#tabs">Segmented tabs</a>
-    <a href="#settings-group">Settings group</a>
     <a href="#switch">Switch</a>
-    <a href="#text-styles">Text styles</a>
+    <div class="sg-nav__group">Navigation</div>
+    <a href="#tabs">Segmented tabs</a>
+    <a href="#underline-tabs">Underline tabs</a>
+    <div class="sg-nav__group">Feedback</div>
+    <a href="#alerts">Alerts</a>
+    <a href="#badges">Badges</a>
+    <a href="#featured-icons">Featured icons</a>
     <a href="#toasts">Toasts</a>
     <a href="#tooltips">Tooltips</a>
+    <div class="sg-nav__group">Containers</div>
+    <a href="#cards">Cards</a>
+    <a href="#dialogs">Dialogs</a>
+    <a href="#settings-group">Settings group</a>
   </nav>
 
   <main>
@@ -126,6 +134,44 @@
       <div id="sg-colors"></div>
     </section>
 
+    <section id="elevation">
+      <h2>Elevation</h2>
+      <p>Cards sit at <code>--shadow-xs</code>. Menus and popovers use <code>--shadow-lg</code>; modals use <code>--shadow-xl</code> or higher.</p>
+      <div class="sg-tiles" id="sg-shadow"></div>
+    </section>
+
+    <section id="radius">
+      <h2>Radius</h2>
+      <p><code>--radius-md</code> (8px) is the default for buttons and inputs; <code>--radius-xl</code> (12px) for cards.</p>
+      <div class="sg-tiles" id="sg-radius"></div>
+    </section>
+
+    <section id="spacing">
+      <h2>Spacing</h2>
+      <p>A 4-point scale. Padding, gaps and margins should land on one of these steps.</p>
+      <div class="sg-panel" id="sg-spacing"></div>
+    </section>
+
+    <section id="text-styles">
+      <h2>Text styles</h2>
+      <p>Classes for headings and body text, so pages don't set font sizes by hand. Headings are semibold; body text is regular. Each uses the matching size and line-height tokens.</p>
+      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-3);">
+        <div class="cc-display-xs">cc-display-xs: Organization Profile</div>
+        <div class="cc-h1">cc-h1: Admin</div>
+        <div class="cc-h2">cc-h2: Credential reports</div>
+        <div class="cc-h3">cc-h3: Countries</div>
+        <div class="cc-h4">cc-h4: Action log</div>
+        <div class="cc-text-md">cc-text-md: Body text for forms and pages.</div>
+        <div class="cc-text-smed">cc-text-smed: 15px body text, for dense reading areas.</div>
+        <div class="cc-text-sm">cc-text-sm: Table cells, hints and descriptions.</div>
+        <div class="cc-text-xs">cc-text-xs: Captions and badge text.</div>
+        <div class="cc-label">cc-label: Field label</div>
+        <div class="cc-eyebrow">cc-eyebrow: Section eyebrow</div>
+        <div><span class="cc-mono">cc-mono: usp_SetPaperOrdering</span> &nbsp; <span class="cc-code">cc-code</span></div>
+      </div>
+      <p style="margin-top:var(--space-3)">Display sizes 2xl to sm are also available (<code>cc-display-2xl</code> &hellip; <code>cc-display-sm</code>) for marketing-size headings.</p>
+    </section>
+
     <section id="type">
       <h2>Typography</h2>
       <p>Inter on the Untitled UI scale. Display sizes are for headlines; body sizes cover everything else.</p>
@@ -136,56 +182,6 @@
         <span style="font-weight: var(--fw-medium)">Medium 500</span>
         <span style="font-weight: var(--fw-semibold)">Semibold 600</span>
         <span style="font-weight: var(--fw-bold)">Bold 700</span>
-      </div>
-    </section>
-
-    <section id="spacing">
-      <h2>Spacing</h2>
-      <p>A 4-point scale. Padding, gaps and margins should land on one of these steps.</p>
-      <div class="sg-panel" id="sg-spacing"></div>
-    </section>
-
-    <section id="radius">
-      <h2>Radius</h2>
-      <p><code>--radius-md</code> (8px) is the default for buttons and inputs; <code>--radius-xl</code> (12px) for cards.</p>
-      <div class="sg-tiles" id="sg-radius"></div>
-    </section>
-
-    <section id="elevation">
-      <h2>Elevation</h2>
-      <p>Cards sit at <code>--shadow-xs</code>. Menus and popovers use <code>--shadow-lg</code>; modals use <code>--shadow-xl</code> or higher.</p>
-      <div class="sg-tiles" id="sg-shadow"></div>
-    </section>
-
-    <section id="alerts">
-      <h2>Alerts</h2>
-      <p>Inline messages at the top of a card or form. They never dismiss on their own. Use the message-only style for one-line sign-in notices.</p>
-      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-3); max-width:640px;">
-        <div class="cc-alert cc-alert--info" role="status"><span class="cc-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span><div class="cc-alert__body"><p class="cc-alert__title">Paper ordering is off</p><p class="cc-alert__message">Students can't order paper credentials for this organization.</p></div><button type="button" class="cc-icon-btn cc-alert__close" aria-label="Dismiss"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
-        <div class="cc-alert cc-alert--warning" role="status"><span class="cc-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="cc-alert__body"><p class="cc-alert__title">Domain needed</p><p class="cc-alert__message">Save a domain before uploading logos or diploma images.</p></div></div>
-        <div class="cc-alert cc-alert--message cc-alert--info" role="status"><p class="cc-alert__message">You've been signed out. Sign in again to continue.</p></div>
-        <div class="cc-alert cc-alert--message cc-alert--warning" role="status"><p class="cc-alert__message">This link has expired. Request a new one.</p></div>
-      </div>
-    </section>
-
-    <section id="badges">
-      <h2>Badges</h2>
-      <p>Pill shaped by default, 12px text. Each status uses its 50 tint for the fill, 200 for the border and 700 for the text.</p>
-      <div class="sg-panel sg-row">
-        <span class="cc-badge">Neutral</span>
-        <span class="cc-badge cc-badge--brand">Coming soon</span>
-        <span class="cc-badge cc-badge--success"><span class="cc-badge__dot"></span>Free</span>
-        <span class="cc-badge cc-badge--warning"><span class="cc-badge__dot"></span>Expiring</span>
-        <span class="cc-badge cc-badge--error"><span class="cc-badge__dot"></span>Revoked</span>
-        <span class="cc-badge">$25.00</span>
-      </div>
-      <p>Square (<code>cc-badge--square</code>, 6px corners) for status and category labels in tables, detail rows and panels. Keep one shape per table or panel.</p>
-      <div class="sg-panel sg-row">
-        <span class="cc-badge cc-badge--square">Draft</span>
-        <span class="cc-badge cc-badge--square cc-badge--brand">Processing</span>
-        <span class="cc-badge cc-badge--square cc-badge--success">Paid</span>
-        <span class="cc-badge cc-badge--square cc-badge--warning">On hold</span>
-        <span class="cc-badge cc-badge--square cc-badge--error">Denied</span>
       </div>
     </section>
 
@@ -220,23 +216,41 @@
       </div>
     </section>
 
-    <section id="cards">
-      <h2>Cards</h2>
-      <p>Hairline <code>--gray-200</code> border, <code>--radius-xl</code>, <code>--shadow-xs</code>. Clickable cards lift to <code>--shadow-md</code> on hover.</p>
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4)">
-        <div class="cc-card">
-          <div style="font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--fg-secondary)">Credentials earned</div>
-          <div style="margin-top: var(--space-2); font: var(--fw-semibold) var(--text-display-sm-size)/var(--text-display-sm-lh) var(--font-display)">12</div>
-        </div>
-        <div class="cc-card cc-card--interactive" tabindex="0">
-          <div class="sg-row" style="justify-content: space-between"><b style="font-size: var(--text-md-size)">Official transcript</b><span class="cc-badge cc-badge--success">Free</span></div>
-          <p style="margin: var(--space-1) 0 0; font-size: var(--text-sm-size); line-height: var(--text-sm-lh); color: var(--fg-secondary)">Clickable card: hover or tab to it.</p>
-        </div>
-        <div class="cc-card cc-card--compact">
-          <b style="font-size: var(--text-sm-size)">Compact card</b>
-          <p style="margin: var(--space-1) 0 0; font-size: var(--text-sm-size); line-height: var(--text-sm-lh); color: var(--fg-secondary)">16px padding for sidebars and dense lists.</p>
+    <section id="icon-buttons">
+      <h2>Icon buttons</h2>
+      <p>For actions shown as an icon only. Always give them an <code>aria-label</code> and a tooltip. 36px by default; <code>cc-icon-btn--xs</code> (32px) for table rows; <code>cc-icon-btn--lg</code> (44px) for headers and touch.</p>
+      <div class="sg-panel sg-row">
+        <button type="button" class="cc-icon-btn cc-icon-btn--xs" aria-label="More actions (xs)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+        <button type="button" class="cc-icon-btn" aria-label="More actions"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+        <button type="button" class="cc-icon-btn cc-icon-btn--lg" aria-label="More actions (lg)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
+        <button type="button" class="cc-icon-btn" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+      </div>
+    </section>
+
+    <section id="links">
+      <h2>Links</h2>
+      <p>Brand links use <code>--blue-800</code> (it passes AA on white). Muted links are for secondary navigation.</p>
+      <div class="sg-panel sg-row" style="gap: var(--space-8)">
+        <a class="cc-link" href="#links">View credential</a>
+        <a class="cc-link cc-link--muted" href="#links">Need help?</a>
+      </div>
+    </section>
+
+    <section id="calendar">
+      <h2>Calendar</h2>
+      <p>The date picker panel. It picks one date at a time; a date range uses two fields (From and To), each with its own calendar. 40px round days; state comes from <code>aria-pressed</code> (selected), <code>aria-disabled</code>, <code>data-outside</code> and <code>data-today</code>.</p>
+      <div class="sg-panel">
+        <div class="cc-calendar" id="sg-cal">
+          <div class="cc-calendar__header"><button type="button" class="cc-calendar__heading">November</button><button type="button" class="cc-calendar__heading">2026</button><span style="flex:1"></span><button type="button" class="cc-icon-btn cc-icon-btn--xs" aria-label="Previous month">&lsaquo;</button><button type="button" class="cc-icon-btn cc-icon-btn--xs" aria-label="Next month">&rsaquo;</button></div>
+          <div class="cc-calendar__grid" id="sg-cal-wk"></div>
+          <div class="cc-calendar__grid" id="sg-cal-days"></div>
         </div>
       </div>
+      <script>
+        (function(){var w=document.getElementById('sg-cal-wk'),g=document.getElementById('sg-cal-days');['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(function(d){var e=document.createElement('div');e.className='cc-calendar__weekday';e.textContent=d;w.appendChild(e);});
+        for(var i=0;i<35;i++){var n=i+1,out=n>30,d=out?n-30:n,c=document.createElement('div'),b=document.createElement('button');c.className='cc-calendar__cell';b.type='button';b.className='cc-calendar__day';b.textContent=d;
+        if(out)b.setAttribute('data-outside','true');if(!out&&d<3)b.setAttribute('aria-disabled','true');if(!out&&d===17)b.setAttribute('data-today','true');if(!out&&d===10)b.setAttribute('aria-pressed','true');c.appendChild(b);g.appendChild(c);}})();
+      </script>
     </section>
 
     <section id="checkbox-radio">
@@ -269,6 +283,154 @@
         </div>
         <div class="cc-code-entry" role="group" aria-label="Verification code with an error">
           <input class="cc-code-entry__box" value="1" aria-invalid="true" aria-label="Digit 1"><input class="cc-code-entry__box" value="2" aria-invalid="true" aria-label="Digit 2"><input class="cc-code-entry__box" value="3" aria-invalid="true" aria-label="Digit 3"><input class="cc-code-entry__box" value="4" aria-invalid="true" aria-label="Digit 4"><input class="cc-code-entry__box" value="5" aria-invalid="true" aria-label="Digit 5"><input class="cc-code-entry__box" value="6" aria-invalid="true" aria-label="Digit 6">
+        </div>
+      </div>
+    </section>
+
+    <section id="inputs">
+      <h2>Inputs</h2>
+      <p>40px tall by default, with an inset 1px border so the field doesn't shift when the error border appears. <code>cc-input--sm</code> (36px) is only for dense spots: filter bars, a search inside a menu, popover or dialog list, and compact toolbars beside <code>cc-btn--sm</code>. Keep fields in one row the same height.</p>
+      <div class="sg-panel" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
+        <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" placeholder="you@school.edu"><span class="cc-hint">We'll send a verification code.</span></label>
+        <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" value="taylor@" aria-invalid="true"><span class="cc-hint cc-hint--error">Enter a valid email address.</span></label>
+        <label class="cc-field"><span class="cc-label">Student ID</span><input class="cc-input" value="0049231" disabled><span class="cc-hint">Managed by your institution.</span></label>
+        <label class="cc-field"><span class="cc-label">Search certificate types</span><input class="cc-input cc-input--sm" placeholder="Search"><span class="cc-hint">Small · 36px, dense spots only.</span></label>
+      </div>
+    </section>
+
+    <section id="option-cards">
+      <h2>Option cards</h2>
+      <p>A radio choice shown as a card (processing time, carrier, report options). The selected card gets a blue-600 border, a blue-50 tint and a filled radio.</p>
+      <div class="sg-panel">
+        <fieldset class="cc-option-group" style="max-width:440px;">
+          <legend class="cc-option-group__legend">Processing time</legend>
+          <label class="cc-option-card"><input type="radio" name="sg-oc" class="cc-option-card__input" checked><span class="cc-option-card__body"><span class="cc-option-card__title">Standard processing <span class="cc-badge cc-badge--success">Free</span></span><span class="cc-option-card__meta">Ships in about 26 business days</span></span><span class="cc-option-card__end cc-option-card__end--success">$0.00</span></label>
+          <label class="cc-option-card"><input type="radio" name="sg-oc" class="cc-option-card__input"><span class="cc-option-card__body"><span class="cc-option-card__title">3 day processing</span><span class="cc-option-card__meta">Ships in 3 business days</span></span><span class="cc-option-card__end">$19.95</span></label>
+          <label class="cc-option-card"><input type="radio" name="sg-oc" class="cc-option-card__input" disabled><span class="cc-option-card__body"><span class="cc-option-card__title">1 day processing</span><span class="cc-option-card__meta">Not available for this order</span></span><span class="cc-option-card__end">$39.95</span></label>
+        </fieldset>
+      </div>
+    </section>
+
+    <section id="switch">
+      <h2>Switch</h2>
+      <p>Turns one setting on or off. A <code>&lt;button role="switch" aria-checked&gt;</code> with a visible label and an On/Off word beside it. 40×24. Use <code>aria-readonly="true"</code> in view mode instead of <code>disabled</code>.</p>
+      <div class="sg-panel" style="display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
+        <span class="cc-switch-label">Off<button type="button" class="cc-switch" role="switch" aria-checked="false" aria-label="Example off"></button></span>
+        <span class="cc-switch-label">On<button type="button" class="cc-switch" role="switch" aria-checked="true" aria-label="Example on"></button></span>
+        <span class="cc-switch-label">Read-only<button type="button" class="cc-switch" role="switch" aria-checked="true" aria-readonly="true" aria-label="Example read-only"></button></span>
+        <span class="cc-switch-label">Disabled<button type="button" class="cc-switch" role="switch" aria-checked="false" disabled aria-label="Example disabled"></button></span>
+      </div>
+      <script>document.querySelectorAll('#switch .cc-switch:not([aria-readonly="true"]):not([disabled])').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-checked',b.getAttribute('aria-checked')!=='true');});});</script>
+    </section>
+
+    <section id="tabs">
+      <h2>Segmented tabs</h2>
+      <p>Switch between views of the same page or table. One 40px layout, so tabs line up with search fields and buttons in a toolbar. Table toolbars use the default look (white selected tab); page-level views use <code>cc-tabs--brand</code> (light blue selected tab). The selected tab is the one with <code>aria-pressed="true"</code>.</p>
+      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-4);">
+        <div class="sg-row">
+          <div class="cc-tabs" role="group" aria-label="Show countries">
+            <button type="button" class="cc-tabs__tab" aria-pressed="true">All <span class="cc-tabs__count">221</span></button>
+            <button type="button" class="cc-tabs__tab" aria-pressed="false">Enabled <span class="cc-tabs__count">207</span></button>
+            <button type="button" class="cc-tabs__tab" aria-pressed="false">Disabled <span class="cc-tabs__count">14</span></button>
+          </div>
+          <input class="cc-input" style="width:240px;" placeholder="Search by country or code" aria-label="Search countries">
+          <button type="button" class="cc-btn cc-btn--secondary">Filter</button>
+        </div>
+        <div class="sg-row">
+          <div class="cc-tabs cc-tabs--brand" role="group" aria-label="Report">
+            <button type="button" class="cc-tabs__tab" aria-pressed="true">Paper Credentials</button>
+            <button type="button" class="cc-tabs__tab" aria-pressed="false">Digital Credentials</button>
+            <button type="button" class="cc-tabs__tab" aria-pressed="false">Student Reorders <span class="cc-tabs__count cc-tabs__count--warning">12</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="underline-tabs">
+      <h2>Underline tabs</h2>
+      <p>Sections inside a page, panel or drawer. Use segmented tabs for table views and toolbars. The selected tab has <code>aria-selected="true"</code>.</p>
+      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-6);">
+        <div class="cc-utabs" role="tablist" aria-label="Shipping addresses"><button type="button" class="cc-utabs__tab" role="tab" aria-selected="true">Credentials</button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Covers</button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Returns</button></div>
+        <div class="cc-utabs" role="tablist" aria-label="Document status"><button type="button" class="cc-utabs__tab" role="tab" aria-selected="true">Active <span class="cc-badge cc-badge--brand">12</span></button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Archived <span class="cc-badge cc-badge--brand">3</span></button></div>
+      </div>
+    </section>
+
+    <section id="alerts">
+      <h2>Alerts</h2>
+      <p>Inline messages at the top of a card or form. They never dismiss on their own. Use the message-only style for one-line sign-in notices.</p>
+      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-3); max-width:640px;">
+        <div class="cc-alert cc-alert--info" role="status"><span class="cc-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span><div class="cc-alert__body"><p class="cc-alert__title">Paper ordering is off</p><p class="cc-alert__message">Students can't order paper credentials for this organization.</p></div><button type="button" class="cc-icon-btn cc-alert__close" aria-label="Dismiss"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+        <div class="cc-alert cc-alert--warning" role="status"><span class="cc-alert__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="cc-alert__body"><p class="cc-alert__title">Domain needed</p><p class="cc-alert__message">Save a domain before uploading logos or diploma images.</p></div></div>
+        <div class="cc-alert cc-alert--message cc-alert--info" role="status"><p class="cc-alert__message">You've been signed out. Sign in again to continue.</p></div>
+        <div class="cc-alert cc-alert--message cc-alert--warning" role="status"><p class="cc-alert__message">This link has expired. Request a new one.</p></div>
+      </div>
+    </section>
+
+    <section id="badges">
+      <h2>Badges</h2>
+      <p>Pill shaped by default, 12px text. Each status uses its 50 tint for the fill, 200 for the border and 700 for the text.</p>
+      <div class="sg-panel sg-row">
+        <span class="cc-badge">Neutral</span>
+        <span class="cc-badge cc-badge--brand">Coming soon</span>
+        <span class="cc-badge cc-badge--success"><span class="cc-badge__dot"></span>Free</span>
+        <span class="cc-badge cc-badge--warning"><span class="cc-badge__dot"></span>Expiring</span>
+        <span class="cc-badge cc-badge--error"><span class="cc-badge__dot"></span>Revoked</span>
+        <span class="cc-badge">$25.00</span>
+      </div>
+      <p>Square (<code>cc-badge--square</code>, 6px corners) for status and category labels in tables, detail rows and panels. Keep one shape per table or panel.</p>
+      <div class="sg-panel sg-row">
+        <span class="cc-badge cc-badge--square">Draft</span>
+        <span class="cc-badge cc-badge--square cc-badge--brand">Processing</span>
+        <span class="cc-badge cc-badge--square cc-badge--success">Paid</span>
+        <span class="cc-badge cc-badge--square cc-badge--warning">On hold</span>
+        <span class="cc-badge cc-badge--square cc-badge--error">Denied</span>
+      </div>
+    </section>
+
+    <section id="featured-icons">
+      <h2>Featured icons</h2>
+      <p>A decorative icon tile (Modern, gray) beside section headings, metric cards and empty states. It isn't clickable, so add <code>aria-hidden="true"</code> and let the heading name it. <code>cc-featured-icon</code> is md (40px); add <code>--sm</code> (32), <code>--lg</code> (48) or <code>--xl</code> (56).</p>
+      <div style="display:flex; align-items:center; gap:var(--space-6); flex-wrap:wrap;">
+        <span class="cc-featured-icon cc-featured-icon--sm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
+        <span class="cc-featured-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
+        <span class="cc-featured-icon cc-featured-icon--lg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
+        <span class="cc-featured-icon cc-featured-icon--xl" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
+      </div>
+    </section>
+
+    <section id="toasts">
+      <h2>Toasts</h2>
+      <p>Short confirmation after an action, in one region at the top right of the page (<code>cc-toast-region</code>). Shown inline here.</p>
+      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-3); max-width:440px;">
+        <div class="cc-toast"><span class="cc-toast__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span><div class="cc-toast__body"><p class="cc-toast__title">Countries updated</p><p class="cc-toast__desc">2 countries were updated.</p></div><button type="button" class="cc-icon-btn cc-icon-btn--xs cc-toast__close" aria-label="Dismiss"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+        <div class="cc-toast cc-toast--error"><span class="cc-toast__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="cc-toast__body"><p class="cc-toast__title">Couldn't save</p><p class="cc-toast__desc">Check your connection and try again.</p><div class="cc-toast__actions"><button type="button" class="cc-toast__action">Try again</button></div></div><button type="button" class="cc-icon-btn cc-icon-btn--xs cc-toast__close" aria-label="Dismiss"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+      </div>
+    </section>
+
+    <section id="tooltips">
+      <h2>Tooltips</h2>
+      <p>A tooltip labels an icon button on hover (about 300ms) and on keyboard focus; Esc closes it. A toggletip holds extra details and opens on press, not hover. Both shown open here.</p>
+      <div class="sg-panel sg-row" style="align-items:flex-start; gap:var(--space-16); min-height:150px;">
+        <span class="cc-tooltip-wrap"><button type="button" class="cc-icon-btn" aria-label="More actions" aria-describedby="sg-tip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button><span class="cc-tooltip" role="tooltip" id="sg-tip">More actions</span></span>
+        <span class="cc-tooltip-wrap"><button type="button" class="cc-icon-btn" aria-label="About batching" aria-expanded="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button><span class="cc-toggletip" role="status">Orders are batched only when 6 or more documents are on hold.</span></span>
+      </div>
+    </section>
+
+    <section id="cards">
+      <h2>Cards</h2>
+      <p>Hairline <code>--gray-200</code> border, <code>--radius-xl</code>, <code>--shadow-xs</code>. Clickable cards lift to <code>--shadow-md</code> on hover.</p>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-4)">
+        <div class="cc-card">
+          <div style="font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--fg-secondary)">Credentials earned</div>
+          <div style="margin-top: var(--space-2); font: var(--fw-semibold) var(--text-display-sm-size)/var(--text-display-sm-lh) var(--font-display)">12</div>
+        </div>
+        <div class="cc-card cc-card--interactive" tabindex="0">
+          <div class="sg-row" style="justify-content: space-between"><b style="font-size: var(--text-md-size)">Official transcript</b><span class="cc-badge cc-badge--success">Free</span></div>
+          <p style="margin: var(--space-1) 0 0; font-size: var(--text-sm-size); line-height: var(--text-sm-lh); color: var(--fg-secondary)">Clickable card: hover or tab to it.</p>
+        </div>
+        <div class="cc-card cc-card--compact">
+          <b style="font-size: var(--text-sm-size)">Compact card</b>
+          <p style="margin: var(--space-1) 0 0; font-size: var(--text-sm-size); line-height: var(--text-sm-lh); color: var(--fg-secondary)">16px padding for sidebars and dense lists.</p>
         </div>
       </div>
     </section>
@@ -315,110 +477,6 @@
       </div>
     </section>
 
-    <section id="featured-icons">
-      <h2>Featured icons</h2>
-      <p>A decorative icon tile (Modern, gray) beside section headings, metric cards and empty states. It isn't clickable, so add <code>aria-hidden="true"</code> and let the heading name it. <code>cc-featured-icon</code> is md (40px); add <code>--sm</code> (32), <code>--lg</code> (48) or <code>--xl</code> (56).</p>
-      <div style="display:flex; align-items:center; gap:var(--space-6); flex-wrap:wrap;">
-        <span class="cc-featured-icon cc-featured-icon--sm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
-        <span class="cc-featured-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
-        <span class="cc-featured-icon cc-featured-icon--lg" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
-        <span class="cc-featured-icon cc-featured-icon--xl" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></span>
-      </div>
-    </section>
-
-    <section id="icon-buttons">
-      <h2>Icon buttons</h2>
-      <p>For actions shown as an icon only. Always give them an <code>aria-label</code> and a tooltip. 36px by default; <code>cc-icon-btn--xs</code> (32px) for table rows; <code>cc-icon-btn--lg</code> (44px) for headers and touch.</p>
-      <div class="sg-panel sg-row">
-        <button type="button" class="cc-icon-btn cc-icon-btn--xs" aria-label="More actions (xs)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
-        <button type="button" class="cc-icon-btn" aria-label="More actions"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
-        <button type="button" class="cc-icon-btn cc-icon-btn--lg" aria-label="More actions (lg)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button>
-        <button type="button" class="cc-icon-btn" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-      </div>
-    </section>
-
-    <section id="underline-tabs">
-      <h2>Underline tabs</h2>
-      <p>Sections inside a page, panel or drawer. Use segmented tabs for table views and toolbars. The selected tab has <code>aria-selected="true"</code>.</p>
-      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-6);">
-        <div class="cc-utabs" role="tablist" aria-label="Shipping addresses"><button type="button" class="cc-utabs__tab" role="tab" aria-selected="true">Credentials</button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Covers</button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Returns</button></div>
-        <div class="cc-utabs" role="tablist" aria-label="Document status"><button type="button" class="cc-utabs__tab" role="tab" aria-selected="true">Active <span class="cc-badge cc-badge--brand">12</span></button><button type="button" class="cc-utabs__tab" role="tab" aria-selected="false">Archived <span class="cc-badge cc-badge--brand">3</span></button></div>
-      </div>
-    </section>
-
-    <section id="calendar">
-      <h2>Calendar</h2>
-      <p>The date picker panel. It picks one date at a time; a date range uses two fields (From and To), each with its own calendar. 40px round days; state comes from <code>aria-pressed</code> (selected), <code>aria-disabled</code>, <code>data-outside</code> and <code>data-today</code>.</p>
-      <div class="sg-panel">
-        <div class="cc-calendar" id="sg-cal">
-          <div class="cc-calendar__header"><button type="button" class="cc-calendar__heading">November</button><button type="button" class="cc-calendar__heading">2026</button><span style="flex:1"></span><button type="button" class="cc-icon-btn cc-icon-btn--xs" aria-label="Previous month">&lsaquo;</button><button type="button" class="cc-icon-btn cc-icon-btn--xs" aria-label="Next month">&rsaquo;</button></div>
-          <div class="cc-calendar__grid" id="sg-cal-wk"></div>
-          <div class="cc-calendar__grid" id="sg-cal-days"></div>
-        </div>
-      </div>
-      <script>
-        (function(){var w=document.getElementById('sg-cal-wk'),g=document.getElementById('sg-cal-days');['Su','Mo','Tu','We','Th','Fr','Sa'].forEach(function(d){var e=document.createElement('div');e.className='cc-calendar__weekday';e.textContent=d;w.appendChild(e);});
-        for(var i=0;i<35;i++){var n=i+1,out=n>30,d=out?n-30:n,c=document.createElement('div'),b=document.createElement('button');c.className='cc-calendar__cell';b.type='button';b.className='cc-calendar__day';b.textContent=d;
-        if(out)b.setAttribute('data-outside','true');if(!out&&d<3)b.setAttribute('aria-disabled','true');if(!out&&d===17)b.setAttribute('data-today','true');if(!out&&d===10)b.setAttribute('aria-pressed','true');c.appendChild(b);g.appendChild(c);}})();
-      </script>
-    </section>
-
-    <section id="inputs">
-      <h2>Inputs</h2>
-      <p>40px tall by default, with an inset 1px border so the field doesn't shift when the error border appears. <code>cc-input--sm</code> (36px) is only for dense spots: filter bars, a search inside a menu, popover or dialog list, and compact toolbars beside <code>cc-btn--sm</code>. Keep fields in one row the same height.</p>
-      <div class="sg-panel" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-6)">
-        <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" placeholder="you@school.edu"><span class="cc-hint">We'll send a verification code.</span></label>
-        <label class="cc-field"><span class="cc-label">Email</span><input class="cc-input" type="email" value="taylor@" aria-invalid="true"><span class="cc-hint cc-hint--error">Enter a valid email address.</span></label>
-        <label class="cc-field"><span class="cc-label">Student ID</span><input class="cc-input" value="0049231" disabled><span class="cc-hint">Managed by your institution.</span></label>
-        <label class="cc-field"><span class="cc-label">Search certificate types</span><input class="cc-input cc-input--sm" placeholder="Search"><span class="cc-hint">Small · 36px, dense spots only.</span></label>
-      </div>
-    </section>
-
-    <section id="links">
-      <h2>Links</h2>
-      <p>Brand links use <code>--blue-800</code> (it passes AA on white). Muted links are for secondary navigation.</p>
-      <div class="sg-panel sg-row" style="gap: var(--space-8)">
-        <a class="cc-link" href="#links">View credential</a>
-        <a class="cc-link cc-link--muted" href="#links">Need help?</a>
-      </div>
-    </section>
-
-    <section id="option-cards">
-      <h2>Option cards</h2>
-      <p>A radio choice shown as a card (processing time, carrier, report options). The selected card gets a blue-600 border, a blue-50 tint and a filled radio.</p>
-      <div class="sg-panel">
-        <fieldset class="cc-option-group" style="max-width:440px;">
-          <legend class="cc-option-group__legend">Processing time</legend>
-          <label class="cc-option-card"><input type="radio" name="sg-oc" class="cc-option-card__input" checked><span class="cc-option-card__body"><span class="cc-option-card__title">Standard processing <span class="cc-badge cc-badge--success">Free</span></span><span class="cc-option-card__meta">Ships in about 26 business days</span></span><span class="cc-option-card__end cc-option-card__end--success">$0.00</span></label>
-          <label class="cc-option-card"><input type="radio" name="sg-oc" class="cc-option-card__input"><span class="cc-option-card__body"><span class="cc-option-card__title">3 day processing</span><span class="cc-option-card__meta">Ships in 3 business days</span></span><span class="cc-option-card__end">$19.95</span></label>
-          <label class="cc-option-card"><input type="radio" name="sg-oc" class="cc-option-card__input" disabled><span class="cc-option-card__body"><span class="cc-option-card__title">1 day processing</span><span class="cc-option-card__meta">Not available for this order</span></span><span class="cc-option-card__end">$39.95</span></label>
-        </fieldset>
-      </div>
-    </section>
-
-    <section id="tabs">
-      <h2>Segmented tabs</h2>
-      <p>Switch between views of the same page or table. One 40px layout, so tabs line up with search fields and buttons in a toolbar. Table toolbars use the default look (white selected tab); page-level views use <code>cc-tabs--brand</code> (light blue selected tab). The selected tab is the one with <code>aria-pressed="true"</code>.</p>
-      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-4);">
-        <div class="sg-row">
-          <div class="cc-tabs" role="group" aria-label="Show countries">
-            <button type="button" class="cc-tabs__tab" aria-pressed="true">All <span class="cc-tabs__count">221</span></button>
-            <button type="button" class="cc-tabs__tab" aria-pressed="false">Enabled <span class="cc-tabs__count">207</span></button>
-            <button type="button" class="cc-tabs__tab" aria-pressed="false">Disabled <span class="cc-tabs__count">14</span></button>
-          </div>
-          <input class="cc-input" style="width:240px;" placeholder="Search by country or code" aria-label="Search countries">
-          <button type="button" class="cc-btn cc-btn--secondary">Filter</button>
-        </div>
-        <div class="sg-row">
-          <div class="cc-tabs cc-tabs--brand" role="group" aria-label="Report">
-            <button type="button" class="cc-tabs__tab" aria-pressed="true">Paper Credentials</button>
-            <button type="button" class="cc-tabs__tab" aria-pressed="false">Digital Credentials</button>
-            <button type="button" class="cc-tabs__tab" aria-pressed="false">Student Reorders <span class="cc-tabs__count cc-tabs__count--warning">12</span></button>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="settings-group">
       <h2>Settings group</h2>
       <p>A titled, bordered list of setting rows: label and help on the left, the control on the right. Used on the organization Settings tab (layout Version 3). In view mode, fields are read-only (not disabled) so they can still be reached.</p>
@@ -428,56 +486,6 @@
           <div class="cc-setting-row"><div class="cc-setting-row__text"><label class="cc-setting-row__label" for="sg-sg-dom">Domain</label><p class="cc-setting-row__help">Read-only until you select Edit.</p></div><div class="cc-setting-row__control"><input id="sg-sg-dom" class="cc-input" value="school.edu" readonly></div></div>
           <div class="cc-setting-row"><div class="cc-setting-row__text"><label class="cc-setting-row__label" for="sg-sg-sub">Subdomain</label></div><div class="cc-setting-row__control"><input id="sg-sg-sub" class="cc-input" placeholder="reorder"></div></div>
         </div>
-      </div>
-    </section>
-
-    <section id="switch">
-      <h2>Switch</h2>
-      <p>Turns one setting on or off. A <code>&lt;button role="switch" aria-checked&gt;</code> with a visible label and an On/Off word beside it. 40×24. Use <code>aria-readonly="true"</code> in view mode instead of <code>disabled</code>.</p>
-      <div class="sg-panel" style="display:flex; gap:24px; flex-wrap:wrap; align-items:center;">
-        <span class="cc-switch-label">Off<button type="button" class="cc-switch" role="switch" aria-checked="false" aria-label="Example off"></button></span>
-        <span class="cc-switch-label">On<button type="button" class="cc-switch" role="switch" aria-checked="true" aria-label="Example on"></button></span>
-        <span class="cc-switch-label">Read-only<button type="button" class="cc-switch" role="switch" aria-checked="true" aria-readonly="true" aria-label="Example read-only"></button></span>
-        <span class="cc-switch-label">Disabled<button type="button" class="cc-switch" role="switch" aria-checked="false" disabled aria-label="Example disabled"></button></span>
-      </div>
-      <script>document.querySelectorAll('#switch .cc-switch:not([aria-readonly="true"]):not([disabled])').forEach(function(b){b.addEventListener('click',function(){b.setAttribute('aria-checked',b.getAttribute('aria-checked')!=='true');});});</script>
-    </section>
-
-    <section id="text-styles">
-      <h2>Text styles</h2>
-      <p>Classes for headings and body text, so pages don't set font sizes by hand. Headings are semibold; body text is regular. Each uses the matching size and line-height tokens.</p>
-      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-3);">
-        <div class="cc-display-xs">cc-display-xs: Organization Profile</div>
-        <div class="cc-h1">cc-h1: Admin</div>
-        <div class="cc-h2">cc-h2: Credential reports</div>
-        <div class="cc-h3">cc-h3: Countries</div>
-        <div class="cc-h4">cc-h4: Action log</div>
-        <div class="cc-text-md">cc-text-md: Body text for forms and pages.</div>
-        <div class="cc-text-smed">cc-text-smed: 15px body text, for dense reading areas.</div>
-        <div class="cc-text-sm">cc-text-sm: Table cells, hints and descriptions.</div>
-        <div class="cc-text-xs">cc-text-xs: Captions and badge text.</div>
-        <div class="cc-label">cc-label: Field label</div>
-        <div class="cc-eyebrow">cc-eyebrow: Section eyebrow</div>
-        <div><span class="cc-mono">cc-mono: usp_SetPaperOrdering</span> &nbsp; <span class="cc-code">cc-code</span></div>
-      </div>
-      <p style="margin-top:var(--space-3)">Display sizes 2xl to sm are also available (<code>cc-display-2xl</code> &hellip; <code>cc-display-sm</code>) for marketing-size headings.</p>
-    </section>
-
-    <section id="toasts">
-      <h2>Toasts</h2>
-      <p>Short confirmation after an action, in one region at the top right of the page (<code>cc-toast-region</code>). Shown inline here.</p>
-      <div class="sg-panel" style="display:flex; flex-direction:column; gap:var(--space-3); max-width:440px;">
-        <div class="cc-toast"><span class="cc-toast__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span><div class="cc-toast__body"><p class="cc-toast__title">Countries updated</p><p class="cc-toast__desc">2 countries were updated.</p></div><button type="button" class="cc-icon-btn cc-icon-btn--xs cc-toast__close" aria-label="Dismiss"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
-        <div class="cc-toast cc-toast--error"><span class="cc-toast__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="cc-toast__body"><p class="cc-toast__title">Couldn't save</p><p class="cc-toast__desc">Check your connection and try again.</p><div class="cc-toast__actions"><button type="button" class="cc-toast__action">Try again</button></div></div><button type="button" class="cc-icon-btn cc-icon-btn--xs cc-toast__close" aria-label="Dismiss"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
-      </div>
-    </section>
-
-    <section id="tooltips">
-      <h2>Tooltips</h2>
-      <p>A tooltip labels an icon button on hover (about 300ms) and on keyboard focus; Esc closes it. A toggletip holds extra details and opens on press, not hover. Both shown open here.</p>
-      <div class="sg-panel sg-row" style="align-items:flex-start; gap:var(--space-16); min-height:150px;">
-        <span class="cc-tooltip-wrap"><button type="button" class="cc-icon-btn" aria-label="More actions" aria-describedby="sg-tip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg></button><span class="cc-tooltip" role="tooltip" id="sg-tip">More actions</span></span>
-        <span class="cc-tooltip-wrap"><button type="button" class="cc-icon-btn" aria-label="About batching" aria-expanded="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></button><span class="cc-toggletip" role="status">Orders are batched only when 6 or more documents are on hold.</span></span>
       </div>
     </section>
 
@@ -579,6 +587,27 @@
   for (const t of tokens.filter(t => /^--shadow-(xs|sm|md|lg|xl|2xl|3xl)$/.test(t.name))) {
     shRoot.appendChild(el('div', { className: 'sg-tile sg-tile--shadow', style: `box-shadow: var(${t.name})` }, `<code>${t.name}</code>`));
   }
+})();
+</script>
+<script>
+// Highlight the side navigation link for the section in view.
+(function () {
+  const links = [...document.querySelectorAll('.sg-nav a[href^="#"]')];
+  const byId = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const set = id => links.forEach(a => a === byId.get(id) ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
+  const secs = [...document.querySelectorAll('main section[id]')];
+  let raf = 0;
+  const update = () => {
+    raf = 0;
+    const line = 120;
+    let cur = secs[0];
+    for (const sec of secs) { if (sec.getBoundingClientRect().top <= line) cur = sec; else break; }
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) cur = secs[secs.length - 1];
+    set(cur.id);
+  };
+  addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
+  addEventListener('hashchange', update);
+  update();
 })();
 </script>
 </body>
