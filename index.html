@@ -77,6 +77,21 @@
     main { padding: var(--space-8) var(--space-4) var(--space-16); }
     .sg-type { grid-template-columns: 1fr; gap: var(--space-1); }
   }
+
+  /* Preview / Code switch (pilot: Buttons). Sections with data-sg-code get the switch; code is generated from the live examples. */
+  .sg-view { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin: 0 0 var(--space-3); }
+  .sg-states { display: grid; grid-template-columns: 120px repeat(4, max-content); align-items: center; gap: var(--space-3) var(--space-6); }
+  .sg-states__head { font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--fg-tertiary); }
+  .sg-code { display: flex; flex-direction: column; gap: var(--space-5); }
+  .sg-code__block h3 { margin: 0 0 var(--space-2); }
+  .sg-code__wrap { position: relative; }
+  .sg-code pre { margin: 0; max-height: 360px; overflow: auto; padding: var(--space-4) var(--space-5); padding-right: 96px; border-radius: var(--radius-lg); background: var(--gray-900); color: var(--gray-100); font: var(--fw-regular) 12px/20px var(--font-mono); white-space: pre; tab-size: 2; }
+  .sg-code pre:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+  .sg-code__copy { position: absolute; top: var(--space-2); right: var(--space-2); }
+  .sg-code__uses { margin: var(--space-2) 0 0; font-size: 12px; line-height: 18px; color: var(--fg-secondary); }
+  .sg-code__uses code { white-space: nowrap; background: var(--gray-100); padding: 1px 4px; border-radius: var(--radius-xs); color: var(--gray-800); }
+  .sg-panel[hidden] { display: none; }
+  .sg-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -185,20 +200,29 @@
       </div>
     </section>
 
-    <section id="buttons">
+    <section id="buttons" data-sg-code>
       <h2>Buttons</h2>
       <p>One primary action per view. Use secondary for the alternatives, and tertiary for low-emphasis actions such as "Cancel". Use extra small only in dense spots such as table rows and inline actions.</p>
       <div class="sg-panel">
         <h3 style="margin-top:0">Hierarchy</h3>
-        <div class="sg-row">
+        <div class="sg-row" data-sg-example="Hierarchy">
           <button class="cc-btn cc-btn--primary">Primary</button>
           <button class="cc-btn cc-btn--secondary">Secondary</button>
           <button class="cc-btn cc-btn--tertiary">Tertiary</button>
           <button class="cc-btn cc-btn--primary" disabled>Disabled</button>
           <button class="cc-icon-btn" aria-label="Help"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M7.6 7.5a2.5 2.5 0 0 1 4.85.83c0 1.67-2.5 2.5-2.5 2.5M10 14.17h.01"/></svg></button>
         </div>
+        <h3>States</h3>
+        <div class="sg-states" aria-hidden="true">
+          <span></span><span class="sg-states__head">Default</span><span class="sg-states__head">Hover</span><span class="sg-states__head">Focus</span><span class="sg-states__head">Disabled</span>
+          <span class="sg-states__head">Primary</span><button class="cc-btn cc-btn--primary" tabindex="-1">Save</button><button class="cc-btn cc-btn--primary" tabindex="-1" data-sg-state="hover">Save</button><button class="cc-btn cc-btn--primary" tabindex="-1" data-sg-state="focus">Save</button><button class="cc-btn cc-btn--primary" tabindex="-1" disabled>Save</button>
+          <span class="sg-states__head">Secondary</span><button class="cc-btn cc-btn--secondary" tabindex="-1">Cancel</button><button class="cc-btn cc-btn--secondary" tabindex="-1" data-sg-state="hover">Cancel</button><button class="cc-btn cc-btn--secondary" tabindex="-1" data-sg-state="focus">Cancel</button><button class="cc-btn cc-btn--secondary" tabindex="-1" disabled>Cancel</button>
+          <span class="sg-states__head">Tertiary</span><button class="cc-btn cc-btn--tertiary" tabindex="-1">Skip</button><button class="cc-btn cc-btn--tertiary" tabindex="-1" data-sg-state="hover">Skip</button><button class="cc-btn cc-btn--tertiary" tabindex="-1" data-sg-state="focus">Skip</button><button class="cc-btn cc-btn--tertiary" tabindex="-1" disabled>Skip</button>
+          <span class="sg-states__head">Icon button</span><button class="cc-icon-btn" tabindex="-1" aria-label="Help"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M7.6 7.5a2.5 2.5 0 0 1 4.85.83c0 1.67-2.5 2.5-2.5 2.5M10 14.17h.01"/></svg></button><button class="cc-icon-btn" tabindex="-1" data-sg-state="hover" aria-label="Help"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M7.6 7.5a2.5 2.5 0 0 1 4.85.83c0 1.67-2.5 2.5-2.5 2.5M10 14.17h.01"/></svg></button><button class="cc-icon-btn" tabindex="-1" data-sg-state="focus" aria-label="Help"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M7.6 7.5a2.5 2.5 0 0 1 4.85.83c0 1.67-2.5 2.5-2.5 2.5M10 14.17h.01"/></svg></button><button class="cc-icon-btn" tabindex="-1" disabled aria-label="Help"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="8"/><path d="M7.6 7.5a2.5 2.5 0 0 1 4.85.83c0 1.67-2.5 2.5-2.5 2.5M10 14.17h.01"/></svg></button>
+        </div>
+        <p class="sg-sr">The states grid shows each button at rest, on hover, with keyboard focus and disabled.</p>
         <h3>Sizes</h3>
-        <div class="sg-row">
+        <div class="sg-row" data-sg-example="Sizes">
           <button class="cc-btn cc-btn--primary cc-btn--xs">Extra small · 32</button>
           <button class="cc-btn cc-btn--primary cc-btn--sm">Small · 36</button>
           <button class="cc-btn cc-btn--primary">Medium · 40</button>
@@ -214,6 +238,7 @@
           <tr><td>Target size</td><td colspan="4">Extra small (32px) is the smallest button. Nothing interactive goes below 24 × 24px (WCAG 2.2, 2.5.8).</td></tr>
         </table>
       </div>
+          <template data-sg-snippet="Disabled"><button class="cc-btn cc-btn--primary" disabled>Save</button></template>
     </section>
 
     <section id="icon-buttons">
@@ -614,6 +639,102 @@
   addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
   addEventListener('hashchange', update);
   update();
+})();
+</script>
+<script>
+// Preview / Code switch for sections marked data-sg-code (pilot: Buttons).
+// The code is read from the live examples ([data-sg-example]), so it always matches what's shown.
+(function () {
+  // 1. Forced states: copy every :hover / :focus-visible rule in components.css to a [data-sg-state] version,
+  //    so the States grid shows hover and focus without anyone hovering. Stays in sync with the stylesheet.
+  function forceStates() {
+    const out = [];
+    const walk = (rules) => { for (const r of rules) {
+      if (r.cssRules && !r.selectorText) { walk(r.cssRules); continue; }
+      const s = r.selectorText; if (!s || !/:hover|:focus-visible/.test(s)) continue;
+      const parts = s.split(',').map(x => x.trim()).filter(x => /:hover|:focus-visible/.test(x));
+      if (!parts.length) continue;
+      const sel = parts.map(x => x.replace(/:hover/g, '[data-sg-state~="hover"]').replace(/:focus-visible/g, '[data-sg-state~="focus"]')).join(', ');
+      out.push(sel + ' { ' + r.style.cssText + ' }');
+    } };
+    for (const sh of document.styleSheets) { let rules; try { rules = sh.cssRules; } catch (e) { continue; } if (sh.href && !/components\.css/.test(sh.href)) continue; walk(rules); }
+    const st = document.createElement('style'); st.textContent = out.join('\n'); document.head.appendChild(st);
+  }
+
+  // 2. Tidy HTML for the code view.
+  const VOID = /^(input|img|br|hr|meta|link)$/i;
+  function clean(el) {
+    const c = el.cloneNode(true);
+    c.querySelectorAll('[data-sg-state]').forEach(n => n.removeAttribute('data-sg-state'));
+    [c, ...c.querySelectorAll('*')].forEach(n => { n.removeAttribute('data-sg-example'); if (n.getAttribute('tabindex') === '-1') n.removeAttribute('tabindex'); });
+    return c;
+  }
+  function fmt(node, depth) {
+    const pad = '  '.repeat(depth);
+    if (node.nodeType === 3) { const s = node.textContent.trim(); return s ? pad + s : ''; }
+    if (node.nodeType !== 1) return '';
+    const tag = node.tagName.toLowerCase();
+    const attrs = [...node.attributes].map(a => a.value === '' ? ' ' + a.name : ' ' + a.name + '="' + a.value + '"').join('');
+    const open = '<' + tag + attrs + '>';
+    if (VOID.test(tag)) return pad + open;
+    // Keep SVG icons and simple text-only elements on one line.
+    const kids = [...node.childNodes].filter(k => k.nodeType === 1 || k.textContent.trim());
+    if (tag === 'svg' || kids.every(k => k.nodeType === 3) || kids.every(k => k.nodeType === 3 || k.tagName.toLowerCase() === 'svg')) return pad + node.outerHTML.replace(/\s*\n\s*/g, ' ').replace(/ data-sg-[a-z-]+="[^"]*"/g, '');
+    return pad + open + '\n' + kids.map(k => fmt(k, depth + 1)).filter(Boolean).join('\n') + '\n' + pad + '</' + tag + '>';
+  }
+  // Classes in a snippet, and the tokens their rules use.
+  function uses(html) {
+    const classes = [...new Set((html.match(/class="([^"]+)"/g) || []).flatMap(m => m.slice(7, -1).split(/\s+/)).filter(c => /^cc-/.test(c)))];
+    const toks = new Set();
+    for (const sh of document.styleSheets) { if (sh.href && !/components\.css/.test(sh.href)) continue; let rules; try { rules = sh.cssRules; } catch (e) { continue; }
+      const walk = (rs) => { for (const r of rs) { if (r.cssRules && !r.selectorText) { walk(r.cssRules); continue; } const s = r.selectorText || '';
+        if (classes.some(c => new RegExp('\\.' + c + '(?![\\w-])').test(s))) (r.style.cssText.match(/var\(--[\w-]+/g) || []).forEach(v => toks.add(v.slice(4))); } };
+      walk(rules); }
+    return { classes, tokens: [...toks].sort() };
+  }
+
+  let live;
+  function say(msg) { if (!live) { live = document.createElement('div'); live.className = 'sg-sr'; live.setAttribute('role', 'status'); document.body.appendChild(live); } live.textContent = ''; setTimeout(() => { live.textContent = msg; }, 50); }
+
+  function build(sec) {
+    const id = sec.id; const panel = sec.querySelector('.sg-panel'); if (!panel) return;
+    const name = (sec.querySelector('h2') || {}).textContent || id;
+    // Tabs
+    const bar = document.createElement('div'); bar.className = 'sg-view';
+    bar.innerHTML = '<div class="cc-tabs" role="tablist" aria-label="' + name + ' view">' +
+      '<button type="button" class="cc-tabs__tab" role="tab" id="' + id + '-tab-preview" aria-controls="' + id + '-preview" aria-selected="true">Preview</button>' +
+      '<button type="button" class="cc-tabs__tab" role="tab" id="' + id + '-tab-code" aria-controls="' + id + '-code" aria-selected="false" tabindex="-1">Code</button></div>';
+    panel.before(bar);
+    panel.id = id + '-preview'; panel.setAttribute('role', 'tabpanel'); panel.setAttribute('aria-labelledby', id + '-tab-preview');
+    // Code panel
+    const code = document.createElement('div'); code.className = 'sg-panel sg-code'; code.id = id + '-code'; code.hidden = true;
+    code.setAttribute('role', 'tabpanel'); code.setAttribute('aria-labelledby', id + '-tab-code');
+    const tidy = (s) => s.replace(/=""/g, ''); /* boolean attributes: disabled, not disabled="" */
+    const blocks = [...panel.querySelectorAll('[data-sg-example]')].map(ex => ({ label: ex.getAttribute('data-sg-example'), html: tidy([...clean(ex).children].map(k => fmt(k, 0)).join('\n')) }));
+    const extra = sec.querySelectorAll('template[data-sg-snippet]');
+    extra.forEach(tp => blocks.push({ label: tp.getAttribute('data-sg-snippet'), html: tidy([...tp.content.children].map(k => fmt(k, 0)).join('\n')) }));
+    blocks.forEach((b, i) => {
+      const u = uses(b.html);
+      const wrap = document.createElement('div'); wrap.className = 'sg-code__block';
+      wrap.innerHTML = '<h3>' + b.label + '</h3><div class="sg-code__wrap"><pre tabindex="0" aria-label="' + b.label + ' code"></pre>' +
+        '<button type="button" class="cc-btn cc-btn--secondary cc-btn--xs sg-code__copy">Copy<span class="sg-sr"> ' + b.label + ' code</span></button></div>' +
+        (u.classes.length ? '<p class="sg-code__uses">Classes: ' + u.classes.map(c => '<code>' + c + '</code>').join(' ') + (u.tokens.length ? '<br>Tokens: ' + u.tokens.map(t => '<code>' + t + '</code>').join(' ') : '') + '</p>' : '');
+      wrap.querySelector('pre').textContent = b.html;
+      wrap.querySelector('button').addEventListener('click', (e) => {
+        const btn = e.currentTarget; const done = () => { btn.firstChild.textContent = 'Copied'; say(b.label + ' code copied'); setTimeout(() => { btn.firstChild.textContent = 'Copy'; }, 1600); };
+        if (navigator.clipboard) navigator.clipboard.writeText(b.html).then(done, done); else done();
+      });
+      code.appendChild(wrap);
+    });
+    panel.after(code);
+    // Tab behaviour: click, and arrow keys move between tabs (WAI-ARIA tabs pattern).
+    const tabs = [...bar.querySelectorAll('[role="tab"]')];
+    const show = (i, focus) => { tabs.forEach((t, j) => { const on = i === j; t.setAttribute('aria-selected', on); t.tabIndex = on ? 0 : -1; }); panel.hidden = i !== 0; code.hidden = i !== 1; if (focus) tabs[i].focus(); };
+    tabs.forEach((t, i) => { t.addEventListener('click', () => show(i)); t.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); show((i + 1) % 2, true); } if (e.key === 'Home') { e.preventDefault(); show(0, true); } if (e.key === 'End') { e.preventDefault(); show(1, true); } }); });
+  }
+
+  function init() { forceStates(); document.querySelectorAll('section[data-sg-code]').forEach(build); }
+  if (document.readyState === 'complete') init(); else window.addEventListener('load', init);
 })();
 </script>
 </body>
