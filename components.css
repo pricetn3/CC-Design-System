@@ -239,12 +239,12 @@
    ===================================================================== */
 
 /* Checkbox (FX-17): a native checkbox inside its label, so the label text ticks it. Row is at least 24px tall. */
-.cc-checkbox { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 24px; cursor: pointer; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+.cc-checkbox { display: inline-flex; align-items: flex-start; gap: var(--space-2); min-height: 24px; cursor: pointer; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
 .cc-checkbox__input {
   appearance: none; -webkit-appearance: none;
   flex-shrink: 0; width: 16px; height: 16px; margin: 0;
   box-sizing: border-box;
-  border: 1.5px solid var(--border-input);   /* 3.17:1 on white: an empty box is identified by its border */
+  border: 1px solid var(--border-input);   /* 3.17:1 on white: an empty box is identified by its border */
   border-radius: var(--radius-sm);
   background: var(--bg-primary) no-repeat center / 12px 12px;
   cursor: pointer;
@@ -262,12 +262,12 @@
 .cc-checkbox:has(.cc-checkbox__input:disabled) { color: var(--gray-500); cursor: not-allowed; }
 
 /* Radio: same states as the checkbox. Checked is a blue-600 circle with a 6px white centre. */
-.cc-radio { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 24px; cursor: pointer; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
+.cc-radio { display: inline-flex; align-items: flex-start; gap: var(--space-2); min-height: 24px; cursor: pointer; font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
 .cc-radio__input {
   appearance: none; -webkit-appearance: none;
   flex-shrink: 0; width: 16px; height: 16px; margin: 0;
   box-sizing: border-box;
-  border: 1px solid var(--gray-500);   /* 4.56:1 on white, same edge as the option card radio */
+  border: 1px solid var(--border-input);   /* 3.17:1 on white, same edge as the checkbox */
   border-radius: var(--radius-full);
   background: var(--bg-primary);
   cursor: pointer;
@@ -278,6 +278,9 @@
 .cc-radio__input:disabled { border: 1px solid var(--gray-300); background: var(--gray-100); cursor: not-allowed; }
 .cc-radio__input:disabled:checked { background: radial-gradient(circle, var(--gray-300) 0 3px, var(--gray-100) 3.5px); }
 .cc-radio:has(.cc-radio__input:disabled) { color: var(--gray-500); cursor: not-allowed; }
+/* Checkbox and radio rows: the 16px control sits centered on the first 20px line of its label, so it lines up with one-line labels and with a title that has a hint under it. */
+.cc-checkbox > .cc-checkbox__input, .cc-radio > .cc-radio__input { margin-top: 2px; }
+
 
 /* Option card (FX-09): a radio choice shown as a card, e.g. Processing Time, carrier, report options.
    Identified by its text, so the resting border stays light; the selected state differs by 3:1 or more
@@ -297,7 +300,7 @@
 .cc-option-card__input {
   appearance: none; -webkit-appearance: none;
   flex-shrink: 0; width: 16px; height: 16px; margin: 0; box-sizing: border-box;
-  border: 1px solid var(--gray-500); border-radius: var(--radius-full);   /* 4.56:1 on white: state is visible */
+  border: 1px solid var(--border-input); border-radius: var(--radius-full);   /* 3.17:1 on white, same as cc-radio */
   background: var(--bg-primary); cursor: pointer; outline: none;
 }
 .cc-option-card__input:checked { border-color: var(--blue-600); background: radial-gradient(circle, var(--bg-primary) 0 3px, var(--blue-600) 3.5px); }   /* same as cc-radio */
