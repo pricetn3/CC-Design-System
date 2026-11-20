@@ -23,7 +23,7 @@
   .sg-nav a[aria-current="true"] { background: var(--blue-50); color: var(--blue-700); }
   .sg-nav a:focus-visible { outline: none; box-shadow: var(--ring-focus); }
 
-  main { padding: var(--space-12) var(--space-12) var(--space-24); min-width: 0; } /* fills the screen; paragraphs keep their own readable width */
+  main { padding: var(--space-12) var(--space-12) var(--space-24); min-width: 0; max-width: 1280px; } /* wide enough for code and state grids, close enough that the Preview / Code tabs stay near the text */
   .sg-hero h1 { margin: 0 0 var(--space-2); font: var(--fw-semibold) var(--text-display-sm-size)/var(--text-display-sm-lh) var(--font-display); letter-spacing: -0.02em; }
   .sg-hero p { margin: 0; max-width: 640px; color: var(--fg-secondary); }
   .sg-meta { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
