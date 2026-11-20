@@ -14,6 +14,13 @@
       "internal.html"
     ]
   },
+  "codebases": {
+    "_about": "App codebases (React and similar). They load tokens.css and components.css from sharedTokensUrl / sharedComponentsUrl in their entry page, so link_tokens.py leaves them alone. drift_check.py checks each one as a unit: the entry page must load the shared files, and all source files together must stick to tokens and the scales.",
+    "CC-Prototype-Unbundled": {
+      "entry": "index.html",
+      "files": ["index.html", "src/**/*.css", "src/**/*.tsx", "src/**/*.ts"]
+    }
+  },
   "notUsingThisSystem": {
     "Implementation Tool/Implementation Tool": "Built in the existing Client Implementation tool's style (Blazor, Telerik, Bootstrap 5.1) to match the live product. Intentionally not on these tokens."
   },

@@ -16,7 +16,8 @@ Usage:
     python3 tools/drift_check.py            # check every page
     python3 tools/drift_check.py "~/Documents/GitHub/CC-Prototype/external.html"
 
-With no arguments it checks every page listed in prototypes.json.
+With no arguments it checks every page listed in prototypes.json, plus each app
+codebase listed under "codebases" (all its source files checked as one unit).
 
 Exit code is 1 when there are errors (token mismatches or off-system colors),
 so the same script can later run automatically on GitHub before publishing.
@@ -166,6 +167,12 @@ def check_page(path, canon, color_to_token, allowed_colors):
     body = re.sub(r"/\*.*?\*/", "", body, flags=re.S)
     body = re.sub(r"(?m)^\s*//.*$", "", body)
 
+    check_styles(body, canon, color_to_token, allowed_colors, is_email, errors, warnings, notes)
+    return errors, warnings, notes, is_export
+
+
+def check_styles(body, canon, color_to_token, allowed_colors, is_email, errors, warnings, notes):
+    """Colors, radii, button heights and typefaces. Shared by pages and codebases."""
     # 2. Hard-coded colors --------------------------------------------------
     by_token = collections.defaultdict(list)                       # token -> [literal, ...]
     found = collections.defaultdict(lambda: collections.defaultdict(list))  # kind -> hex -> [snippet]
@@ -194,7 +201,7 @@ def check_page(path, canon, color_to_token, allowed_colors):
 
     if is_email:
         notes.append("Email template: checked colors only (email clients can't use CSS tokens).")
-        return errors, warnings, notes, is_export
+        return
 
     # 3. Radius --------------------------------------------------------------
     radius_tokens = {v.strip(): k for k, v in canon.items() if k.startswith("--radius-")}
@@ -246,7 +253,6 @@ def check_page(path, canon, color_to_token, allowed_colors):
     for fam in sorted(fonts):
         warnings.append(f"Typeface '{fam}' isn't part of the system (Inter / Roboto Mono).")
 
-    return errors, warnings, notes, is_export
 
 
 def nearest_token(rgb, color_to_token):
@@ -269,6 +275,61 @@ def registry_pages():
         for pattern in patterns:
             pages += glob.glob(os.path.join(base, repo, pattern))
     return sorted(set(pages))
+
+
+def registry_codebases():
+    """App codebases listed under "codebases" in prototypes.json: {repo folder: (entry page, [files])}.
+    Their styles are spread across many source files and load the tokens from the shared site,
+    so they're checked as one unit instead of page by page."""
+    reg = load_registry()
+    base = os.path.expanduser(reg["base"])
+    out = {}
+    for repo, spec in reg.get("codebases", {}).items():
+        if repo.startswith("_"):
+            continue
+        root = os.path.join(base, repo)
+        if not os.path.isdir(root):
+            continue
+        files = []
+        for pattern in spec["files"]:
+            files += glob.glob(os.path.join(root, pattern), recursive=True)
+        out[root] = (os.path.join(root, spec["entry"]), sorted(set(files)))
+    return out
+
+
+def check_codebase(entry, files, canon, color_to_token, allowed_colors):
+    """Check an app codebase: the entry page must load the shared tokens and components,
+    and the source files must stick to tokens, the radius and button scales and the typefaces."""
+    reg = load_registry()
+    errors, warnings, notes = [], [], []
+    try:
+        with open(entry, encoding="utf-8") as f:
+            entry_html = f.read()
+    except OSError:
+        entry_html = ""
+        errors.append(f"Entry page {os.path.basename(entry)} not found.")
+    if reg["sharedTokensUrl"] not in entry_html:
+        errors.append(f"Doesn't load the shared tokens ({reg['sharedTokensUrl']}).")
+    if reg["sharedComponentsUrl"] not in entry_html:
+        warnings.append(f"Doesn't load the shared components ({reg['sharedComponentsUrl']}).")
+    for old in reg.get("oldAddresses", []):
+        if old in entry_html:
+            errors.append(f"Loads the design system from its old address ({old}).")
+
+    parts = []
+    for p in files:
+        with open(p, encoding="utf-8") as f:
+            parts.append(f.read())
+    body = "\n".join(parts)
+    body = re.sub(r"data:[\w/+.-]+;base64,[A-Za-z0-9+/=]+", "data:", body)
+    if ROOT_BLOCK_RE.search(body):
+        warnings.append("Defines its own :root token block. Tokens should come from the shared tokens.css only.")
+    body = ROOT_BLOCK_RE.sub("", body)
+    body = re.sub(r"/\*.*?\*/", "", body, flags=re.S)
+    body = re.sub(r"(?m)^\s*//.*$", "", body)
+    check_styles(body, canon, color_to_token, allowed_colors, False, errors, warnings, notes)
+    notes.append(f"Codebase: {len(files)} source files checked together.")
+    return errors, warnings, notes
 
 
 def display_name(path):
@@ -300,17 +361,33 @@ def main(argv):
 
     if argv:
         pages = [os.path.abspath(os.path.expanduser(p)) for p in argv]
+        codebases = {}
     else:
         pages = registry_pages()
+        codebases = registry_codebases()
 
     total_err = total_warn = 0
-    print(f"\nDesign system drift check · {len(canon)} tokens · {len(pages)} pages\n")
+    print(f"\nDesign system drift check · {len(canon)} tokens · {len(pages)} pages · {len(codebases)} codebases\n")
     for p in pages:
         errors, warnings, notes, is_export = check_page(p, canon, color_to_token, allowed_colors)
         total_err += len(errors)
         total_warn += len(warnings)
         status = "✗" if errors else ("!" if warnings else "✓")
         print(f"{status} {display_name(p)}  ({len(errors)} errors, {len(warnings)} warnings)")
+        for e in errors:
+            print(f"    ERROR  {e}")
+        for w in warnings:
+            print(f"    warn   {w}")
+        for n in notes:
+            print(f"    note   {n}")
+        print()
+
+    for root, (entry, files) in codebases.items():
+        errors, warnings, notes = check_codebase(entry, files, canon, color_to_token, allowed_colors)
+        total_err += len(errors)
+        total_warn += len(warnings)
+        status = "✗" if errors else ("!" if warnings else "✓")
+        print(f"{status} {display_name(root)}/ (codebase)  ({len(errors)} errors, {len(warnings)} warnings)")
         for e in errors:
             print(f"    ERROR  {e}")
         for w in warnings:

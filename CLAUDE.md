@@ -33,6 +33,9 @@ Linked prototype repos (see `prototypes.json`):
 - `The Store/The-Store`: all `*.dc.html` exports and `index.html`; `emails/` is drift-checked only (email can't load CSS tokens). Its `handoff/` React components load `tokens.css` and `components.css` from this site.
 - `CC-Prototype`: `external.html`, `internal.html` (`index.html` is a plain menu page).
 
+Linked app codebases (`codebases` in `prototypes.json`):
+- `CC-Prototype-Unbundled`: the React rebuild of the CC Platform prototype. Its `index.html` loads `tokens.css` and `components.css` from this site, so token and component-style changes reach it on the next page load, with no re-export. Renamed or removed tokens and classes, and changes to a component's markup, need a code update there (its `sync-design` skill handles that). `link_tokens.py` skips it; `drift_check.py` checks all its source files as one unit.
+
 `Implementation Tool` is intentionally **not** on this system: it's built in the existing Client Implementation tool's style (Blazor, Telerik, Bootstrap 5.1) to match the live product.
 
 The focus ring standard is the 2px solid `--ring-focus` (the owner chose it over the older 4px soft halo for accessibility). Fields (inputs, selects, dropdowns, code-entry boxes) instead swap their gray edge for a 2px `--blue-600` edge drawn inside the field (`--error-500` when the field has an error), with no outside ring, so containers can't clip it. Chosen 2026-11-17; the developed store still uses the older outside ring until developers update it.
