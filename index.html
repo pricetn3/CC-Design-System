@@ -80,6 +80,9 @@
 
   /* Preview / Code switch (pilot: Buttons). Sections with data-sg-code get the switch; code is generated from the live examples. */
   .sg-view { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin: 0 0 var(--space-3); }
+  .sg-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin: 0 0 var(--space-1); }
+  .sg-head > h2 { margin: 0; }
+  .sg-head > .sg-view { margin: 0; flex-shrink: 0; }
   .sg-states { max-width: 100%; overflow-x: auto; padding: 4px; display: grid; grid-template-columns: 120px repeat(var(--sg-cols, 4), max-content); align-items: center; gap: var(--space-3) var(--space-6); }
   .sg-states__na { color: var(--fg-tertiary); }
   .sg-states-panel { margin-top: var(--space-4); }
@@ -128,6 +131,8 @@
     <a href="#calendar">Calendar</a>
     <a href="#checkbox-radio">Checkbox &amp; radio</a>
     <a href="#code-entry">Code entry</a>
+    <a href="#dropdowns">Dropdowns</a>
+    <a href="#filter-bar">Filter bar</a>
     <a href="#inputs">Inputs</a>
     <a href="#option-cards">Option cards</a>
     <a href="#switch">Switch</a>
@@ -325,6 +330,151 @@
           <input class="cc-code-entry__box" value="1" aria-invalid="true" aria-label="Digit 1"><input class="cc-code-entry__box" value="2" aria-invalid="true" aria-label="Digit 2"><input class="cc-code-entry__box" value="3" aria-invalid="true" aria-label="Digit 3"><input class="cc-code-entry__box" value="4" aria-invalid="true" aria-label="Digit 4"><input class="cc-code-entry__box" value="5" aria-invalid="true" aria-label="Digit 5"><input class="cc-code-entry__box" value="6" aria-invalid="true" aria-label="Digit 6">
         </div>
       </div>
+    </section>
+
+    <section id="dropdowns" data-sg-code data-sg-states=".cc-dropdown__option" data-sg-state-list="Default,Hover,Focus">
+      <h2>Dropdowns</h2>
+      <p>A button that opens a list. Use a dropdown for 4 or more choices; for 2–3, use radio buttons. Three kinds share one menu and one 40px row: a field dropdown picks one value (blue check on the chosen row), a toolbar dropdown shows its current choice as the label (radio rows), and a searchable dropdown adds a search box for long lists. Menus close on Esc, a click outside, or after a single choice, and focus goes back to the button. Taken from the Settings tab, the Action log and the organization picker in the CC Platform.</p>
+      <h3>Field dropdown</h3>
+      <div class="sg-panel" style="min-height:300px;">
+        <div class="cc-field" style="max-width:320px;">
+          <label class="cc-label" id="sg-dd1-l">Batch frequency</label>
+          <div class="cc-dropdown" data-sg-dd>
+            <button type="button" class="cc-btn cc-btn--secondary cc-dropdown__trigger" id="sg-dd1" aria-haspopup="listbox" aria-expanded="true" aria-controls="sg-dd1-list" aria-labelledby="sg-dd1-l sg-dd1"><span class="cc-dropdown__value">Weekly</span><svg class="cc-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="cc-dropdown__menu" id="sg-dd1-list" role="listbox" aria-labelledby="sg-dd1-l" tabindex="-1">
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__label">Daily (Monday–Friday)</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="true"><span class="cc-dropdown__label">Weekly</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__label">Twice a week</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false" aria-disabled="true"><span class="cc-dropdown__label">Monthly (unavailable)</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h3>Placeholder and error</h3>
+      <div class="sg-panel sg-row" style="align-items:flex-start;">
+        <div class="cc-field" style="width:260px;">
+          <label class="cc-label" id="sg-dd2-l">Department</label>
+          <div class="cc-dropdown" data-sg-dd>
+            <button type="button" class="cc-btn cc-btn--secondary cc-dropdown__trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="sg-dd2-list" aria-labelledby="sg-dd2-l"><span class="cc-dropdown__value cc-dropdown__value--placeholder">Select</span><svg class="cc-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="cc-dropdown__menu" id="sg-dd2-list" role="listbox" aria-labelledby="sg-dd2-l" tabindex="-1" hidden>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__label">Diplomas</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__label">Registrar</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+            </div>
+          </div>
+        </div>
+        <div class="cc-field" style="width:260px;">
+          <label class="cc-label" id="sg-dd3-l">Batch frequency</label>
+          <div class="cc-dropdown" data-sg-dd>
+            <button type="button" class="cc-btn cc-btn--secondary cc-dropdown__trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="sg-dd3-list" aria-labelledby="sg-dd3-l" aria-invalid="true" aria-describedby="sg-dd3-e"><span class="cc-dropdown__value cc-dropdown__value--placeholder">Select</span><svg class="cc-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+            <div class="cc-dropdown__menu" id="sg-dd3-list" role="listbox" aria-labelledby="sg-dd3-l" tabindex="-1" hidden>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__label">Weekly</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__label">Monthly</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+            </div>
+          </div>
+          <span class="cc-hint cc-hint--error" id="sg-dd3-e">Select a batch frequency.</span>
+        </div>
+      </div>
+      <h3>Toolbar dropdown (date range)</h3>
+      <div class="sg-panel" style="min-height:300px; display:flex; justify-content:flex-end; align-items:flex-start;">
+        <div class="cc-dropdown" data-sg-dd>
+          <button type="button" class="cc-btn cc-btn--secondary" aria-haspopup="true" aria-expanded="true" aria-controls="sg-dd4-menu" aria-label="Date range: Last 90 days"><span>Last 90 days</span><svg class="cc-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+          <div class="cc-dropdown__menu cc-dropdown__menu--end" id="sg-dd4-menu" style="width:200px;">
+            <fieldset class="cc-dropdown__group">
+              <legend class="sg-sr">Date range</legend>
+              <label class="cc-dropdown__option"><input type="radio" class="cc-radio__input" name="sg-dd4"><span class="cc-dropdown__label">Today</span></label>
+              <label class="cc-dropdown__option"><input type="radio" class="cc-radio__input" name="sg-dd4"><span class="cc-dropdown__label">Last 7 days</span></label>
+              <label class="cc-dropdown__option"><input type="radio" class="cc-radio__input" name="sg-dd4"><span class="cc-dropdown__label">Last 30 days</span></label>
+              <label class="cc-dropdown__option"><input type="radio" class="cc-radio__input" name="sg-dd4" checked><span class="cc-dropdown__label">Last 90 days</span></label>
+              <label class="cc-dropdown__option"><input type="radio" class="cc-radio__input" name="sg-dd4"><span class="cc-dropdown__label">Custom range</span></label>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+      <h3>Searchable dropdown (organization picker)</h3>
+      <div class="sg-panel" style="min-height:330px; display:flex; justify-content:flex-end; align-items:flex-start;">
+        <div class="cc-dropdown" data-sg-dd>
+          <button type="button" class="cc-btn cc-btn--secondary" aria-haspopup="dialog" aria-expanded="true" aria-controls="sg-dd5-menu" aria-label="Switch organization, current: Virginia Hanock University"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 15 5 5 5-5M7 9l5-5 5 5"/></svg>Switch organization</button>
+          <div class="cc-dropdown__menu cc-dropdown__menu--end cc-dropdown__menu--sections" id="sg-dd5-menu" style="width:360px;">
+            <div class="cc-input cc-input--sm cc-dropdown__search" style="display:flex; align-items:center; gap:var(--space-2); padding:0 var(--space-3);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--gray-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="search" aria-label="Search organizations by ID or name" placeholder="Search by ID or name" style="flex:1; min-width:0; height:100%; padding:0; border:none; outline:none; background:transparent; font:inherit; color:var(--fg-primary);"></div>
+            <div class="cc-dropdown__list" role="listbox" aria-label="Organizations">
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="true"><span class="cc-dropdown__meta">2052</span><span class="cc-dropdown__label">Virginia Hanock University</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__meta">2053</span><span class="cc-dropdown__label">Virginia Hanock Business School</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__meta">2054</span><span class="cc-dropdown__label">Virginia Hanock School of Law</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__meta">2055</span><span class="cc-dropdown__label">Virginia Hanock School of Medicine</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></button>
+              <p class="cc-dropdown__empty" hidden>No matches</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <table class="sg-spec">
+        <tr><th scope="col">Part</th><th scope="col">Class</th><th scope="col">Look</th></tr>
+        <tr><td>Field trigger</td><td><code>cc-btn cc-btn--secondary cc-dropdown__trigger</code></td><td>40px, full width, value left (14 medium gray-900; placeholder regular gray-500), 16px gray-500 chevron right that flips when open. Focus and open: 2px blue-600 ring outside the edge; error-500 when invalid.</td></tr>
+        <tr><td>Toolbar trigger</td><td><code>cc-btn cc-btn--secondary</code> + <code>aria-haspopup</code></td><td>Label is the current choice. Open: 1px blue-600 edge.</td></tr>
+        <tr><td>Menu</td><td><code>cc-dropdown__menu</code> (<code>--end</code>, <code>--up</code>, <code>--sections</code>)</td><td>4px under the button, white, 1px gray-200, radius-lg, shadow-lg, 8px padding, up to 296px then scrolls.</td></tr>
+        <tr><td>Row</td><td><code>cc-dropdown__option</code></td><td>40px, 10px sides, radius-sm, 2px apart. Hover gray-100; chosen gray-50 plus the blue-600 check; keyboard focus 2px blue-600 inside the row.</td></tr>
+        <tr><td>Search</td><td><code>cc-input cc-input--sm cc-dropdown__search</code></td><td>36px search box with 8px around it; the list under it scrolls (280px).</td></tr>
+      </table>
+    </section>
+
+    <section id="filter-bar" data-sg-code>
+      <h2>Filter bar</h2>
+      <p>Filters for a table. The Filter button in the toolbar opens a bar under it with one small dropdown per column people filter by. Each has checkbox rows and Clear all; the button shows how many are chosen. Clear all and Apply filters appear once anything is chosen. The bar wraps on narrow screens. Taken from the Action log in Admin.</p>
+      <div class="sg-panel" style="padding:0; min-height:440px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--space-3); padding:var(--space-4) var(--space-5);">
+          <div style="display:flex; align-items:center; gap:var(--space-2);"><span style="font:var(--fw-semibold) var(--text-md-size)/var(--text-md-lh) var(--font-body); color:var(--gray-900);">All changes</span><span class="cc-badge cc-badge--brand">79 changes</span></div>
+          <div style="display:flex; align-items:center; gap:var(--space-3);">
+            <button type="button" class="cc-btn cc-btn--secondary cc-filter-toggle" aria-expanded="true" aria-controls="sg-fbar"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"/></svg>Filter</button>
+          </div>
+        </div>
+        <div class="cc-filter-bar" id="sg-fbar" role="group" aria-label="Filters">
+          <div class="cc-filter-bar__filters">
+            <div class="cc-dropdown" data-sg-dd>
+              <button type="button" class="cc-btn cc-btn--secondary cc-btn--sm" aria-haspopup="true" aria-expanded="false" aria-controls="sg-f1"><span>Organization</span><svg class="cc-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+              <div class="cc-dropdown__menu cc-dropdown__menu--sections" id="sg-f1" hidden>
+                <div class="cc-input cc-input--sm cc-dropdown__search" style="display:flex; align-items:center; gap:var(--space-2); padding:0 var(--space-3);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--gray-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><input type="search" aria-label="Search organizations" placeholder="Search" style="flex:1; min-width:0; height:100%; padding:0; border:none; outline:none; background:transparent; font:inherit; color:var(--fg-primary);"></div>
+                <fieldset class="cc-dropdown__group cc-dropdown__list"><legend class="sg-sr">Organization filter</legend>
+                  <label class="cc-dropdown__option"><input type="checkbox" class="cc-checkbox__input"><span class="cc-dropdown__meta">1419</span><span class="cc-dropdown__label">Albany Medical College</span></label>
+                  <label class="cc-dropdown__option"><input type="checkbox" class="cc-checkbox__input"><span class="cc-dropdown__meta">2052</span><span class="cc-dropdown__label">Virginia Hanock University</span></label>
+                </fieldset>
+                <div class="cc-dropdown__footer"><button type="button" class="cc-link cc-link-btn">Clear all</button></div>
+              </div>
+            </div>
+            <div class="cc-dropdown" data-sg-dd>
+              <button type="button" class="cc-btn cc-btn--secondary cc-btn--sm" aria-haspopup="true" aria-expanded="true" aria-controls="sg-f2" aria-label="Area, 2 chosen"><span>Area</span><span class="cc-dropdown__count" aria-hidden="true">2</span><svg class="cc-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+              <div class="cc-dropdown__menu cc-dropdown__menu--sections" id="sg-f2">
+                <fieldset class="cc-dropdown__group cc-dropdown__list"><legend class="sg-sr">Area filter</legend>
+                  <label class="cc-dropdown__option"><input type="checkbox" class="cc-checkbox__input"><span class="cc-dropdown__label">Organization Setup</span></label>
+                  <label class="cc-dropdown__option"><input type="checkbox" class="cc-checkbox__input" checked><span class="cc-dropdown__label">Paper Ordering</span></label>
+                  <label class="cc-dropdown__option"><input type="checkbox" class="cc-checkbox__input" checked><span class="cc-dropdown__label">Order Batching</span></label>
+                  <label class="cc-dropdown__option"><input type="checkbox" class="cc-checkbox__input"><span class="cc-dropdown__label">Global Settings</span></label>
+                </fieldset>
+                <div class="cc-dropdown__footer"><button type="button" class="cc-link cc-link-btn">Clear all</button></div>
+              </div>
+            </div>
+            <div class="cc-dropdown" data-sg-dd>
+              <button type="button" class="cc-btn cc-btn--secondary cc-btn--sm" aria-haspopup="true" aria-expanded="false" aria-controls="sg-f3"><span>Change type</span><svg class="cc-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+              <div class="cc-dropdown__menu cc-dropdown__menu--sections" id="sg-f3" hidden>
+                <fieldset class="cc-dropdown__group cc-dropdown__list"><legend class="sg-sr">Change type filter</legend>
+                  <label class="cc-dropdown__option"><input type="checkbox" class="cc-checkbox__input"><span class="cc-dropdown__label">Display name</span></label>
+                  <label class="cc-dropdown__option"><input type="checkbox" class="cc-checkbox__input"><span class="cc-dropdown__label">Batch frequency</span></label>
+                </fieldset>
+                <div class="cc-dropdown__footer"><button type="button" class="cc-link cc-link-btn">Clear all</button></div>
+              </div>
+            </div>
+          </div>
+          <div class="cc-filter-bar__actions">
+            <button type="button" class="cc-link cc-link-btn">Clear all</button>
+            <button type="button" class="cc-btn cc-btn--secondary cc-btn--sm">Apply filters</button>
+          </div>
+        </div>
+      </div>
+      <table class="sg-spec">
+        <tr><th scope="col">Part</th><th scope="col">Class</th><th scope="col">Look</th></tr>
+        <tr><td>Filter button</td><td><code>cc-btn cc-btn--secondary cc-filter-toggle</code></td><td>40px, filter-lines icon. <code>aria-expanded</code> and <code>aria-controls</code> point at the bar; stays gray-50 while the bar is open.</td></tr>
+        <tr><td>Bar</td><td><code>cc-filter-bar</code></td><td>Full width under the toolbar, 1px gray-200 top divider, 12px × 20px padding, wraps.</td></tr>
+        <tr><td>Filter dropdowns</td><td><code>cc-btn--sm</code> + <code>cc-dropdown__count</code></td><td>36px, 10px apart. Count: 20px gray-100 circle; the button's name includes it ("Area, 2 chosen"). Menu 240px with checkbox rows and Clear all.</td></tr>
+        <tr><td>Actions</td><td><code>cc-filter-bar__actions</code></td><td>Clear all (link) and Apply filters (sm secondary), 16px apart, shown once something is chosen.</td></tr>
+      </table>
     </section>
 
     <section id="inputs" data-sg-code>
@@ -751,8 +901,9 @@
   function tokensFor(root) {
     const got = {};
     /* the example itself, plus its own parts (e.g. the box inside a checkbox label), named after their class */
-    const parts = [root, ...[...root.querySelectorAll('[class*="cc-"]')].filter(p => p.closest('[class*="cc-"]') && (p.className.match(/cc-[\w-]+__([\w-]+)/) || [])[1])];
-    parts.forEach(el => { const pre = el === root ? '' : (el.className.match(/cc-[\w-]+__([\w-]+)/) || [])[1].replace(/-/g, ' ') + ': ';
+    const cls = (el) => el.getAttribute('class') || ''; /* getAttribute: an SVG's className isn't a string */
+    const parts = [root, ...[...root.querySelectorAll('[class*="cc-"]')].filter(p => (cls(p).match(/cc-[\w-]+__([\w-]+)/) || [])[1])];
+    parts.forEach(el => { const pre = el === root ? '' : (cls(el).match(/cc-[\w-]+__([\w-]+)/) || [])[1].replace(/-/g, ' ') + ': ';
       rules().forEach(r => { let ok = false; try { ok = el.matches(r.sel); } catch (e) {} if (!ok) return;
         PROPS.forEach(([p, label]) => { const v = r.style.getPropertyValue(p); if (v) got[pre + label] = v.trim(); }); }); });
     const show = {};
@@ -782,7 +933,7 @@
     'cc-checkbox': 'checkbox-radio', 'cc-radio': 'checkbox-radio', 'cc-code-entry': 'code-entry', 'cc-input': 'inputs', 'cc-hint': 'inputs', 'cc-field': 'inputs', 'cc-label': 'inputs',
     'cc-option-card': 'option-cards', 'cc-option-group': 'option-cards', 'cc-switch': 'switch', 'cc-switch-label': 'switch', 'cc-tabs': 'tabs', 'cc-utabs': 'underline-tabs',
     'cc-alert': 'alerts', 'cc-badge': 'badges', 'cc-featured-icon': 'featured-icons', 'cc-toast': 'toasts', 'cc-toast-region': 'toasts',
-    'cc-tooltip': 'tooltips', 'cc-tooltip-wrap': 'tooltips', 'cc-toggletip': 'tooltips', 'cc-card': 'cards',
+    'cc-tooltip': 'tooltips', 'cc-tooltip-wrap': 'tooltips', 'cc-toggletip': 'tooltips', 'cc-card': 'cards', 'cc-dropdown': 'dropdowns', 'cc-filter-bar': 'filter-bar', 'cc-filter-toggle': 'filter-bar', 'cc-link-btn': 'filter-bar',
     'cc-dialog': 'dialogs', 'cc-dialog-overlay': 'dialogs', 'cc-timeout': 'dialogs', 'cc-countdown': 'dialogs', 'cc-setting-group': 'settings-group', 'cc-setting-row': 'settings-group' };
   const family = (c) => c.replace(/(__|--).*$/, '');
   const ownedHere = (c, id) => !OWNER[family(c)] || OWNER[family(c)] === id;
@@ -888,9 +1039,11 @@
     // Tabs
     const bar = document.createElement('div'); bar.className = 'sg-view';
     bar.innerHTML = '<div class="cc-tabs" role="tablist" aria-label="' + name + ' view">' +
-      '<button type="button" class="cc-tabs__tab" role="tab" id="' + id + '-tab-preview" aria-controls="' + id + '-preview" aria-selected="true">Preview</button>' +
-      '<button type="button" class="cc-tabs__tab" role="tab" id="' + id + '-tab-code" aria-controls="' + id + '-code" aria-selected="false" tabindex="-1">Code</button></div>';
-    panel.before(bar);
+      '<button type="button" class="cc-tabs__tab" role="tab" id="' + id + '-tab-preview" aria-controls="' + id + '-preview" aria-selected="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.42 12.71a1 1 0 0 1 0-.71 10.75 10.75 0 0 1 19.16 0 1 1 0 0 1 0 .71 10.75 10.75 0 0 1-19.16 0"/><circle cx="12" cy="12" r="3"/></svg>Preview</button>' +
+      '<button type="button" class="cc-tabs__tab" role="tab" id="' + id + '-tab-code" aria-controls="' + id + '-code" aria-selected="false" tabindex="-1"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>Code</button></div>';
+    /* The tabs sit to the right of the section heading, like the component cards in Claude Design. */
+    const h2 = sec.querySelector(':scope > h2');
+    if (h2) { const head = document.createElement('div'); head.className = 'sg-head'; h2.before(head); head.append(h2, bar); } else panel.before(bar);
     panel.id = id + '-preview'; panel.setAttribute('role', 'tabpanel'); panel.setAttribute('aria-labelledby', id + '-tab-preview');
     // Code panel
     const code = document.createElement('div'); code.className = 'sg-panel sg-code'; code.id = id + '-code'; code.hidden = true;
@@ -921,7 +1074,40 @@
     tabs.forEach((t, i) => { t.addEventListener('click', () => show(i)); t.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); show((i + 1) % 2, true); } if (e.key === 'Home') { e.preventDefault(); show(0, true); } if (e.key === 'End') { e.preventDefault(); show(1, true); } }); });
   }
 
-  async function init() { forceStates(); try { const l = document.querySelector('link[href*="components.css"]'); CSS_SRC = await (await fetch(l ? l.href : 'components.css')).text(); } catch (e) {} document.querySelectorAll('section[data-sg-code]').forEach(build); }
+
+  // Demo behaviour for the dropdowns on this page (open, close, choose, count). Product code brings its own.
+  function wireDropdowns() {
+    const all = [...document.querySelectorAll('[data-sg-dd]')].filter(d => !d.closest('.sg-states'));
+    const parts = (d) => ({ btn: d.querySelector(':scope > button'), menu: d.querySelector(':scope > .cc-dropdown__menu') });
+    const close = (d, focus) => { const { btn, menu } = parts(d); if (!menu || menu.hidden) return; menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); if (focus) btn.focus(); };
+    const open = (d) => { all.forEach(o => o !== d && close(o)); const { btn, menu } = parts(d); menu.hidden = false; btn.setAttribute('aria-expanded', 'true');
+      const first = menu.querySelector('[aria-selected="true"]') || menu.querySelector('input[type=search], input:checked, input, [role=option]'); if (first) first.focus(); };
+    all.forEach(d => { const { btn, menu } = parts(d); if (!btn || !menu) return;
+      btn.addEventListener('click', () => menu.hidden ? open(d) : close(d));
+      d.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) { e.preventDefault(); close(d, true); }
+        const opts = [...menu.querySelectorAll('[role=option]:not([aria-disabled=true])')]; const i = opts.indexOf(document.activeElement);
+        if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && opts.length && i > -1) { e.preventDefault(); opts[(i + (e.key === 'ArrowDown' ? 1 : opts.length - 1)) % opts.length].focus(); }
+        if ((e.key === 'Home' || e.key === 'End') && i > -1) { e.preventDefault(); opts[e.key === 'Home' ? 0 : opts.length - 1].focus(); } });
+      menu.querySelectorAll('[role=option]').forEach(o => o.addEventListener('click', () => { if (o.getAttribute('aria-disabled') === 'true') return;
+        menu.querySelectorAll('[role=option]').forEach(x => x.setAttribute('aria-selected', String(x === o)));
+        const v = btn.querySelector('.cc-dropdown__value'); if (v) { v.textContent = o.querySelector('.cc-dropdown__label').textContent; v.classList.remove('cc-dropdown__value--placeholder'); }
+        if (btn.getAttribute('aria-invalid') === 'true') { btn.removeAttribute('aria-invalid'); const err = document.getElementById(btn.getAttribute('aria-describedby')); if (err) err.hidden = true; }
+        close(d, true); }));
+      menu.querySelectorAll('input[type=radio]').forEach(r => r.addEventListener('change', () => { const l = btn.querySelector(':scope > span'); const t = r.closest('label').textContent.trim(); if (l) l.textContent = t; btn.setAttribute('aria-label', 'Date range: ' + t); close(d, true); }));
+      const count = () => { const n = menu.querySelectorAll('input[type=checkbox]:checked').length; let c = btn.querySelector('.cc-dropdown__count');
+        if (n && !c) { c = document.createElement('span'); c.className = 'cc-dropdown__count'; c.setAttribute('aria-hidden', 'true'); btn.querySelector('.cc-dropdown__chevron').before(c); }
+        if (c) { c.textContent = n; c.hidden = !n; } const name = btn.querySelector(':scope > span').textContent; if (n) btn.setAttribute('aria-label', name + ', ' + n + ' chosen'); else btn.removeAttribute('aria-label');
+        const bar = d.closest('.cc-filter-bar'); if (bar) { const act = bar.querySelector('.cc-filter-bar__actions'); act.hidden = !bar.querySelector('input[type=checkbox]:checked'); } };
+      menu.querySelectorAll('input[type=checkbox]').forEach(x => x.addEventListener('change', count));
+      menu.querySelectorAll('.cc-dropdown__footer .cc-link-btn').forEach(b => b.addEventListener('click', () => { menu.querySelectorAll('input[type=checkbox]').forEach(x => { x.checked = false; }); count(); }));
+      const q = menu.querySelector('input[type=search]'); if (q) q.addEventListener('input', () => { const t = q.value.trim().toLowerCase(); let any = false;
+        menu.querySelectorAll('.cc-dropdown__option').forEach(o => { const hit = o.textContent.toLowerCase().includes(t); o.hidden = !hit; any = any || hit; }); const em = menu.querySelector('.cc-dropdown__empty'); if (em) em.hidden = any; });
+    });
+    document.addEventListener('click', (e) => all.forEach(d => { if (!d.contains(e.target)) close(d); }));
+    document.querySelectorAll('.cc-filter-toggle').forEach(t => t.addEventListener('click', () => { const bar = document.getElementById(t.getAttribute('aria-controls')); const on = t.getAttribute('aria-expanded') !== 'true'; t.setAttribute('aria-expanded', String(on)); bar.hidden = !on; }));
+    document.querySelectorAll('.cc-filter-bar__actions .cc-link-btn').forEach(b => b.addEventListener('click', () => { const bar = b.closest('.cc-filter-bar'); bar.querySelectorAll('input[type=checkbox]').forEach(x => { x.checked = false; x.dispatchEvent(new Event('change')); }); }));
+  }
+  async function init() { forceStates(); try { const l = document.querySelector('link[href*="components.css"]'); CSS_SRC = await (await fetch(l ? l.href : 'components.css')).text(); } catch (e) {} document.querySelectorAll('section[data-sg-code]').forEach(sec => { try { build(sec); } catch (e) { console.error('Style guide: ' + sec.id, e); } }); wireDropdowns(); }
   if (document.readyState === 'complete') init(); else window.addEventListener('load', init);
 })();
 </script>

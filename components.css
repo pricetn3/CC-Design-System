@@ -400,6 +400,74 @@
 .cc-toast__action:focus-visible { outline: none; box-shadow: var(--ring-focus); }
 .cc-toast__close { flex-shrink: 0; margin: -4px -4px 0 0; }
 
+/* Dropdown: a button that opens a list. Three kinds share one menu panel and one row style:
+   - Field dropdown (cc-dropdown__trigger): picks one value in a form or settings row. role="listbox" menu, blue check on the chosen row.
+   - Toolbar dropdown: a secondary button whose label is the current choice (date range). Radio rows in a group.
+   - Filter dropdown: a sm secondary button in the filter bar, with a count of what's chosen. Checkbox rows in a group, Clear all at the bottom.
+   The menu closes on Esc, on a click outside, and after a single choice; focus goes back to the button. */
+.cc-dropdown { position: relative; }
+/* Field trigger: the cc-btn cc-btn--secondary look, text left and chevron right, filling its column. */
+.cc-dropdown__trigger { width: 100%; justify-content: space-between; text-align: left; }
+.cc-dropdown__value { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-dropdown__value--placeholder { font-weight: var(--fw-regular); color: var(--gray-500); }
+.cc-dropdown__chevron { flex-shrink: 0; width: 16px; height: 16px; color: var(--gray-500); transition: transform 150ms cubic-bezier(0.2,0.6,0.2,1); }
+[aria-expanded="true"] > .cc-dropdown__chevron { transform: rotate(180deg); }
+/* Fields: focus and open both get the tight 2px blue-600 ring outside the edge, like cc-input (error-500 when invalid). */
+.cc-dropdown__trigger:focus-visible, .cc-dropdown__trigger[aria-expanded="true"] { outline: none; box-shadow: var(--shadow-xs), 0 0 0 2px var(--blue-600); }
+.cc-dropdown__trigger[aria-invalid="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--error-500); }
+.cc-dropdown__trigger[aria-invalid="true"]:focus-visible, .cc-dropdown__trigger[aria-invalid="true"][aria-expanded="true"] { box-shadow: var(--shadow-xs), 0 0 0 2px var(--error-500); }
+/* Toolbar and filter buttons (not fields): open shows a 1px blue-600 edge. */
+.cc-btn--secondary[aria-haspopup][aria-expanded="true"]:not(.cc-dropdown__trigger) { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--blue-600); }
+/* Count of chosen filters, inside the button. */
+.cc-dropdown__count { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; box-sizing: border-box; padding: 0 var(--space-1_5); border-radius: var(--radius-full); background: var(--gray-100); color: var(--gray-700); font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); font-variant-numeric: tabular-nums; }
+
+/* Menu panel: opens 4px under the button, flips above it when there's no room below. */
+.cc-dropdown__menu { position: absolute; z-index: var(--z-dropdown); top: calc(100% + 4px); left: 0; min-width: 100%; max-width: calc(100vw - 2 * var(--space-4)); max-height: 296px; overflow-y: auto; box-sizing: border-box; padding: var(--space-2); background: var(--bg-primary); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.cc-dropdown__menu[hidden] { display: none; }
+.cc-dropdown__menu--end { left: auto; right: 0; }
+.cc-dropdown__menu--up { top: auto; bottom: calc(100% + 4px); }
+/* A menu with a search box or a footer scrolls its list, not the whole panel. */
+.cc-dropdown__menu--sections { padding: 0; max-height: none; overflow: hidden; }
+.cc-dropdown__search { margin: var(--space-2); width: auto; } /* cc-input is 100% wide; auto keeps it inside the margin */
+.cc-dropdown__list { max-height: 280px; overflow-y: auto; padding: 0 var(--space-2) var(--space-2); }
+.cc-dropdown__menu--sections > .cc-dropdown__list:first-child { padding-top: var(--space-2); }
+.cc-dropdown__footer { padding: var(--space-2) var(--space-4) var(--space-3); }
+.cc-dropdown__empty { margin: 0; padding: var(--space-2_5); font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-500); }
+
+/* Rows: 40px tall, 14px medium gray-900. Hover gray-100; chosen gray-50 plus the blue-600 check (not color alone, WCAG 1.4.1). */
+.cc-dropdown__option { display: flex; align-items: center; gap: var(--space-2_5); width: 100%; box-sizing: border-box; min-height: 40px; padding: var(--space-2) var(--space-2_5); border: none; border-radius: var(--radius-sm); background: transparent; cursor: pointer; text-align: left; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-dropdown__option + .cc-dropdown__option { margin-top: 2px; }
+.cc-dropdown__option > .cc-dropdown__label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cc-dropdown__option:hover { background: var(--gray-100); }
+.cc-dropdown__option[aria-selected="true"] { background: var(--gray-50); }
+.cc-dropdown__option[aria-selected="true"]:hover { background: var(--gray-100); }
+.cc-dropdown__option:focus-visible, .cc-dropdown__option[data-active] { outline: none; box-shadow: inset 0 0 0 2px var(--blue-600); }
+.cc-dropdown__check { flex-shrink: 0; width: 16px; height: 16px; color: var(--blue-600); }
+.cc-dropdown__option:not([aria-selected="true"]) > .cc-dropdown__check { visibility: hidden; }
+.cc-dropdown__option[aria-disabled="true"], .cc-dropdown__option:disabled { background: transparent; color: var(--gray-500); cursor: not-allowed; }
+/* A short code or ID before the name (organization picker). */
+.cc-dropdown__meta { flex-shrink: 0; min-width: 35px; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-500); font-variant-numeric: tabular-nums; }
+/* Checkbox and radio rows: the whole row is the label. */
+label.cc-dropdown__option:has(input:focus-visible) { box-shadow: inset 0 0 0 2px var(--blue-600); }
+.cc-dropdown__option > .cc-checkbox__input, .cc-dropdown__option > .cc-radio__input { margin: 0; }
+.cc-dropdown__option > .cc-checkbox__input:focus-visible, .cc-dropdown__option > .cc-radio__input:focus-visible { box-shadow: none; }
+.cc-dropdown__group { margin: 0; padding: 0; border: 0; min-width: 0; }
+@media (prefers-reduced-motion: reduce) { .cc-dropdown__chevron { transition: none; } }
+
+/* Filter bar: opens under a table toolbar when Filter is pressed. One sm dropdown per column people filter by;
+   Clear all and Apply filters show once something is chosen. Wraps on narrow screens (WCAG 1.4.10). */
+.cc-filter-bar { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); padding: var(--space-3) var(--space-5); border-top: 1px solid var(--gray-200); }
+.cc-filter-bar[hidden] { display: none; }
+.cc-filter-bar__filters { display: flex; align-items: flex-end; flex-wrap: wrap; gap: var(--space-2_5); }
+.cc-filter-bar__actions { display: flex; align-items: center; gap: var(--space-4); }
+.cc-filter-bar__actions[hidden] { display: none; }
+.cc-filter-bar .cc-dropdown__menu { width: 240px; }
+/* The Filter button stays pressed while the bar is open. */
+.cc-btn--secondary.cc-filter-toggle[aria-expanded="true"] { background: var(--gray-50); color: var(--gray-800); }
+/* Clear all: a cc-link styled as a text button. */
+.cc-link-btn { padding: 0; border: none; background: none; cursor: pointer; font: var(--fw-semibold) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); border-radius: var(--radius-xxs); min-height: 24px; }
+.cc-link-btn:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+
 /* Tooltip (FX-20): short label for an icon button. Hover (about 300ms) and keyboard focus; Esc closes. */
 .cc-tooltip-wrap { position: relative; display: inline-flex; }
 .cc-tooltip {
