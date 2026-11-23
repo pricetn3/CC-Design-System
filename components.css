@@ -630,3 +630,8 @@ label.cc-dropdown__option:has(input:focus-visible) { box-shadow: inset 0 0 0 2px
    blue-25 keeps every normal token at WCAG AA: field border 3.04:1, error-600 text 4.63:1, checkbox and focus ring 5.24:1.
    Secondary text in table rows is gray-600 or darker (gray-500 drops to 4.37:1 on the gray-50 hover). */
 tbody tr:has(> td .cc-row-select:checked) > td, tbody tr:has(> td .cc-row-select:checked):hover > td { background: var(--blue-25) !important; }
+
+/* Filters (every table): the Filter button that opens the filter row (.cc-filter-toggle) and any dropdown button (aria-haspopup) get a 2px blue-600 edge while open (aria-expanded="true"), same as an open field.
+   The open filter row (.cc-filter-row) sits under the table header with a 1px gray-200 divider and 12px / 20px padding. */
+.cc-filter-toggle[aria-expanded="true"], .cc-btn--secondary[aria-haspopup][aria-expanded="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
+.cc-filter-row { border-top: 1px solid var(--gray-200); padding: var(--space-3) var(--space-5); }
