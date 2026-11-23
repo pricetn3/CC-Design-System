@@ -111,6 +111,8 @@
   outline: none;
 }
 .cc-input::placeholder { color: var(--gray-500); }
+/* Selects rest on the light gray-300 edge like field dropdowns: the arrow and the value identify them (WCAG 1.4.11). Text boxes keep --border-input. */
+select.cc-input:not([aria-invalid="true"]):not(:focus) { box-shadow: var(--shadow-xs), inset 0 0 0 1px var(--gray-300); }
 /* Focus: the gray edge is replaced by a 2px blue-600 edge (5.46:1) drawn inside the field, so the field never grows and a parent with overflow:hidden can't clip it. Not --ring-focus (buttons, links, cards). */
 .cc-input:focus { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
 /* Empty date/time fields read like placeholders; native picker icons sit at the gray-500 weight of other field icons. */
