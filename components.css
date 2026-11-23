@@ -84,6 +84,12 @@
 .cc-icon-btn--lg { width: 44px; height: 44px; }
 .cc-icon-btn:focus-visible { outline: none; box-shadow: var(--ring-focus); }
 
+/* Link row: a whole list row that opens something, such as a settings summary item. 26px tall (WCAG 2.5.8 needs 24px), flat with a tint on hover like icon buttons, a chevron at the end so it reads as clickable. */
+.cc-link-row { display: flex; align-items: center; gap: var(--space-2); box-sizing: border-box; width: calc(100% + var(--space-4)); min-height: 26px; margin: 0 calc(-1 * var(--space-2)); padding: var(--space-0_5) var(--space-2); border: none; border-radius: var(--radius-sm); background: transparent; color: var(--gray-700); font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); text-align: left; cursor: pointer; }
+.cc-link-row:hover { background: var(--overlay-hover, rgba(10, 13, 18, 0.05)); color: var(--gray-900); }
+.cc-link-row:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+.cc-link-row__chev { flex-shrink: 0; color: var(--gray-500); }
+
 /* ---------- Inputs ---------- */
 .cc-field { display: flex; flex-direction: column; gap: var(--space-1_5); }
 .cc-label { font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-700); }
