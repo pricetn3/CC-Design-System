@@ -76,7 +76,9 @@
   border: none; border-radius: var(--radius-md);
   background: transparent; color: var(--gray-500); cursor: pointer;
 }
-.cc-icon-btn:hover { background: var(--gray-100); color: var(--gray-900); }
+.cc-icon-btn:hover { background: var(--overlay-hover, rgba(10, 13, 18, 0.05)); box-shadow: inset 0 0 0 1px var(--overlay-subtle, rgba(10, 13, 18, 0.12)); color: var(--gray-900); }
+/* Hover is a see-through tint with a hairline edge, so it stays visible on any row or surface color (white, gray-50 hover rows, tinted rows). */
+.cc-icon-btn:active { background: var(--overlay-subtle, rgba(10, 13, 18, 0.12)); }
 .cc-icon-btn--xs { width: 32px; height: 32px; }
 /* lg: 44px target for header and touch-first icon buttons (FX-20). Same icon size; only the button grows. */
 .cc-icon-btn--lg { width: 44px; height: 44px; }
