@@ -439,6 +439,11 @@
 /* Rows: 40px tall, 14px medium gray-900. Hover gray-100; chosen gray-50 plus the blue-600 check (not color alone, WCAG 1.4.1). */
 .cc-dropdown__option { display: flex; align-items: center; gap: var(--space-2_5); width: 100%; box-sizing: border-box; min-height: 40px; padding: var(--space-2) var(--space-2_5); border: none; border-radius: var(--radius-sm); background: transparent; cursor: pointer; text-align: left; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
 .cc-dropdown__option + .cc-dropdown__option { margin-top: 2px; }
+/* Compact menu: 36px rows for action and navigation menus (account menu, Export, the Settings section menu). Fields and filters keep 40px. */
+.cc-dropdown__menu--compact .cc-dropdown__option { min-height: 36px; padding-top: var(--space-1_5); padding-bottom: var(--space-1_5); }
+/* Group heading inside a menu (for example Organization Setup / Paper Ordering): 12/18 semibold gray-600, not selectable */
+.cc-dropdown__heading { padding: var(--space-3) var(--space-2_5) var(--space-1); font: var(--fw-semibold) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--gray-600); }
+.cc-dropdown__heading:first-child { padding-top: var(--space-1); }
 .cc-dropdown__option > .cc-dropdown__label { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .cc-dropdown__option:hover { background: var(--gray-100); }
 .cc-dropdown__option[aria-selected="true"] { background: var(--gray-50); }

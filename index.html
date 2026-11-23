@@ -406,12 +406,29 @@
           </div>
         </div>
       </div>
+      <h3>Compact menu (36px)</h3>
+      <p>For action and navigation menus: the account (avatar) menu, Export, View, and the Settings Section menu on narrow screens. Rows are 36px, like the side navigation; fields and filters keep 40px. Group names use <code>cc-dropdown__heading</code>.</p>
+      <div class="sg-panel" style="min-height:300px;">
+        <div class="cc-field" style="max-width:320px;">
+          <span class="cc-label" id="sg-dd6-l">Section</span>
+          <div class="cc-dropdown">
+            <button type="button" class="cc-btn cc-btn--secondary cc-dropdown__trigger" id="sg-dd6" aria-haspopup="listbox" aria-expanded="true" aria-controls="sg-dd6-list" aria-label="Section: Paper Credentials, On"><span class="cc-dropdown__value">Paper Credentials</span><svg class="cc-dropdown__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+            <div class="cc-dropdown__menu cc-dropdown__menu--compact" id="sg-dd6-list" role="listbox" aria-labelledby="sg-dd6-l" tabindex="-1">
+              <div class="cc-dropdown__heading" role="presentation">Organization Setup</div>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__label">Digital Credentials</span></button>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="false"><span class="cc-dropdown__label">Reorder Management</span></button>
+              <div class="cc-dropdown__heading" role="presentation">Paper Ordering</div>
+              <button type="button" class="cc-dropdown__option" role="option" aria-selected="true"><span class="cc-dropdown__label">Paper Credentials</span><svg class="cc-dropdown__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
       <table class="sg-spec">
         <tr><th scope="col">Part</th><th scope="col">Class</th><th scope="col">Look</th></tr>
         <tr><td>Field trigger</td><td><code>cc-btn cc-btn--secondary cc-dropdown__trigger</code></td><td>40px, full width, value left (14 medium gray-900; placeholder regular gray-500), 16px gray-500 chevron right that flips when open. Focus and open: 2px blue-600 ring outside the edge; error-500 when invalid.</td></tr>
         <tr><td>Toolbar trigger</td><td><code>cc-btn cc-btn--secondary</code> + <code>aria-haspopup</code></td><td>Label is the current choice. Open: 1px blue-600 edge.</td></tr>
-        <tr><td>Menu</td><td><code>cc-dropdown__menu</code> (<code>--end</code>, <code>--up</code>, <code>--sections</code>)</td><td>4px under the button, white, 1px gray-200, radius-lg, shadow-lg, 8px padding, up to 296px then scrolls.</td></tr>
-        <tr><td>Row</td><td><code>cc-dropdown__option</code></td><td>40px, 10px sides, radius-sm, 2px apart. Hover gray-100; chosen gray-50 plus the blue-600 check; keyboard focus 2px blue-600 inside the row.</td></tr>
+        <tr><td>Menu</td><td><code>cc-dropdown__menu</code> (<code>--end</code>, <code>--up</code>, <code>--sections</code>, <code>--compact</code>)</td><td>4px under the button, white, 1px gray-200, radius-lg, shadow-lg, 8px padding, up to 296px then scrolls.</td></tr>
+        <tr><td>Row</td><td><code>cc-dropdown__option</code></td><td>40px (36px inside <code>cc-dropdown__menu--compact</code>), 10px sides, radius-sm, 2px apart. Hover gray-100; chosen gray-50 plus the blue-600 check; keyboard focus 2px blue-600 inside the row.</td></tr>
         <tr><td>Search</td><td><code>cc-input cc-input--sm cc-dropdown__search</code></td><td>36px search box with 8px around it; the list under it scrolls (280px).</td></tr>
       </table>
     </section>
