@@ -191,8 +191,11 @@ select.cc-input:not([aria-invalid="true"]):not(:focus) { box-shadow: var(--shado
 .cc-calendar__options--scroll { max-height: 280px; overflow-y: auto; }
 /* Date field: a text field typed as MM/DD/YYYY with a calendar button inside on the right. The button opens the calendar (cc-calendar) under the field, one date at a time. Down arrow or a click in the field opens it; Esc closes it and returns focus to the field. */
 .cc-date-field { position: relative; display: block; width: 100%; }
-.cc-date-field > .cc-input { width: 100%; padding-right: 44px; }
-.cc-date-field > .cc-date-field__btn { position: absolute; top: 20px; right: var(--space-1); transform: translateY(-50%); width: 32px; height: 32px; }
+.cc-date-field > .cc-input { width: 100%; padding-right: 52px; }
+/* The calendar button is a full-height segment at the right end of the field, split off by a 1px gray-300 line. The whole segment takes the hover tint while the icon darkens (gray-500 to gray-900); it stays tinted while the calendar is open. A press outside the open calendar closes it. */
+.cc-date-field > .cc-date-field__btn { position: absolute; top: 1px; right: 1px; width: 40px; height: 38px; display: inline-flex; align-items: center; justify-content: center; border: 0; border-left: 1px solid var(--gray-300); border-radius: 0 calc(var(--radius-md) - 1px) calc(var(--radius-md) - 1px) 0; background: transparent; color: var(--gray-500); }
+.cc-date-field > .cc-date-field__btn:hover, .cc-date-field > .cc-date-field__btn[aria-expanded="true"] { background: var(--overlay-hover); color: var(--gray-900); }
+.cc-date-field > .cc-date-field__btn:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--blue-600); }
 .cc-date-field > .cc-date-field__popover { position: absolute; top: calc(40px + var(--space-1)); right: 0; z-index: 100; }
 @media (max-width: 480px) { .cc-date-field__popover { left: 0; right: auto; } }
 .cc-calendar__option { height: 36px; border: none; border-radius: var(--radius-md); background: transparent; cursor: pointer; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
@@ -642,6 +645,7 @@ tbody tr:has(> td .cc-row-select:checked) > td, tbody tr:has(> td .cc-row-select
    White controls (secondary, dropdown and filter buttons) layer the tint over their white fill; clear controls (tertiary, flat icon buttons, menu options) use the tint alone.
    Text inside these controls is gray-600 or darker (gray-500 drops to 4.11:1 on the hover fill). Table rows keep the lighter gray-50 hover. */
 [role="listbox"] [role="option"]:hover:not([aria-disabled="true"]):not(:disabled) { background: var(--overlay-hover); }
-/* Icon-only secondary and tertiary buttons: the icon is the label, so it needs 3:1. gray-600 at rest, gray-700 on hover. */
-:is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label] > svg:only-child, :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label] > .lucide:only-child { color: var(--gray-600); }
-:is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label]:hover > svg:only-child, :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label]:hover > .lucide:only-child { color: var(--gray-700); }
+button[aria-haspopup]:hover > .lucide-chevron-down { color: var(--gray-700); }
+/* Icons in controls: every icon-only button (flat icon buttons, the date calendar button, remove X, icon-only secondary buttons) rests at gray-500 (4.56:1, above the 3:1 icons need) and turns gray-900 on hover with the --overlay-hover tint. Dropdown chevrons rest at gray-500 and darken to gray-700 when their button is hovered. */
+:is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label] > svg:only-child, :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label] > .lucide:only-child { color: var(--gray-500); }
+:is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label]:hover > svg:only-child, :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label]:hover > .lucide:only-child { color: var(--gray-900); }
