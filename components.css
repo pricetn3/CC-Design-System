@@ -43,10 +43,10 @@
 .cc-btn--primary:hover { background: var(--blue-700); }
 
 .cc-btn--secondary { background: var(--bg-primary); color: var(--gray-700); box-shadow: var(--shadow-button-secondary), inset 0 0 0 1px var(--gray-300); }
-.cc-btn--secondary:hover { background: var(--gray-50); color: var(--gray-800); }
+.cc-btn--secondary:hover { background: linear-gradient(var(--overlay-hover), var(--overlay-hover)), var(--bg-primary); color: var(--gray-800); }
 
 .cc-btn--tertiary { background: transparent; color: var(--gray-600); }
-.cc-btn--tertiary:hover { background: var(--gray-100); color: var(--gray-800); }
+.cc-btn--tertiary:hover { background: var(--overlay-hover); color: var(--gray-800); }
 /* Destructive: for delete, deactivate and remove actions. Filled for the final confirm in a dialog, outline for the action that opens it. */
 .cc-btn--destructive { background: var(--error-700); color: var(--fg-on-brand); box-shadow: var(--shadow-button-primary); }
 .cc-btn--destructive:hover { box-shadow: var(--shadow-button-primary), var(--shadow-md); }
@@ -196,7 +196,7 @@ select.cc-input:not([aria-invalid="true"]):not(:focus) { box-shadow: var(--shado
 .cc-date-field > .cc-date-field__popover { position: absolute; top: calc(40px + var(--space-1)); right: 0; z-index: 100; }
 @media (max-width: 480px) { .cc-date-field__popover { left: 0; right: auto; } }
 .cc-calendar__option { height: 36px; border: none; border-radius: var(--radius-md); background: transparent; cursor: pointer; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
-.cc-calendar__option:hover:not([aria-pressed="true"]) { background: var(--gray-100); }
+.cc-calendar__option:hover:not([aria-pressed="true"]) { background: var(--overlay-hover); }
 .cc-calendar__option[aria-pressed="true"] { background: var(--blue-600); color: var(--fg-on-brand); font-weight: var(--fw-semibold); }
 
 
@@ -637,3 +637,11 @@ tbody tr:has(> td .cc-row-select:checked) > td, tbody tr:has(> td .cc-row-select
    The open filter row (.cc-filter-row) sits under the table header with a 1px gray-200 divider and 12px / 20px padding. */
 .cc-filter-toggle[aria-expanded="true"], .cc-btn--secondary[aria-haspopup][aria-expanded="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
 .cc-filter-row { border-top: 1px solid var(--gray-200); padding: var(--space-3) var(--space-5); }
+
+/* Hover step: every control that isn't a primary button darkens by --overlay-hover on hover (4.2 lightness points, the same step as primary blue-600 to blue-700).
+   White controls (secondary, dropdown and filter buttons) layer the tint over their white fill; clear controls (tertiary, flat icon buttons, menu options) use the tint alone.
+   Text inside these controls is gray-600 or darker (gray-500 drops to 4.11:1 on the hover fill). Table rows keep the lighter gray-50 hover. */
+[role="listbox"] [role="option"]:hover:not([aria-disabled="true"]):not(:disabled) { background: var(--overlay-hover); }
+/* Icon-only secondary and tertiary buttons: the icon is the label, so it needs 3:1. gray-600 at rest, gray-700 on hover. */
+:is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label] > svg:only-child, :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label] > .lucide:only-child { color: var(--gray-600); }
+:is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label]:hover > svg:only-child, :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label]:hover > .lucide:only-child { color: var(--gray-700); }
