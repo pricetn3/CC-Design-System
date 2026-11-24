@@ -681,4 +681,6 @@ th:first-child > .cc-th-sort { padding-left: var(--space-5); }
 .cc-th-sort .cc-th-sort__both { opacity: 0; }
 .cc-th-sort:hover .cc-th-sort__both, .cc-th-sort:focus-visible .cc-th-sort__both { opacity: 1; }
 @media (hover: none) { .cc-th-sort .cc-th-sort__both { opacity: 1; } }
-.cc-th-sort.is-asc .cc-th-sort__up, .cc-th-sort.is-desc .cc-th-sort__down { display: block; }
+/* Sorted: both chevrons stay in place; the active one is gray-700, the other drops to gray-300. aria-sort on the th carries the state for assistive tech. (The __up/__down arrow svgs are no longer shown.) */
+.cc-th-sort.is-asc .cc-th-sort__both, .cc-th-sort.is-desc .cc-th-sort__both { display: block; opacity: 1; }
+.cc-th-sort.is-asc .cc-th-sort__both path:first-child, .cc-th-sort.is-desc .cc-th-sort__both path:last-child { stroke: var(--gray-300); }
