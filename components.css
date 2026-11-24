@@ -450,7 +450,7 @@ select.cc-input:not([aria-invalid="true"]):not(:focus) { box-shadow: var(--shado
 .cc-dropdown__empty { margin: 0; padding: var(--space-2_5); font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-500); }
 
 /* Rows: 40px tall, 14px medium gray-900. Hover gray-100; chosen gray-50 plus the blue-600 check (not color alone, WCAG 1.4.1). */
-.cc-dropdown__option { display: flex; align-items: center; gap: var(--space-2_5); width: 100%; box-sizing: border-box; min-height: 40px; padding: var(--space-2) var(--space-2_5); border: none; border-radius: var(--radius-sm); background: transparent; cursor: pointer; text-align: left; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
+.cc-dropdown__option { display: flex; align-items: center; gap: var(--space-2_5); width: 100%; box-sizing: border-box; min-height: 36px; padding: var(--space-1_5) var(--space-2_5); border: none; border-radius: var(--radius-sm); background: transparent; cursor: pointer; text-align: left; font: var(--fw-medium) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-900); }
 .cc-dropdown__option + .cc-dropdown__option { margin-top: 2px; }
 /* Compact menu: 36px rows for action and navigation menus (account menu, Export, the Settings section menu). Fields and filters keep 40px. */
 .cc-dropdown__menu--compact .cc-dropdown__option { min-height: 36px; padding-top: var(--space-1_5); padding-bottom: var(--space-1_5); }
@@ -641,6 +641,10 @@ tbody tr:has(> td .cc-row-select:checked) > td, tbody tr:has(> td .cc-row-select
    The open filter row (.cc-filter-row) sits under the table header with a 1px gray-200 divider and 12px / 20px padding. */
 .cc-filter-toggle[aria-expanded="true"], .cc-btn--secondary[aria-haspopup][aria-expanded="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
 .cc-filter-row { border-top: 1px solid var(--gray-200); padding: var(--space-3) var(--space-5); }
+
+/* Menus: every dropdown and filter menu uses 36px option rows and a 36px search field (filter menus, form dropdowns such as states and countries, organization pickers, search results). Form field triggers stay 40px. 36px is well above the 24px minimum target (WCAG 2.5.8). */
+[role="listbox"] [role="option"], .cc-tm { min-height: 36px; }
+.ccDd-list .ccFW, .cc-dropdown__menu .ccFW { height: 36px; }
 
 /* Table search clear: every table search shows a 26px flat X once something is typed; it clears the search and returns focus to the field. */
 .cc-search-clr { display: inline-flex; width: 26px; height: 26px; flex-shrink: 0; align-items: center; justify-content: center; padding: 0; border: none; border-radius: var(--radius-sm); background: transparent; color: var(--gray-500); cursor: pointer; }
