@@ -630,16 +630,27 @@ label.cc-dropdown__option:has(input:focus-visible) { box-shadow: inset 0 0 0 2px
 .cc-featured-icon--xl { width: 56px; height: 56px; border-radius: 12px; }
 .cc-featured-icon--xl svg, .cc-featured-icon--xl i { width: 28px; height: 28px; stroke-width: 2; }
 
-/* Table row states (tables with a select checkbox per row, for bulk actions): rest white, hover gray-50, selected blue-25. Hovering a selected row keeps blue-25.
+/* Table row states (tables with a select checkbox per row, for bulk actions): rest white, hover gray-50, selected gray-50 (matches development). Hovering a selected row stays gray-50.
+   The checked checkbox carries the selected state (WCAG 1.4.1); the gray tint adds to it. gray-50 keeps every normal token at AA, so fields need no special edge: --border-input 3.04:1, error-600 text 4.63:1, checkbox and focus ring 5.24:1, gray-600 text 6.6:1.
+   Not a darker gray: gray-100 drops --border-input to 2.91:1, under the 3:1 fields need. Not blue: development uses gray.
    Mark the select checkbox with .cc-row-select. A checkbox that is a setting in the row (e.g. Countries "Enabled for shipping") never tints the row.
-   blue-25 keeps every normal token at WCAG AA: field border 3.04:1, error-600 text 4.63:1, checkbox and focus ring 5.24:1.
-   Secondary text in table rows is gray-600 or darker (gray-500 drops to 4.37:1 on the gray-50 hover). */
-tbody tr:has(> td .cc-row-select:checked) > td, tbody tr:has(> td .cc-row-select:checked):hover > td { background: var(--blue-25) !important; }
+   Secondary text in table rows is gray-600 or darker (gray-500 drops to 4.37:1 on gray-50). */
+tbody tr:has(> td .cc-row-select:checked) > td, tbody tr:has(> td .cc-row-select:checked):hover > td { background: var(--gray-50) !important; }
 
 /* Filters (every table): the Filter button that opens the filter row (.cc-filter-toggle) and any dropdown button (aria-haspopup) get a 2px blue-600 edge while open (aria-expanded="true"), same as an open field.
    The open filter row (.cc-filter-row) sits under the table header with a 1px gray-200 divider and 12px / 20px padding. */
 .cc-filter-toggle[aria-expanded="true"], .cc-btn--secondary[aria-haspopup][aria-expanded="true"] { box-shadow: var(--shadow-xs), inset 0 0 0 2px var(--blue-600); }
 .cc-filter-row { border-top: 1px solid var(--gray-200); padding: var(--space-3) var(--space-5); }
+
+/* Table search clear: every table search shows a 26px flat X once something is typed; it clears the search and returns focus to the field. */
+.cc-search-clr { display: inline-flex; width: 26px; height: 26px; flex-shrink: 0; align-items: center; justify-content: center; padding: 0; border: none; border-radius: var(--radius-sm); background: transparent; color: var(--gray-500); cursor: pointer; }
+.cc-search-clr:hover { background: var(--overlay-hover); color: var(--gray-900); }
+.cc-search-clr:focus-visible { outline: none; box-shadow: var(--ring-focus); }
+/* Checkboxes straight in a table cell: 24px hit area (WCAG 2.5.8) without changing how they look. */
+.cc-hit { display: inline-flex; padding: 4px; margin: -4px; cursor: pointer; vertical-align: middle; }
+/* Rows that open something: reachable with Tab, opened with Enter or Space (WCAG 2.1.1), 2px blue focus edge. */
+tr.cc-key-open:focus { outline: none; }
+tr.cc-key-open:focus-visible > td { box-shadow: inset 0 2px 0 var(--blue-600), inset 0 -2px 0 var(--blue-600); }
 
 /* Hover step: every control that isn't a primary button darkens by --overlay-hover on hover (4.2 lightness points, the same step as primary blue-600 to blue-700).
    White controls (secondary, dropdown and filter buttons) layer the tint over their white fill; clear controls (tertiary, flat icon buttons, menu options) use the tint alone.
