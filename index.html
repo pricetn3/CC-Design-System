@@ -133,6 +133,7 @@
     <a href="#code-entry">Code entry</a>
     <a href="#dropdowns">Dropdowns</a>
     <a href="#filter-bar">Filter bar</a>
+    <a href="#table-sort">Sortable table headers</a>
     <a href="#inputs">Inputs</a>
     <a href="#option-cards">Option cards</a>
     <a href="#switch">Switch</a>
@@ -431,6 +432,14 @@
         <tr><td>Row</td><td><code>cc-dropdown__option</code></td><td>40px (36px inside <code>cc-dropdown__menu--compact</code>), 10px sides, radius-sm, 2px apart. Hover gray-100; chosen gray-50 plus the blue-600 check; keyboard focus 2px blue-600 inside the row.</td></tr>
         <tr><td>Search</td><td><code>cc-input cc-input--sm cc-dropdown__search</code></td><td>36px search box with 8px around it; the list under it scrolls (280px).</td></tr>
       </table>
+    </section>
+
+    <section id="table-sort" data-sg-code data-sg-states=".cc-th-sort" data-sg-state-list="Default,Hover,Focus">
+      <h2>Sortable table headers</h2>
+      <p>Every column people would order by is sortable. The header text is a button: click sorts ascending, again descending, a third time goes back to the default order. Hover shows an up-and-down chevron (always shown on touch screens); a sorted column shows an arrow and darker text. Put <code>aria-sort</code> on the <code>th</code> (WCAG 4.1.2). Actions, checkboxes and long free-text columns are not sortable.</p>
+      <div class="sg-panel" style="padding:0;">
+        <table style="width:100%; border-collapse:collapse;"><thead><tr style="background:var(--gray-50);"><th aria-sort="descending" style="text-align:left; border-bottom:1px solid var(--gray-200);"><button type="button" class="cc-th-sort is-desc">Order placed<span class="cc-th-sort__icon" aria-hidden="true"><svg class="cc-th-sort__both" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg><svg class="cc-th-sort__up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg><svg class="cc-th-sort__down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span></button></th><th aria-sort="none" style="text-align:left; border-bottom:1px solid var(--gray-200);"><button type="button" class="cc-th-sort">Organization<span class="cc-th-sort__icon" aria-hidden="true"><svg class="cc-th-sort__both" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg><svg class="cc-th-sort__up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg><svg class="cc-th-sort__down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span></button></th><th aria-sort="none" style="text-align:left; border-bottom:1px solid var(--gray-200);"><button type="button" class="cc-th-sort">Status<span class="cc-th-sort__icon" aria-hidden="true"><svg class="cc-th-sort__both" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7 15 5 5 5-5"/><path d="m7 9 5-5 5 5"/></svg><svg class="cc-th-sort__up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg><svg class="cc-th-sort__down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg></span></button></th><th style="text-align:left; padding:var(--space-2_5) var(--space-3); border-bottom:1px solid var(--gray-200); font:var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color:var(--gray-600);">Actions</th></tr></thead><tbody><tr><td style="padding:var(--space-3) var(--space-5);">23 Nov 2026</td><td style="padding:var(--space-3);">CFA Institute</td><td style="padding:var(--space-3);"><span class="cc-badge cc-badge--warning">Pending</span></td><td style="padding:var(--space-3);">—</td></tr></tbody></table>
+      </div>
     </section>
 
     <section id="filter-bar" data-sg-code>

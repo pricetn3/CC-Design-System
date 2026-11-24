@@ -649,3 +649,20 @@ button[aria-haspopup]:hover > .lucide-chevron-down { color: var(--gray-700); }
 /* Icons in controls: every icon-only button (flat icon buttons, the date calendar button, remove X, icon-only secondary buttons) rests at gray-500 (4.56:1, above the 3:1 icons need) and turns gray-900 on hover with the --overlay-hover tint. Dropdown chevrons rest at gray-500 and darken to gray-700 when their button is hovered. */
 :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label] > svg:only-child, :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label] > .lucide:only-child { color: var(--gray-500); }
 :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label]:hover > svg:only-child, :is(.cc-btn--secondary, .cc-btn--tertiary)[aria-label]:hover > .lucide:only-child { color: var(--gray-900); }
+
+/* Sortable table header (every table): the header text is a button. Click cycles ascending, descending, then back to unsorted.
+   Put aria-sort on the th ("ascending", "descending" or "none"). The th has no padding of its own; the button carries it, so the whole cell is the target. */
+th:has(> .cc-th-sort) { padding: 0 !important; }
+.cc-th-sort { display: flex; align-items: center; gap: var(--space-1); width: 100%; box-sizing: border-box; min-height: 40px; padding: var(--space-2_5) var(--space-3); border: 0; border-radius: 0; background: transparent; cursor: pointer; text-align: left; white-space: nowrap; font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); color: var(--gray-600); }
+th:first-child > .cc-th-sort { padding-left: var(--space-5); }
+.cc-th-sort:hover { background: var(--overlay-hover); color: var(--gray-800); }
+.cc-th-sort:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--blue-600); }
+.cc-th-sort.is-asc, .cc-th-sort.is-desc { color: var(--gray-900); }
+.cc-th-sort__icon { display: inline-flex; flex-shrink: 0; width: 14px; height: 14px; color: var(--gray-500); }
+.cc-th-sort.is-asc .cc-th-sort__icon, .cc-th-sort.is-desc .cc-th-sort__icon { color: var(--gray-700); }
+.cc-th-sort__icon svg { display: none; width: 14px; height: 14px; }
+/* Unsorted: the up-and-down chevron appears on hover and keyboard focus (always on touch screens, which can't hover). Sorted: an arrow shows the direction. */
+.cc-th-sort:not(.is-asc):not(.is-desc) .cc-th-sort__both { display: block; opacity: 0; }
+.cc-th-sort:hover .cc-th-sort__both, .cc-th-sort:focus-visible .cc-th-sort__both { opacity: 1; }
+@media (hover: none) { .cc-th-sort .cc-th-sort__both { opacity: 1; } }
+.cc-th-sort.is-asc .cc-th-sort__up, .cc-th-sort.is-desc .cc-th-sort__down { display: block; }
