@@ -437,14 +437,14 @@ select.cc-input:not([aria-invalid="true"]):not(:focus) { box-shadow: var(--shado
 .cc-dropdown__count { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; box-sizing: border-box; padding: 0 var(--space-1_5); border-radius: var(--radius-full); background: var(--gray-100); color: var(--gray-700); font: var(--fw-medium) var(--text-xs-size)/var(--text-xs-lh) var(--font-body); font-variant-numeric: tabular-nums; }
 
 /* Menu panel: opens 4px under the button, flips above it when there's no room below. */
-.cc-dropdown__menu { position: absolute; z-index: var(--z-dropdown); top: calc(100% + 4px); left: 0; min-width: 100%; max-width: calc(100vw - 2 * var(--space-4)); max-height: 296px; overflow-y: auto; box-sizing: border-box; padding: var(--space-2); background: var(--bg-primary); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+.cc-dropdown__menu { position: absolute; z-index: var(--z-dropdown); top: calc(100% + 4px); left: 0; min-width: 100%; max-width: calc(100vw - 2 * var(--space-4)); max-height: calc(6 * 36px + 5 * 2px + 2 * var(--space-2) + 2px); /* 6 rows, then scroll */ overflow-y: auto; box-sizing: border-box; padding: var(--space-2); background: var(--bg-primary); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
 .cc-dropdown__menu[hidden] { display: none; }
 .cc-dropdown__menu--end { left: auto; right: 0; }
 .cc-dropdown__menu--up { top: auto; bottom: calc(100% + 4px); }
 /* A menu with a search box or a footer scrolls its list, not the whole panel. */
 .cc-dropdown__menu--sections { padding: 0; max-height: none; overflow: hidden; }
 .cc-dropdown__search { margin: var(--space-2); width: auto; } /* cc-input is 100% wide; auto keeps it inside the margin */
-.cc-dropdown__list { max-height: 280px; overflow-y: auto; padding: 0 var(--space-2) var(--space-2); }
+.cc-dropdown__list { box-sizing: border-box; max-height: calc(6 * 36px + 5 * 2px + var(--space-2)); /* 6 rows under the search box, then scroll */ overflow-y: auto; padding: 0 var(--space-2) var(--space-2); }
 .cc-dropdown__menu--sections > .cc-dropdown__list:first-child { padding-top: var(--space-2); }
 .cc-dropdown__footer { padding: var(--space-2) var(--space-4) var(--space-3); }
 .cc-dropdown__empty { margin: 0; padding: var(--space-2_5); font: var(--fw-regular) var(--text-sm-size)/var(--text-sm-lh) var(--font-body); color: var(--gray-500); }
