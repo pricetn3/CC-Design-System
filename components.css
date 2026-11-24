@@ -677,7 +677,8 @@ th:first-child > .cc-th-sort { padding-left: var(--space-5); }
 .cc-th-sort.is-asc .cc-th-sort__icon, .cc-th-sort.is-desc .cc-th-sort__icon { color: var(--gray-700); }
 .cc-th-sort__icon svg { display: none; width: 14px; height: 14px; }
 /* Unsorted: the up-and-down chevron appears on hover and keyboard focus (always on touch screens, which can't hover). Sorted: an arrow shows the direction. */
-.cc-th-sort:not(.is-asc):not(.is-desc) .cc-th-sort__both { display: block; opacity: 0; }
+.cc-th-sort:not(.is-asc):not(.is-desc) .cc-th-sort__both { display: block; }
+.cc-th-sort .cc-th-sort__both { opacity: 0; }
 .cc-th-sort:hover .cc-th-sort__both, .cc-th-sort:focus-visible .cc-th-sort__both { opacity: 1; }
 @media (hover: none) { .cc-th-sort .cc-th-sort__both { opacity: 1; } }
 .cc-th-sort.is-asc .cc-th-sort__up, .cc-th-sort.is-desc .cc-th-sort__down { display: block; }
